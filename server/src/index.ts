@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import { router as userRouter } from "./routes/user";
+import { router as authRouter } from "./routes/auth";
 
 dotenv.config();
 
@@ -18,7 +20,8 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-console.log(connection);
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
