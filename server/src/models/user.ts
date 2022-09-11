@@ -1,4 +1,11 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { ObjectId, Schema } from "mongoose";
+import { CartType, cartSchema } from "./cart";
+
+type UserType = {
+  username: string;
+  password: string;
+  cart: CartType;
+};
 
 const userSchema = new Schema(
   {
@@ -16,7 +23,7 @@ const userSchema = new Schema(
       minlength: 6,
     },
     cart: {
-      type: Array,
+      type: cartSchema,
       required: true,
     },
   },
@@ -27,4 +34,4 @@ const userSchema = new Schema(
 );
 const User = mongoose.model("User", userSchema);
 
-export { User };
+export { User, UserType };

@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import { User } from "../models/user";
+import { Cart } from "../models/cart";
 
 const router = Router();
 
@@ -18,7 +19,7 @@ router.post("/login", (req: Request, res: Response) => {
 router.post("/register", (req: Request, res: Response) => {
   const username = req.body.username;
   const password = req.body.password;
-  const cart = <Array<string>>[];
+  const cart = new Cart();
   const newUser = new User({ username, password, cart });
   newUser
     .save()

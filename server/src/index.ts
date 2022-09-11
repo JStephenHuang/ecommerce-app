@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { router as userRouter } from "./routes/user";
 import { router as authRouter } from "./routes/auth";
+import { router as articleRouter } from "./routes/article";
+import { router as cartRouter } from "./routes/cart";
 
 dotenv.config();
 
@@ -22,6 +24,8 @@ connection.once("open", () => {
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/article", articleRouter);
+app.use("/cart", cartRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
