@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { Article } from "../models/article";
 import { User } from "../models/user";
+import { School } from "../models/school";
 import { CartType } from "../models/cart";
 
 const router = Router();
@@ -15,18 +16,27 @@ router.get("/", (req: Request, res: Response) => {
 
 router.post("/sell", (req: Request, res: Response) => {
   const { title, seller, description, size, school, price } = req.body;
-  const newArticle = new Article({
-    title,
-    seller,
-    description,
-    size,
-    school,
-    price,
-  });
-  newArticle
-    .save()
-    .then(() => res.status(200).json("ArticleInStore"))
-    .catch((err) => res.status(404).send("Error: " + err));
+  School.findOne({ name: school })
+    .then((school) => {
+      if (!school) return res.status(200).json("SchoolNotFound");
+      const newArticle = new Article({
+        title,
+        seller,
+        description,
+        size,
+        school,
+        price,
+      });
+      newArticle
+        .save()
+        .then(() => {
+          school.products += 1;
+          school.save();
+          res.status(200).json("ArticleInStore");
+        })
+        .catch((err) => res.status(404).send("Error: " + err));
+    })
+    .catch((err) => res.status(404).send("Error:" + err));
 });
 
 router.post("/add-cart/:id", (req: Request, res: Response) => {

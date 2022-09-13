@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { APIContext, APIProvider } from "./contexts/APIContext";
+import LoginPage from "./pages/login";
+import RegisterPage from "./pages/register";
+import ProductPage from "./pages/product";
+import SellPage from "./pages/sell";
+import CartPage from "./pages/cart";
+import ProfilePage from "./pages/profile";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <APIProvider>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/main" element={<ProductPage />} />
+        <Route path="/sell" element={<SellPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Routes>
+    </APIProvider>
   );
 }
 

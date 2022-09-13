@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { CreateOptions } from "ts-node";
+import { schoolSchema } from "./school";
 
 type ArticleType = {
   title: string;
@@ -28,7 +28,7 @@ const articleSchema = new Schema({
     required: true,
   },
   school: {
-    type: String,
+    type: schoolSchema,
     required: true,
   },
   price: {
