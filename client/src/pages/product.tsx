@@ -1,12 +1,13 @@
 import Navbar from "../components/product-page/navbar/navbar";
 import SubNavbar from "../components/product-page/sub-navbar/sub-navbar";
-import Schools from "../components/product-page/features/schools";
 import ImgSwiper from "../components/product-page/features/image-swiper";
+import Schools from "../components/product-page/features/schools";
+import Articles from "../components/product-page/features/articles";
 
 const ProductPage = () => {
   return (
     <div className="h-screen w-screen">
-      <header className="h-[10%]">
+      <header className="h-[10%] mb-5">
         <Navbar />
       </header>
 
@@ -15,10 +16,9 @@ const ProductPage = () => {
 
         <ImgSwiper />
 
-        <div className="w-[80%] h-[10rem] my-5">
-          <p className="">Schools</p>
-          <Schools />
-        </div>
+        <Schools />
+
+        <Articles />
       </div>
     </div>
   );

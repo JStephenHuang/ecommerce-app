@@ -3,15 +3,20 @@ import { schoolSchema } from "./school";
 
 type ArticleType = {
   title: string;
+  productType: string;
   seller: string;
   description: string;
   size: number;
-  school: string;
+  school: any;
   price: number;
 };
 
 const articleSchema = new Schema({
   title: {
+    type: String,
+    required: true,
+  },
+  productType: {
     type: String,
     required: true,
   },
@@ -24,7 +29,7 @@ const articleSchema = new Schema({
     required: true,
   },
   size: {
-    type: Number,
+    type: String,
     required: true,
   },
   school: {

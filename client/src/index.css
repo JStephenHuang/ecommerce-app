@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
 body {
+  font-family: 'Prompt', sans-serif;
   background-color: #EAF2EF;
   scrollbar-width: thin;          
   scrollbar-color: #521945 #EAF2EF;
@@ -31,6 +34,30 @@ body {
     @apply text-gray-600 font-bold text-[36px]
   }
   .select-button {
-    @apply flex items-center justify-between text-[16px] w-[60%] border p-2 rounded-md
+    @apply flex items-center justify-between 
+    text-[16px] w-[60%] border p-2 rounded-md
+    border-[#521945]
+    bg-inherit
+    /* bg-white */
+  }
+  .text-area {
+    @apply w-[60%] border border-[#521945]
+    outline-none rounded-md
+    resize-none p-2 bg-transparent 
+  }
+}
+
+@layer components {
+  .spacer {
+    @apply aspect-auto w-full h-full bg-no-repeat bg-center bg-cover 
+  }
+  .layer1 {
+    @apply bg-[url('./svg/layer1.svg')]
+  }
+  .layer2 {
+    @apply bg-[url('./svg/layer2.svg')]
+  }
+  .layer3 {
+    @apply bg-[url('./svg/layer3.svg')]
   }
 }

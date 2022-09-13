@@ -12,7 +12,11 @@ class APIContextValue {
   getSchools = async () => {
     return await this.axios.get(`${this.IP}/school`);
   };
+  getArticles = async () => {
+    return await this.axios.get(`${this.IP}/article`);
+  };
 }
+
 const defaultValue = new APIContextValue();
 const APIContext = React.createContext<APIContextValue>(defaultValue);
 const useAPIs = () => useContext(APIContext);

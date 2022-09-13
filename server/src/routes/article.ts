@@ -15,12 +15,14 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.post("/sell", (req: Request, res: Response) => {
-  const { title, seller, description, size, school, price } = req.body;
+  const { title, productType, seller, description, size, school, price } =
+    req.body;
   School.findOne({ name: school })
     .then((school) => {
       if (!school) return res.status(200).json("SchoolNotFound");
       const newArticle = new Article({
         title,
+        productType,
         seller,
         description,
         size,
