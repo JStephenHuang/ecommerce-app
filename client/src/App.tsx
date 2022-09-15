@@ -5,6 +5,7 @@ import RegisterPage from "./pages/register";
 import ProductPage from "./pages/product";
 import SellPage from "./pages/sell";
 import CartPage from "./pages/cart";
+import CheckoutPage from "./pages/checkout";
 import ProfilePage from "./pages/profile";
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/main" element={<ProductPage />} />
+        <Route path="/" element={<ProductPage />} />
         <Route path="/sell" element={<SellPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/checkout" element={<CheckoutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </APIProvider>

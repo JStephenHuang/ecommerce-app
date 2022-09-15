@@ -6,7 +6,7 @@ import { User } from "../models/user";
 const router = Router();
 
 router.get("/", (req: Request, res: Response) => {
-  User.findOne({ username: req.body.username }).then((user) => {
+  User.findOne({ user: req.params.user }).then((user) => {
     if (!user) return res.status(400).json("UserNotFound");
     const cart: CartType = user.cart;
     return res.status(200).json(cart);
@@ -30,7 +30,7 @@ router.post("/remove/:id", (req: Request, res: Response) => {
       articles.splice(articleIndex, 1);
       console.log(articleIndex);
 
-      cart.price -= article.price;
+      cart.total -= article.price;
       user.save();
       return res.status(200).json(cart);
     });

@@ -14,13 +14,17 @@ body {
 
 
 @layer components {
-  .product-page-navbar {
+  .navbar {
     @apply w-full h-[10%] fixed bg-[#EAF2EF]
-   flex items-center justify-center
+   flex items-center justify-center border-b shadow-md
+  }
+  .navbar-link {
+    @apply text-[16px] text-gray-600 hover:text-[#912F56] 
+    ease-in-out duration-150
   }
 }
 @layer components {
-  .product-page-sub-navbar-link {
+  .sub-navbar-link {
     @apply text-[16px] font-semibold mx-5 hover:text-[#912F56]
   }
 }
@@ -48,6 +52,14 @@ body {
 }
 
 @layer components {
+  .checkout-button {
+    @apply p-2 text-white rounded-lg w-full
+    bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+    ease-in-out duration-150
+  }
+}
+
+@layer components {
   .spacer {
     @apply aspect-auto w-full h-full bg-no-repeat bg-center bg-cover 
   }
@@ -59,5 +71,26 @@ body {
   }
   .layer3 {
     @apply bg-[url('./svg/layer3.svg')]
+  }
+  .layer4 {
+    @apply bg-[url('./svg/layer4.svg')]
+  }
+  .layer5 {
+    @apply bg-[url('./svg/layer5.svg')]
+  }
+  .layer6 {
+    @apply bg-[url('./svg/layer6.svg')]
+  }
+  .layer7 {
+    @apply bg-[url('./svg/layer7.svg')]
+  }
+  .layer8 {
+    @apply bg-[url('./svg/layer8.svg')]
+  }
+  .layer9 {
+    @apply bg-[url('./svg/layer9.svg')]
+  }
+  .layer-wave1 {
+    @apply bg-[url('./svg/layer-wave1.svg')]
   }
 }

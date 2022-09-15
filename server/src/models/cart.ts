@@ -3,7 +3,7 @@ import { Article, ArticleType, articleSchema } from "./article";
 
 type CartType = {
   articles: Array<any>;
-  price: number;
+  total: number;
 };
 
 const cartSchema = new Schema({
@@ -11,7 +11,7 @@ const cartSchema = new Schema({
     type: [articleSchema],
     default: [],
   },
-  price: {
+  total: {
     type: Number,
     default: 0,
   },

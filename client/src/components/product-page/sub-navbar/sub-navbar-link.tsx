@@ -4,7 +4,11 @@ interface SubNavbarLinkProperties {
 }
 
 const SubNavbarLinks = (props: SubNavbarLinkProperties) => {
-  return <div className="product-page-sub-navbar-link">{props.name}</div>;
+  return (
+    <a className="sub-navbar-link" href="#article">
+      {props.name}
+    </a>
+  );
 };
 
 export default SubNavbarLinks;

@@ -36,7 +36,7 @@ const Articles = () => {
   });
 
   return (
-    <div className="w-[80%] h-[10rem] my-5">
+    <div id="" className="w-[80%] my-5">
       <div className="flex justify-between">
         <p className="">Uniforms</p>
 

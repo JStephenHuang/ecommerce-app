@@ -5,7 +5,7 @@ import ProfilePic from "./pfp";
 
 const Navbar = () => {
   return (
-    <div className="product-page-navbar border-b shadow-md">
+    <div className="navbar">
       <div className="w-[90%] h-full flex items-center justify-center">
         <Logo />
         <div className="w-[70%] h-full flex items-center">

@@ -1,9 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 
-import React, { ReactNode, useContext } from "react";
+import React, { useContext } from "react";
 
 class APIContextValue {
   axios: AxiosInstance;
+
   constructor(public readonly IP: string = `http://localhost:8000`) {
     this.axios = axios.create({
       withCredentials: true,
@@ -14,6 +15,12 @@ class APIContextValue {
   };
   getArticles = async () => {
     return await this.axios.get(`${this.IP}/article`);
+  };
+  getCartItems = async (username: string) => {
+    const params = {
+      username: username,
+    };
+    return await this.axios.get(`${this.IP}/cart/${params.username}`);
   };
 }
 
