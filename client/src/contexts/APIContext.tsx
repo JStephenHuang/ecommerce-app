@@ -16,11 +16,17 @@ class APIContextValue {
   getArticles = async () => {
     return await this.axios.get(`${this.IP}/article`);
   };
-  getCartItems = async (username: string) => {
+  getCart = async (username: string) => {
     const params = {
       username: username,
     };
     return await this.axios.get(`${this.IP}/cart/${params.username}`);
+  };
+  removeItem = async (username: string, id: string) => {
+    const body = {
+      username: username,
+    };
+    await this.axios.post(`${this.IP}/cart/remove/${id}`, body);
   };
 }
 
