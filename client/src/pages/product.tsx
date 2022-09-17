@@ -19,12 +19,6 @@ const ProductPage = () => {
         <Schools />
 
         <Articles />
-
-        <Schools />
-
-        <Schools />
-
-        <Schools />
       </div>
     </div>
   );

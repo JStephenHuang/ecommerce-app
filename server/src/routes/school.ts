@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import { School } from "../models/school";
+import { articleType } from "../models/article";
 
 const router = Router();
 
@@ -13,7 +14,7 @@ router.get("/", (req: Request, res: Response) => {
 
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
-  const products = 0;
+  const products: articleType[] = [];
   const newSchool = new School({ name, products });
   newSchool
     .save()

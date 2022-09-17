@@ -1,10 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { Article, ArticleType, articleSchema } from "./article";
-
-type CartType = {
-  articles: Array<any>;
-  total: number;
-};
+import { articleSchema } from "./article";
 
 const cartSchema = new Schema({
   articles: {
@@ -16,6 +11,8 @@ const cartSchema = new Schema({
     default: 0,
   },
 });
+
+type CartType = typeof cartSchema;
 
 const Cart = mongoose.model("Cart", cartSchema);
 

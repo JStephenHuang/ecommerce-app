@@ -1,11 +1,5 @@
-import mongoose, { ObjectId, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { CartType, cartSchema } from "./cart";
-
-type UserType = {
-  username: string;
-  password: string;
-  cart: CartType;
-};
 
 const userSchema = new Schema(
   {
@@ -32,6 +26,9 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+type userType = typeof userSchema;
+
 const User = mongoose.model("User", userSchema);
 
-export { User, UserType };
+export { User, userSchema, userType };

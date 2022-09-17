@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { articleSchema, articleType } from "./article";
 
 const schoolSchema = new Schema({
   name: {
@@ -6,11 +7,13 @@ const schoolSchema = new Schema({
     required: true,
   },
   products: {
-    type: Number,
+    type: [],
     required: true,
   },
 });
 
+type schoolType = typeof schoolSchema;
+
 const School = mongoose.model("School", schoolSchema);
 
-export { School, schoolSchema };
+export { School, schoolSchema, schoolType };

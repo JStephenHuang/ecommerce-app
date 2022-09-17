@@ -27,6 +27,11 @@ body {
   .sub-navbar-link {
     @apply text-[16px] font-semibold mx-5 hover:text-[#912F56]
   }
+  .article-bubble {
+    @apply flex flex-col rounded-lg bg-[#912F56] 
+    border text-white mx-2 mb-3 shadow-md 
+    hover:border-[#912F56] hover:shadow-xl ease-in-out duration-150
+  }
 }
 
 
@@ -57,6 +62,19 @@ body {
     bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
     ease-in-out duration-150
   }
+  .checkout-button-in-cart {
+    @apply p-2 text-white rounded-lg w-full
+    bg-[#912F56] opacity-50
+    ease-in-out duration-150
+  }
+}
+
+
+@layer components {
+  .cart-items {
+    @apply border border-black rounded-lg p-3 flex items-center justify-between
+  }
+
 }
 
 @layer components {

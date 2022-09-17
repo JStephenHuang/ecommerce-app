@@ -13,6 +13,7 @@ const Articles = () => {
       size: number;
       school: any;
       price: number;
+      _id: string;
     }>
   >([]);
   useEffect(() => {
@@ -31,6 +32,7 @@ const Articles = () => {
         size={article.size}
         school={article.school}
         price={article.price}
+        id={article._id}
       />
     );
   });

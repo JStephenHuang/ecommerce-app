@@ -1,16 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { schoolSchema } from "./school";
 
-type ArticleType = {
-  title: string;
-  productType: string;
-  seller: string;
-  description: string;
-  size: number;
-  school: any;
-  price: number;
-};
-
 const articleSchema = new Schema({
   title: {
     type: String,
@@ -42,6 +32,8 @@ const articleSchema = new Schema({
   },
 });
 
+type articleType = typeof articleSchema;
+
 const Article = mongoose.model("Article", articleSchema);
 
-export { Article, ArticleType, articleSchema };
+export { Article, articleType, articleSchema };

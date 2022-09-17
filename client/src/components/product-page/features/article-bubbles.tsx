@@ -1,3 +1,6 @@
+import { title } from "process";
+import { Link } from "react-router-dom";
+
 interface ArticleBubblesProperties {
   title: string;
   productType: string;
@@ -5,11 +8,13 @@ interface ArticleBubblesProperties {
   size: number;
   school: any;
   price: number;
+  id: string;
 }
 
 const ArticleBubbles = (props: ArticleBubblesProperties) => {
+  const title = props.title.replace(/ /g, "-");
   return (
-    <div className="flex flex-col rounded-lg bg-[#912F56] border text-white mx-2 mb-3 shadow-md">
+    <Link className="article-bubble" to={`/article/${title}/${props.id}`}>
       <div className="w-[20rem] h-[12rem] bg-white rounded-t-md"></div>
       <div className="w-[20rem] h-[6rem] p-3 flex flex-col justify-center">
         <div>
@@ -24,7 +29,7 @@ const ArticleBubbles = (props: ArticleBubblesProperties) => {
           <p className="text-[#EF798A]">Seller: {props.seller}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

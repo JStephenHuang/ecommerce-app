@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { Key, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useAPIs } from "../../contexts/APIContext";
 
 interface CartItemProperties {
+  deleteAlertFunction: () => void;
   title: string;
   price: number;
   seller: string;
@@ -11,28 +13,29 @@ interface CartItemProperties {
 
 const CartItem = (props: CartItemProperties) => {
   const APIContext = useAPIs();
-  const username = "Stephen";
-  const refreshPage = () => {
-    window.location.reload();
-  };
-  console.log(props.id);
+  const username = "Leo";
+
   const removeItem = () => {
     APIContext.removeItem(username, props.id)
       .then(() => {
-        console.log("Removed Item Successfully");
-        refreshPage();
+        console.log("Item Removed Successfully");
+        props.deleteAlertFunction();
       })
       .catch((err) => console.log(err));
   };
   return (
-    <div className="border border-black rounded-lg p-5 flex items-center justify-between">
+    <div className="cart-items">
       <div className="flex items-center">
         <div className="h-20 w-20 bg-white rounded-lg"></div>
 
         <div className="flex flex-col ml-5">
-          <p className="">{props.title}</p>
-          <p className="flex">Seller:</p>
-          <p className="text-[#912F56] ml-1"> {props.seller}</p>
+          <Link to={`/article/${props.title.replace(/ /g, "-")}/${props.id}`}>
+            <p className="hover:text-[#912F56] font-bold">{props.title}</p>
+          </Link>
+          <div className="flex">
+            <p className="">Seller:</p>
+            <p className="text-[#912F56] ml-1"> {props.seller}</p>
+          </div>
         </div>
       </div>
 

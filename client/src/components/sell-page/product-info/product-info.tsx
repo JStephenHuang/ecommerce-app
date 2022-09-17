@@ -6,7 +6,7 @@ import DescriptionSection from "./description-section";
 
 const ProductInfo = () => {
   return (
-    <div className="w-[50%] rounded-md my-5 p-5">
+    <div className="w-[60%] rounded-md my-5 p-5">
       <p className="text-[20px] font-bold">Product Information</p>
       <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
 
