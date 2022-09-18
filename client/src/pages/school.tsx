@@ -20,12 +20,11 @@ const SchoolPage = () => {
         <AiOutlineArrowLeft size={30} />
       </button>
       <div className="flex flex-col items-center"></div>
-      <div className="spacer layer2">
-        <div className="flex flex-col items-center">
-          <p className="title">{name}</p>
-          <SchoolInfo />
-        </div>
+      <div className="flex flex-col items-center">
+        <p className="title">{name}</p>
+        <SchoolInfo />
       </div>
+      <div className="spacer layer10"></div>
     </div>
   );
 };

@@ -108,6 +108,9 @@ body {
   .layer9 {
     @apply bg-[url('./svg/layer9.svg')]
   }
+  .layer10 {
+    @apply bg-[url('./svg/layer10.svg')]
+  }
   .layer-wave1 {
     @apply bg-[url('./svg/layer-wave1.svg')]
   }

@@ -20,7 +20,7 @@ const ArticlePage = () => {
         <AiOutlineArrowLeft size={30} />
       </button>
       <div className="flex flex-col items-center"></div>
-      <div className="spacer layer2">
+      <div className="spacer layer9">
         <div className="flex flex-col items-center">
           <p className="title">{title}</p>
           <ArticleInfo />
