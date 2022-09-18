@@ -16,16 +16,18 @@ router.get("/:username", (req: Request, res: Response) => {
 router.post("/remove/:id", (req: Request, res: Response) => {
   User.findOne({ username: req.body.username }).then((user) => {
     if (!user) return res.status(400).json("UserNotFound");
-    const articleId: Types.ObjectId = Object(req.params.id);
+    const articleId = req.params.id;
     Article.findById(articleId).then((article) => {
       if (!article) return res.status(400).json("ArticleNotFound");
       const cart = user.cart;
       const articles = cart.articles;
 
       // Removing article
+
       const articleIndex = articles
-        .map((article) => article._id)
+        .map((article) => article._id?.toHexString())
         .indexOf(articleId);
+
       articles.splice(articleIndex, 1);
 
       cart.total -= article.price;

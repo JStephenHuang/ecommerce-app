@@ -6,7 +6,7 @@ import CartTotal from "./cart-total";
 const CartInfo = () => {
   const APIContext = useAPIs();
   const username = "Leo";
-
+  const [deleteAlert, setDeleteAlert] = useState<number>(0);
   const [cartItems, setCartItems] = useState<
     Array<{
       title: string;
@@ -19,13 +19,14 @@ const CartInfo = () => {
     }>
   >([]);
   const deleteAlertFunction = () => {
-    console.log("Bruh");
+    setDeleteAlert((deleteAlert) => (deleteAlert += 1));
   };
   useEffect(() => {
     APIContext.getCart(username).then((value) => {
       setCartItems(value.data.articles);
+      console.log("23");
     });
-  }, []);
+  }, [deleteAlert]);
 
   const frontEndCartItems = cartItems.map((cartItem, key) => {
     return (
@@ -57,7 +58,7 @@ const CartInfo = () => {
             frontEndCartItems
           )}
         </div>
-        <CartTotal deleteAlertFunction={deleteAlertFunction} />
+        <CartTotal deleteAlert={deleteAlert} />
       </div>
     </div>
   );

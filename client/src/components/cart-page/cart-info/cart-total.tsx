@@ -3,7 +3,7 @@ import { useAPIs } from "../../../contexts/APIContext";
 import { Link } from "react-router-dom";
 
 interface CartTotalProperties {
-  deleteAlertFunction: () => void;
+  deleteAlert: number;
 }
 
 const CartTotal = (props: CartTotalProperties) => {
@@ -15,7 +15,7 @@ const CartTotal = (props: CartTotalProperties) => {
       setCartTotal(value.data.total);
       console.log("lol");
     });
-  }, []);
+  }, [props.deleteAlert]);
   const shipping = cartTotal * 0.1;
   const total = cartTotal + shipping;
   return (

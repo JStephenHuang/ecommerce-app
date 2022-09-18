@@ -13,6 +13,10 @@ class APIContextValue {
   getSchools = async () => {
     return await this.axios.get(`${this.IP}/school`);
   };
+
+  getSchool = async (id: string) => {
+    return await this.axios.get(`${this.IP}/school/${id}`);
+  };
   getArticles = async () => {
     return await this.axios.get(`${this.IP}/article`);
   };

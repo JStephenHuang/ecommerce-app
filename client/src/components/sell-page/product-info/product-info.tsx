@@ -17,6 +17,7 @@ const ProductInfo = () => {
       <SizeSection />
 
       <DescriptionSection />
+      <button></button>
     </div>
   );
 };

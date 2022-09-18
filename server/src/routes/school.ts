@@ -12,6 +12,14 @@ router.get("/", (req: Request, res: Response) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.get("/:id", (req: Request, res: Response) => {
+  School.findById(req.params.id)
+    .then((school) => {
+      return res.status(200).json(school);
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
   const products: articleType[] = [];

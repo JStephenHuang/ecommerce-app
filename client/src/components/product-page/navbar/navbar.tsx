@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="w-[70%] h-full flex items-center">
           <SearchBar />
           <div className="flex w-[20%] items-center justify-between ml-[3rem]">
-            <NavbarLink name="Sell" link="/sell" />
+            <NavbarLink name="Sell" link="/sell/product-info" />
             <NavbarLink name="Cart" link="/cart" />
             <ProfilePic />
           </div>

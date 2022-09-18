@@ -4,9 +4,9 @@ import SchoolBubbles from "./school-bubbles";
 
 const Schools = () => {
   const APIContext = useAPIs();
-  const [schools, setSchools] = useState<Array<{ name: string; products: [] }>>(
-    []
-  );
+  const [schools, setSchools] = useState<
+    Array<{ name: string; products: []; _id: string }>
+  >([]);
   useEffect(() => {
     APIContext.getSchools().then((value) => {
       setSchools(value.data);
@@ -19,6 +19,7 @@ const Schools = () => {
         key={key}
         name={school.name}
         products={school.products.length}
+        id={school._id}
       />
     );
   });
