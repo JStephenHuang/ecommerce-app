@@ -50,9 +50,30 @@ body {
     /* bg-white */
   }
   .text-area {
-    @apply w-[60%] border border-[#521945]
+    @apply w-full border border-[#521945]
     outline-none rounded-md
     resize-none p-2 bg-transparent 
+  }
+
+  .input {
+    @apply w-full border border-[#521945]
+    outline-none rounded-md text-[16px]
+    resize-none p-2 bg-transparent
+  }
+
+  .price-div {
+    @apply border-[#521945] w-[20%] h-[15%] 
+    flex items-center border  rounded-md p-2 mr-auto
+  }
+  .price-input {
+    @apply border-none ml-2 
+    outline-none rounded-md text-[16px]
+    resize-none bg-transparent
+  }
+  .publish-button {
+    @apply p-3 text-white rounded-lg text-[20px]
+    bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+    ease-in-out duration-150 w-[30%] 
   }
 }
 
@@ -60,6 +81,11 @@ body {
   .checkout-button {
     @apply p-2 text-white rounded-lg w-full
     bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+    ease-in-out duration-150
+  }
+  .checkout-button-disabled {
+    @apply p-2 text-white rounded-lg w-full
+    bg-[#912F56] opacity-50
     ease-in-out duration-150
   }
   .checkout-button-in-cart {
@@ -110,6 +136,9 @@ body {
   }
   .layer10 {
     @apply bg-[url('./svg/layer10.svg')]
+  }
+  .layer11 {
+    @apply bg-[url('./svg/layer11.svg')]
   }
   .layer-wave1 {
     @apply bg-[url('./svg/layer-wave1.svg')]

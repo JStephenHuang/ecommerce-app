@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useAPIs } from "../../../contexts/APIContext";
 
-const SchoolSection = () => {
+interface SchoolSectionProperties {
+  selectValue: React.RefObject<HTMLSelectElement>;
+}
+
+const SchoolSection = (props: SchoolSectionProperties) => {
   const APIContext = useAPIs();
 
   const [schools, setSchools] = useState<
@@ -15,7 +19,7 @@ const SchoolSection = () => {
   return (
     <div className="container">
       <p className="text-[16px] font-bold">School</p>
-      <select className="select-button">
+      <select className="select-button" ref={props.selectValue}>
         {schools.map((school, key) => {
           return (
             <option key={key} value={school.name}>

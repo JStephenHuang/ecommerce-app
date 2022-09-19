@@ -47,7 +47,7 @@ const Articles = () => {
         </a>
       </div>
 
-      <div className="flex w-full my-5">{frontEndArticles}</div>
+      <div className="flex w-full my-5 overflow-y-auto">{frontEndArticles}</div>
     </div>
   );
 };

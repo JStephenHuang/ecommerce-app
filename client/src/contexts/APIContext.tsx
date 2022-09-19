@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { stringify } from "querystring";
 
 import React, { useContext } from "react";
 
@@ -24,7 +25,26 @@ class APIContextValue {
   getArticle = async (id: string) => {
     return await this.axios.get(`${this.IP}/article/${id}`);
   };
-
+  sellProduct = async (
+    title: string,
+    productType: string,
+    seller: string,
+    description: string,
+    size: string,
+    school: string,
+    price: number
+  ) => {
+    const body = {
+      title: title,
+      productType: productType,
+      seller: seller,
+      description: description,
+      size: size,
+      school: school,
+      price: price,
+    };
+    await this.axios.post(`${this.IP}/article/sell`, body);
+  };
   getCart = async (username: string) => {
     const params = {
       username: username,

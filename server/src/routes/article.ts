@@ -23,7 +23,6 @@ router.get("/:id", (req: Request, res: Response) => {
 router.post("/sell", (req: Request, res: Response) => {
   const { title, productType, seller, description, size, school, price } =
     req.body;
-  const inCart: userType[] = [];
   School.findOne({ name: school })
     .then((school) => {
       if (!school) return res.status(200).json("SchoolNotFound");
@@ -35,7 +34,6 @@ router.post("/sell", (req: Request, res: Response) => {
         size,
         school,
         price,
-        inCart,
       });
       newArticle
         .save()
@@ -44,9 +42,9 @@ router.post("/sell", (req: Request, res: Response) => {
           school.save();
           res.status(200).json("ArticleInStore");
         })
-        .catch((err) => res.status(404).send("Error: " + err));
+        .catch((err) => res.status(400).send("Error: " + err));
     })
-    .catch((err) => res.status(404).send("Error:" + err));
+    .catch((err) => res.status(400).send("Error:" + err));
 });
 
 router.post("/add-cart/:id", (req: Request, res: Response) => {

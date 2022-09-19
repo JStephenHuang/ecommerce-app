@@ -33,9 +33,15 @@ const CartTotal = (props: CartTotalProperties) => {
         <p className="">Total:</p>
         <p className="text-[#87C38F]">${total.toFixed(2)}</p>
       </div>
-      <Link className="w-full" to="checkout">
-        <p className="checkout-button text-center">Checkout</p>
-      </Link>
+      {cartTotal === 0 ? (
+        <button className="checkout-button-disabled" disabled={true}>
+          Checkout
+        </button>
+      ) : (
+        <Link className="w-full" to="checkout">
+          <p className="checkout-button text-center">Checkout</p>
+        </Link>
+      )}
     </div>
   );
 };
