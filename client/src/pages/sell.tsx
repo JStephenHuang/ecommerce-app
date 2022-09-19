@@ -13,7 +13,7 @@ const SellPage = () => {
   const APIContext = useAPIs();
   const navigate = useNavigate();
   const [count, setCount] = useState<number>(0);
-  const [invalidInfo, setInvalidInfo] = useState<boolean>(false);
+  // const [invalidInfo, setInvalidInfo] = useState<boolean>(false);
 
   const publish = () => {
     setCount((current) => current + 1);
@@ -52,8 +52,6 @@ const SellPage = () => {
         .catch((err) => {
           console.log(err);
         });
-    } else {
-      setInvalidInfo(true);
     }
   };
 
@@ -78,24 +76,13 @@ const SellPage = () => {
           <p className="title">Welcome to the Sell page</p>
           {sections}
           <div className="w-[60%] flex flex-col items-end">
-            {invalidInfo ? (
-              <button
-                className="publish-button flex items-center justify-center"
-                onClick={publish}
-              >
-                <p className="mr-[5px]">Publish</p>
-                <AiFillCaretRight size={20} />
-              </button>
-            ) : (
-              <button
-                className="publish-button opacity-50 z-[-10] flex items-center justify-center"
-                onClick={publish}
-                disabled={true}
-              >
-                <p className="mr-[5px]">Publish</p>
-                <AiFillCaretRight size={20} />
-              </button>
-            )}
+            <button
+              className="publish-button flex items-center justify-center"
+              onClick={publish}
+            >
+              <p className="mr-[5px]">Publish</p>
+              <AiFillCaretRight size={20} />
+            </button>
           </div>
         </div>
 

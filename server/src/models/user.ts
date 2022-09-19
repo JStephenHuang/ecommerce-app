@@ -28,7 +28,6 @@ const userSchema = new Schema(
 );
 
 type userType = typeof userSchema;
-
 const User = mongoose.model("User", userSchema);
 
 export { User, userSchema, userType };
