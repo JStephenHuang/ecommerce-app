@@ -7,50 +7,37 @@ import SizeSection from "./size-section";
 import TitleSection from "./title-section";
 
 interface ProductInfoProperties {
+  selectSchool: React.RefObject<HTMLSelectElement>;
+  selectSize: React.RefObject<HTMLSelectElement>;
+  selectType: React.RefObject<HTMLSelectElement>;
+  inputTitle: React.RefObject<HTMLInputElement>;
   count: number;
 }
 
 const ProductInfo = (props: ProductInfoProperties) => {
-  const SellProductContext = useSellProduct();
-  const schoolSelectRef = useRef<HTMLSelectElement>(null);
-  const typeSelectRef = useRef<HTMLSelectElement>(null);
-  const sizeSelectRef = useRef<HTMLSelectElement>(null);
-  const titleInputRef = useRef<HTMLInputElement>(null);
+  const selectSchool = props.selectSchool;
+  const selectType = props.selectType;
+  const selectSize = props.selectSize;
+  const inputTitle = props.inputTitle;
   const [notFilled, setNotFilled] = useState<boolean>(false);
 
-  const fillDetail = (seller: string, price: number, description: string) => {
-    SellProductContext.fillDetail(seller, price, description);
-  };
-
   useEffect(() => {
-    const fillInformation = (
-      school: string,
-      productType: string,
-      size: string,
-      title: string
-    ) => {
-      SellProductContext.fillInformation(school, productType, size, title);
-    };
-
     if (
-      schoolSelectRef.current &&
-      typeSelectRef.current &&
-      sizeSelectRef.current &&
-      titleInputRef.current &&
+      selectSchool.current &&
+      selectType.current &&
+      selectSize.current &&
+      inputTitle.current &&
       props.count !== 0
     ) {
-      const seller = "Stephen";
-
-      const school = schoolSelectRef.current.value;
-      const type = typeSelectRef.current.value;
-      const size = sizeSelectRef.current.value;
-      const title = titleInputRef.current.value;
-      if (title === "") {
+      const school = selectSchool.current.value;
+      const type = selectType.current.value;
+      const size = selectSize.current.value;
+      const title = inputTitle.current.value;
+      if (title === "" || school === "-" || type === "-" || size === "-") {
         setNotFilled(true);
       } else {
         setNotFilled(false);
       }
-      fillInformation(school, type, size, title);
     }
   }, [props.count]);
 
@@ -59,13 +46,13 @@ const ProductInfo = (props: ProductInfoProperties) => {
       <p className="text-[20px] font-bold">Product Information</p>
       <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
 
-      <SchoolSection selectValue={schoolSelectRef} />
+      <SchoolSection selectValue={selectSchool} />
 
-      <TypeSection selectValue={typeSelectRef} />
+      <TypeSection selectValue={selectType} />
 
-      <SizeSection selectValue={sizeSelectRef} />
+      <SizeSection selectValue={selectSize} />
 
-      <TitleSection inputValue={titleInputRef} />
+      <TitleSection inputValue={inputTitle} />
       {notFilled ? (
         <div className="text-center">
           <p className="text-red-600 my-5">Invalid or missing informations</p>

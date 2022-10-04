@@ -7,11 +7,8 @@ const CheckoutPage = () => {
   return (
     <>
       <div className="h-screen w-screen">
-        <header className="h-[10%] mb-10">
-          <Link
-            className="m-10 text-gray-400 hover:text-red-600 ease-in-out duration-150 fixed"
-            to="/cart"
-          >
+        <header className="h-[10%] mb-5">
+          <Link className="back-arrow" to="/cart">
             <AiOutlineArrowLeft size={30} />
           </Link>
         </header>

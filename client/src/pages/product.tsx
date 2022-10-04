@@ -20,6 +20,7 @@ const ProductPage = () => {
 
         <Articles />
       </div>
+      <div className="spacer layer3"></div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { articleSchema, articleType } from "./article";
+import { listingSchema, listingType } from "./listing";
 
 const schoolSchema = new Schema({
   name: {

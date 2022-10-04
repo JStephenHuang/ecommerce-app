@@ -5,7 +5,7 @@ import CartTotal from "./cart-total";
 
 const CartInfo = () => {
   const APIContext = useAPIs();
-  const username = "Leo";
+  const username = "Stephen";
   const [deleteAlert, setDeleteAlert] = useState<number>(0);
   const [cartItems, setCartItems] = useState<
     Array<{
@@ -23,7 +23,7 @@ const CartInfo = () => {
   };
   useEffect(() => {
     APIContext.getCart(username).then((value) => {
-      setCartItems(value.data.articles);
+      setCartItems(value.data.listings);
       console.log("23");
     });
   }, [deleteAlert]);
@@ -53,7 +53,9 @@ const CartInfo = () => {
       <div className="flex h-[20rem] ">
         <div className="flex flex-col w-[60%] overflow-y-auto pr-3">
           {frontEndCartItems.length === 0 ? (
-            <p>Cart Empty</p>
+            <div className="w-full h-full grid place-items-center">
+              <p>Cart Empty</p>
+            </div>
           ) : (
             frontEndCartItems
           )}

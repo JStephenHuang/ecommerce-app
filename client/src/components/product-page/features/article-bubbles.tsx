@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 interface ArticleBubblesProperties {
+  className: string;
   title: string;
   productType: string;
   seller: string;
@@ -14,10 +15,14 @@ const ArticleBubbles = (props: ArticleBubblesProperties) => {
   const title = props.title.replace(/ /g, "-");
   return (
     <Link className="article-bubble" to={`/article/${title}/${props.id}`}>
-      <div className="w-[20rem] h-[12rem] bg-white rounded-t-md"></div>
-      <div className="w-[20rem] h-[6rem] p-3 flex flex-col justify-center">
-        <div>
-          <p className="">{props.title}</p>
+      <div
+        className={`${props.className} h-[12rem] bg-white rounded-t-md`}
+      ></div>
+      <div
+        className={`${props.className} h-[6rem] p-3 flex flex-col justify-center`}
+      >
+        <div className="w-[90%]">
+          <p className="truncate">{props.title}</p>
         </div>
 
         <div>

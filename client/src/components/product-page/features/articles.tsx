@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../../contexts/APIContext";
-import { productTypes } from "../../../docs/options";
 import ArticleBubbles from "./article-bubbles";
 
 const Articles = () => {
@@ -17,7 +16,7 @@ const Articles = () => {
     }>
   >([]);
   useEffect(() => {
-    APIContext.getArticles().then((value) => {
+    APIContext.getListings().then((value) => {
       setArticles(value.data);
     });
   }, []);
@@ -25,6 +24,7 @@ const Articles = () => {
   const frontEndArticles = articles.map((article, key) => {
     return (
       <ArticleBubbles
+        className="w-[20rem]"
         key={key}
         title={article.title}
         productType={article.productType}
@@ -47,7 +47,7 @@ const Articles = () => {
         </a>
       </div>
 
-      <div className="flex w-full my-5 overflow-y-auto">{frontEndArticles}</div>
+      <div className="flex w-full my-5 overflow-x-auto">{frontEndArticles}</div>
     </div>
   );
 };

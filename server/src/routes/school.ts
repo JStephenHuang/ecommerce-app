@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { School } from "../models/school";
-import { articleType } from "../models/article";
+import { listingType } from "../models/listing";
 
 const router = Router();
 
@@ -22,7 +22,7 @@ router.get("/:id", (req: Request, res: Response) => {
 
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
-  const products: articleType[] = [];
+  const products: listingType[] = [];
   const newSchool = new School({ name, products });
   newSchool
     .save()

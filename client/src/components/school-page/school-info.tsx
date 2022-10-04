@@ -32,6 +32,7 @@ const SchoolInfo = () => {
     return (
       <ArticleBubbles
         key={key}
+        className="w-full"
         title={schoolArticle.title}
         productType={schoolArticle.productType}
         seller={schoolArticle.seller}
@@ -47,7 +48,9 @@ const SchoolInfo = () => {
       <p className="text-[20px] font-bold">Every Listings from {school.name}</p>
       <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
       <div className="flex flex-col">{school.products.length} listings:</div>
-      <div className="flex w-full my-5">{frontEndSchoolArticles}</div>
+      <div className="w-full my-5 grid grid-cols-3">
+        {frontEndSchoolArticles}
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ interface CartTotalProperties {
 
 const CartTotal = (props: CartTotalProperties) => {
   const APIContext = useAPIs();
-  const username = "Leo";
+  const username = "Stephen";
   const [cartTotal, setCartTotal] = useState<number>(0);
   useEffect(() => {
     APIContext.getCart(username).then((value) => {

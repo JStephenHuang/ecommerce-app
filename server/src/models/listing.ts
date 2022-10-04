@@ -1,7 +1,8 @@
 import mongoose, { Schema } from "mongoose";
 import { schoolSchema } from "./school";
+import { userSchema, userType } from "./user";
 
-const articleSchema = new Schema({
+const listingSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -32,8 +33,8 @@ const articleSchema = new Schema({
   },
 });
 
-type articleType = typeof articleSchema;
+type listingType = typeof listingSchema;
 
-const Article = mongoose.model("Article", articleSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
-export { Article, articleType, articleSchema };
+export { Listing, listingType, listingSchema };
