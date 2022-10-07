@@ -16,7 +16,6 @@ const SchoolPage = () => {
       <button className="back-arrow" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={30} />
       </button>
-      <div className="flex flex-col items-center"></div>
       <div className="flex flex-col items-center">
         <p className="title">{name}</p>
         <SchoolInfo />

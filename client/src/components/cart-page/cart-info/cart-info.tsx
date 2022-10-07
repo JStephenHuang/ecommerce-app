@@ -1,11 +1,13 @@
 import { useState, useEffect, Key } from "react";
 import { useAPIs } from "../../../contexts/APIContext";
+import { useUser } from "../../../contexts/UserContext";
 import CartItem from "../cart-item";
 import CartTotal from "./cart-total";
 
 const CartInfo = () => {
   const APIContext = useAPIs();
-  const username = "Stephen";
+  const userContext = useUser();
+  const username = userContext.buyer;
   const [deleteAlert, setDeleteAlert] = useState<number>(0);
   const [cartItems, setCartItems] = useState<
     Array<{
@@ -60,7 +62,7 @@ const CartInfo = () => {
             frontEndCartItems
           )}
         </div>
-        <CartTotal deleteAlert={deleteAlert} />
+        <CartTotal deleteAlert={deleteAlert} cartLength={cartItems.length} />
       </div>
     </div>
   );

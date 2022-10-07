@@ -2,6 +2,7 @@ import { Key, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAPIs } from "../../contexts/APIContext";
+import { useUser } from "../../contexts/UserContext";
 
 interface CartItemProperties {
   deleteAlertFunction: () => void;
@@ -13,7 +14,8 @@ interface CartItemProperties {
 
 const CartItem = (props: CartItemProperties) => {
   const APIContext = useAPIs();
-  const username = "Stephen";
+  const userContext = useUser();
+  const username = userContext.buyer;
 
   const removeItem = () => {
     APIContext.removeListing(username, props.id)

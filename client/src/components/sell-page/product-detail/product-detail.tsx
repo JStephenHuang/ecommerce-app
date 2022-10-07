@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useSellProduct } from "../../../contexts/SellProductContext";
 import DescriptionSection from "./description-section";
 import ConditionSection from "./condition-section";
 import PriceSection from "./price-section";

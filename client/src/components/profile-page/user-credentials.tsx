@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { useAPIs } from "../../contexts/APIContext";
 import InfoSection from "./info-section";
 
-const UserCredentials = () => {
-  const APIContext = useAPIs();
-  const [user, setUser] = useState<{
+interface UserCredentialsProperties {
+  user: {
     username: string;
     listings: Array<{
       title: string;
@@ -15,23 +12,19 @@ const UserCredentials = () => {
       price: number;
       _id: string;
     }>;
-  }>({
-    username: "-",
-    listings: [],
-  });
-  const username = "Stephen";
-  APIContext.getUser(username).then((value) => {
-    setUser(value.data);
-  });
+  };
+}
+
+const UserCredentials = (props: UserCredentialsProperties) => {
   return (
-    <div className="w-[70%] h-[10%]">
+    <div className="w-full">
       <div className="flex items-center justify-between">
         <p className="font-bold text-[20px] truncate">User Credentials</p>
       </div>
       <hr className="w-full bg-[#521945] h-[2px]" />
       <div className="flex flex-col">
-        <div className="flex flex-col w-[50%] justify-between h-full p-5">
-          <InfoSection name="Name" value={user.username} />
+        <div className="flex flex-col w-[50%] justify-between h-full my-5">
+          <InfoSection name="Name" value={props.user.username} />
         </div>
       </div>
     </div>

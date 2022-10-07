@@ -14,12 +14,11 @@ const ProfilePage = () => {
       <button className="back-arrow" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={30} />
       </button>
-      <div className="spacer layer2">
-        <div className="flex flex-col items-center">
-          <p className="title">Welcome to the Profile Page</p>
-          <UserInfo />
-        </div>
+      <div className="flex flex-col items-center">
+        <p className="title">Welcome to the Profile Page</p>
+        <UserInfo />
       </div>
+      <div className="spacer layered2"></div>
     </div>
   );
 };

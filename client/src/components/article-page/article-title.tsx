@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { useAPIs } from "../../contexts/APIContext";
+import { useUser } from "../../contexts/UserContext";
 
 interface ArticleTitleProperties {
   id: string;
@@ -9,7 +10,8 @@ interface ArticleTitleProperties {
 
 const ArticleTitle = (props: ArticleTitleProperties) => {
   const APIContext = useAPIs();
-  const username = "Leo";
+  const userContext = useUser();
+  const username = userContext.buyer;
   const [ownership, setOwnership] = useState<boolean>(false);
   useEffect(() => {
     APIContext.getUserListings(username).then((value) => {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../contexts/APIContext";
+import { useUser } from "../../contexts/UserContext";
 
 interface AddToCartButtonProperties {
   id: string;
@@ -7,7 +8,8 @@ interface AddToCartButtonProperties {
 
 const AddToCartButton = (props: AddToCartButtonProperties) => {
   const APIContext = useAPIs();
-  const username = "Stephen";
+  const userContext = useUser();
+  const username = userContext.buyer;
   const [inCart, setInCart] = useState<boolean>(false);
 
   const [ownership, setOwnership] = useState<boolean>(false);

@@ -3,13 +3,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiFillCaretRight } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useAPIs } from "../contexts/APIContext";
-import { useSellProduct } from "../contexts/SellProductContext";
+import { useUser } from "../contexts/UserContext";
 import Navbar from "../components/product-page/navbar/navbar";
 import ProductInfo from "../components/sell-page/product-info/product-info";
 import ProductDetail from "../components/sell-page/product-detail/product-detail";
 
 const SellPage = () => {
   const APIContext = useAPIs();
+  const userContext = useUser();
   const navigate = useNavigate();
   //* Product detail
   const priceInputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +39,7 @@ const SellPage = () => {
     ) {
       const title = titleInputRef.current.value;
       const productType = typeSelectRef.current.value;
-      const seller = "Leo";
+      const seller = userContext.seller;
       const description = descriptionTextAreaRef.current.value;
       const size = sizeSelectRef.current.value;
       const school = schoolSelectRef.current.value;
@@ -134,9 +135,11 @@ const SellPage = () => {
                   <span className="sr-only">Loading...</span>
                 </div>
               ) : (
-                <p className="mr-[5px]">Publish</p>
+                <>
+                  <p className="mr-[5px]">Publish</p>
+                  <AiFillCaretRight size={20} />
+                </>
               )}
-              <AiFillCaretRight size={20} />
             </button>
           </div>
         </div>

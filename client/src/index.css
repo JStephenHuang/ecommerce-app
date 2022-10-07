@@ -29,9 +29,9 @@ body {
   .sub-navbar-link {
     @apply text-[16px] font-semibold mx-5 hover:text-[#912F56]
   }
-  .article-bubble {
-    @apply flex flex-col rounded-lg bg-[#912F56] 
-    border text-white mx-2 mb-3 shadow-md
+  .main-bubble {
+    @apply flex flex-col rounded-lg
+  text-white mx-2 mb-3 shadow-md border
     hover:border-[#912F56] hover:shadow-xl ease-in-out duration-150
   }
   
@@ -153,5 +153,11 @@ body {
   }
   .layer-wave1 {
     @apply bg-[url('./svg/layer-wave1.svg')]
+  }
+  .layered1 {
+    @apply bg-[url('./svg/layered1.svg')]
+  }
+  .layered2 {
+    @apply bg-[url('./svg/layered2.svg')]
   }
 }

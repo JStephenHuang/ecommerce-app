@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { useSellProduct } from "../../../contexts/SellProductContext";
-
+import { useEffect, useState } from "react";
 import SchoolSection from "./school-section";
 import TypeSection from "./type-section";
 import SizeSection from "./size-section";
