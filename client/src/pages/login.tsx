@@ -58,12 +58,13 @@ const LoginPage = () => {
             <br />
             <div>
               <button className="bg-[#ffffff] text-[#111111] border-2 border-[#dcdcdc] w-full h-10 rounded-lg">
-                <div className="flex">
-                  <img
-                    className="h-6 w-6 ml-9"
-                    src="facebook_login_logo.png"
-                  ></img>
-                  <span className="ml-6">Sign in with Facebook</span>
+                <div className="grid grid-cols-12 m-2">
+                  <div className="col-span-2">
+                    <img className="m-auto" src="facebook_login_logo.png"></img>
+                  </div>
+                  <div className="col-span-10">
+                    <span>Sign in with Facebook</span>
+                  </div>
                 </div>
               </button>
             </div>
