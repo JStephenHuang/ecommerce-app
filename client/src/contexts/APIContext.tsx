@@ -6,7 +6,9 @@ import React, { useContext } from "react";
 class APIContextValue {
   axios: AxiosInstance;
 
-  constructor(public readonly IP: string = `http://localhost:8000`) {
+  constructor(
+    public readonly IP: string = process.env.REACT_APP_BACKEND_URI as string
+  ) {
     this.axios = axios.create({
       withCredentials: true,
     });
