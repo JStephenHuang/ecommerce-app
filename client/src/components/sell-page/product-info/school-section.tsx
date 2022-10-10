@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useAPIs } from "../../../contexts/APIContext";
 
 interface SchoolSectionProperties {
@@ -20,6 +20,7 @@ const SchoolSection = (props: SchoolSectionProperties) => {
     <div className="container">
       <p className="text-[16px] font-bold">School</p>
       <select className="select-button" ref={props.selectValue}>
+        <option value="-">--Choose an option--</option>
         {schools.map((school, key) => {
           return (
             <option key={key} value={school.name}>

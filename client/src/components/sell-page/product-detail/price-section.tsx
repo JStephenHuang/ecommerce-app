@@ -11,10 +11,10 @@ const PriceSection = (props: PriceSectionProperties) => {
         <p className="text-[16px] font-bold">Price</p>
         <p className="text-[12px]">Should not be over $50</p>
       </div>
-      <div className="price-div">
+      <div className="price-div text-[20px]">
         <p className="text-[#87C38F]">$</p>
         <input
-          className="price-input"
+          className="price-input text-[20px]"
           type="text"
           placeholder="0.00"
           maxLength={60}

@@ -11,4 +11,16 @@ router.get("/", (req: Request, res: Response) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.get("/:username", async (req: Request, res: Response) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (!user) return res.status(400).json("UserNotFound");
+  return res.status(200).json(user);
+});
+
+router.get("/listings/:username", async (req: Request, res: Response) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (!user) return res.status(400).json("UserNotFound");
+  return res.status(200).json(user.listings);
+});
+
 export { router };

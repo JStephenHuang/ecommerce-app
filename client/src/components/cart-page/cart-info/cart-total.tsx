@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useAPIs } from "../../../contexts/APIContext";
 import { Link } from "react-router-dom";
+import { useUser } from "../../../contexts/UserContext";
 
 interface CartTotalProperties {
   deleteAlert: number;
+  cartLength: number;
 }
 
 const CartTotal = (props: CartTotalProperties) => {
   const APIContext = useAPIs();
-  const username = "Leo";
+  const userContext = useUser();
+  const username = userContext.buyer;
   const [cartTotal, setCartTotal] = useState<number>(0);
   useEffect(() => {
     APIContext.getCart(username).then((value) => {
@@ -33,7 +36,7 @@ const CartTotal = (props: CartTotalProperties) => {
         <p className="">Total:</p>
         <p className="text-[#87C38F]">${total.toFixed(2)}</p>
       </div>
-      {cartTotal === 0 ? (
+      {props.cartLength === 0 ? (
         <button className="checkout-button-disabled" disabled={true}>
           Checkout
         </button>

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../../contexts/APIContext";
-import { productTypes } from "../../../docs/options";
-import ArticleBubbles from "./article-bubbles";
+import ListingBubbles from "./listing-bubbles";
 
 const Articles = () => {
   const APIContext = useAPIs();
-  const [articles, setArticles] = useState<
+  const [listings, setListings] = useState<
     Array<{
       title: string;
       productType: string;
@@ -17,22 +16,23 @@ const Articles = () => {
     }>
   >([]);
   useEffect(() => {
-    APIContext.getArticles().then((value) => {
-      setArticles(value.data);
+    APIContext.getListings().then((value) => {
+      setListings(value.data);
     });
   }, []);
 
-  const frontEndArticles = articles.map((article, key) => {
+  const frontEndArticles = listings.map((listing, key) => {
     return (
-      <ArticleBubbles
+      <ListingBubbles
+        className="w-[20rem]"
         key={key}
-        title={article.title}
-        productType={article.productType}
-        seller={article.seller}
-        size={article.size}
-        school={article.school}
-        price={article.price}
-        id={article._id}
+        title={listing.title}
+        productType={listing.productType}
+        seller={listing.seller}
+        size={listing.size}
+        school={listing.school}
+        price={listing.price}
+        id={listing._id}
       />
     );
   });
@@ -47,7 +47,7 @@ const Articles = () => {
         </a>
       </div>
 
-      <div className="flex w-full my-5 overflow-y-auto">{frontEndArticles}</div>
+      <div className="flex w-full my-5 overflow-x-auto">{frontEndArticles}</div>
     </div>
   );
 };

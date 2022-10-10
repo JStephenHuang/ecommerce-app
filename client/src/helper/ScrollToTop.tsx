@@ -4,7 +4,7 @@ import { useLayoutEffect } from "react";
 export const ScrollToTop = ({ children }: any) => {
   const location = useLocation();
   useLayoutEffect(() => {
-    document.documentElement.scrollTo(0, 0);
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
   return children;
 };

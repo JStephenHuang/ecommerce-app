@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-import { articleSchema } from "./article";
+import { listingSchema } from "./listing";
 
 const cartSchema = new Schema({
-  articles: {
-    type: [articleSchema],
+  listings: {
+    type: [listingSchema],
     default: [],
   },
   total: {

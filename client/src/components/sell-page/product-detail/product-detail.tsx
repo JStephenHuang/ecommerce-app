@@ -1,39 +1,34 @@
 import { useEffect, useRef, useState } from "react";
-import { useSellProduct } from "../../../contexts/SellProductContext";
 import DescriptionSection from "./description-section";
 import ConditionSection from "./condition-section";
 import PriceSection from "./price-section";
 
 interface ProductDetailProperties {
+  inputDescription: React.RefObject<HTMLTextAreaElement>;
+  inputPrice: React.RefObject<HTMLInputElement>;
   count: number;
 }
 
 const ProductDetail = (props: ProductDetailProperties) => {
-  const SellProductContext = useSellProduct();
-  const priceInputRef = useRef<HTMLInputElement>(null);
-  const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
-  //   const sellerInputRef = useRef<HTMLInputElement>(null);
+  const inputDescription = props.inputDescription;
+  const inputPrice = props.inputPrice;
   const [notFilled, setNotFilled] = useState<boolean>(false);
+  const [priceError, setPriceError] = useState<boolean>(false);
 
   useEffect(() => {
-    const fillDetail = (seller: string, price: number, description: string) => {
-      SellProductContext.fillDetail(seller, price, description);
-    };
-
-    if (
-      priceInputRef.current &&
-      descriptionTextAreaRef.current &&
-      props.count !== 0
-    ) {
+    if (inputPrice.current && inputDescription.current && props.count !== 0) {
       const seller = "Stephen";
-      const price = Number(priceInputRef.current.value);
-      const description = descriptionTextAreaRef.current.value;
+      const description = inputDescription.current.value;
+      const price = Number(inputPrice.current.value);
       if (price === 0 || description === "") {
         setNotFilled(true);
+      } else if (price % 1 !== 0) {
+        setNotFilled(false);
+        setPriceError(true);
       } else {
+        setPriceError(false);
         setNotFilled(false);
       }
-      fillDetail(seller, price, description);
     }
   }, [props.count]);
 
@@ -44,12 +39,17 @@ const ProductDetail = (props: ProductDetailProperties) => {
 
       <ConditionSection />
 
-      <DescriptionSection inputValue={descriptionTextAreaRef} />
+      <DescriptionSection inputValue={inputDescription} />
 
-      <PriceSection inputValue={priceInputRef} />
+      <PriceSection inputValue={inputPrice} />
       {notFilled ? (
         <div className="text-center">
           <p className="text-red-600 my-5">Invalid or missing details</p>
+        </div>
+      ) : null}
+      {priceError ? (
+        <div className="text-center">
+          <p className="text-red-600 my-5">Price can have . but not ,</p>
         </div>
       ) : null}
     </div>

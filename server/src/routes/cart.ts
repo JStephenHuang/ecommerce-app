@@ -1,40 +1,37 @@
 import { Router, Request, Response } from "express";
 import { Types } from "mongoose";
-import { Article } from "../models/article";
+import { Listing } from "../models/listing";
 import { User } from "../models/user";
 
 const router = Router();
 
-router.get("/:username", (req: Request, res: Response) => {
-  User.findOne({ username: req.params.username }).then((user) => {
-    if (!user) return res.status(400).json("UserNotFound");
-    const cart = user.cart;
-    return res.status(200).json(cart);
-  });
+router.get("/:username", async (req: Request, res: Response) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (!user) return res.status(400).json("UserNotFound");
+  const cart = user.cart;
+  return res.status(200).json(cart);
 });
 
-router.post("/remove/:id", (req: Request, res: Response) => {
-  User.findOne({ username: req.body.username }).then((user) => {
-    if (!user) return res.status(400).json("UserNotFound");
-    const articleId = req.params.id;
-    Article.findById(articleId).then((article) => {
-      if (!article) return res.status(400).json("ArticleNotFound");
-      const cart = user.cart;
-      const articles = cart.articles;
+router.post("/remove/:id", async (req: Request, res: Response) => {
+  const user = await User.findOne({ username: req.body.username });
+  if (!user) return res.status(400).json("UserNotFound");
+  const listingId = req.params.id;
+  const listing = await Listing.findById(listingId);
+  if (!listing) return res.status(400).json("ArticleNotFound");
+  const cart = user.cart;
+  const listings = cart.listings;
 
-      // Removing article
+  // Removing article
 
-      const articleIndex = articles
-        .map((article) => article._id?.toHexString())
-        .indexOf(articleId);
+  const listingIndex = listings
+    .map((listing) => listing._id?.toHexString())
+    .indexOf(listingId);
 
-      articles.splice(articleIndex, 1);
+  listings.splice(listingIndex, 1);
 
-      cart.total -= article.price;
-      user.save();
-      return res.status(200).json(cart);
-    });
-  });
+  cart.total -= listing.price;
+  user.save();
+  return res.status(200).json(cart);
 });
 
 export { router };

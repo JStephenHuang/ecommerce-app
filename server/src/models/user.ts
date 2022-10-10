@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { CartType, cartSchema } from "./cart";
+import { listingSchema } from "./listing";
 
 const userSchema = new Schema(
   {
@@ -19,6 +20,9 @@ const userSchema = new Schema(
     cart: {
       type: cartSchema,
       required: true,
+    },
+    listings: {
+      type: [listingSchema],
     },
   },
 

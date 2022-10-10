@@ -12,7 +12,6 @@ body {
   scrollbar-color: #521945 #EAF2EF;
 }
 
-
 @layer components {
   .navbar {
     @apply w-full h-[10%] fixed bg-[#EAF2EF]
@@ -22,18 +21,29 @@ body {
     @apply text-[16px] text-gray-600 hover:text-[#912F56] 
     ease-in-out duration-150
   }
+  .back-arrow {
+    @apply absolute ml-10 text-gray-400 hover:text-red-600 ease-in-out duration-150 mt-10 z-[5]
+  }
 }
 @layer components {
   .sub-navbar-link {
     @apply text-[16px] font-semibold mx-5 hover:text-[#912F56]
   }
-  .article-bubble {
-    @apply flex flex-col rounded-lg bg-[#912F56] 
-    border text-white mx-2 mb-3 shadow-md 
+  .main-bubble {
+    @apply flex flex-col rounded-lg
+  text-white mx-2 mb-3 shadow-md border
     hover:border-[#912F56] hover:shadow-xl ease-in-out duration-150
   }
+  
 }
 
+@layer components {
+  .edit-button {
+    @apply p-2 text-white rounded-lg w-full
+    bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+    ease-in-out duration-150
+  }
+}
 
 @layer components {
   .container {
@@ -93,6 +103,7 @@ body {
     bg-[#912F56] opacity-50
     ease-in-out duration-150
   }
+  
 }
 
 
@@ -142,5 +153,11 @@ body {
   }
   .layer-wave1 {
     @apply bg-[url('./svg/layer-wave1.svg')]
+  }
+  .layered1 {
+    @apply bg-[url('./svg/layered1.svg')]
+  }
+  .layered2 {
+    @apply bg-[url('./svg/layered2.svg')]
   }
 }

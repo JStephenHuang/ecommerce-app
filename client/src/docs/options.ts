@@ -1,4 +1,5 @@
 export const productTypes = [
+  { value: "-", label: "--Choose an option--" },
   { value: "Polo", label: "Polo" },
   { value: "Sportswear", label: "Sportswear" },
   { value: "Shorts", label: "Shorts" },
@@ -9,6 +10,7 @@ export const productTypes = [
 ];
 
 export const sizes = [
+  { value: "-", label: "--Choose an option--" },
   { value: "XL", label: "Extra Large" },
   { value: "L", label: "Large" },
   { value: "M", label: "Medium" },
@@ -16,22 +18,9 @@ export const sizes = [
 ];
 
 export const conditions = [
+  { value: "-", label: "--Choose an option--" },
   { value: "Old", label: "Old" },
   { value: "Used, Good", label: "Used, Good" },
   { value: "Used, New", label: "Used, New" },
   { value: "Brand New", label: "Brand New" },
 ];
-
-// description: "Good shorts, slick light shorts, brebeuf shorts, brand and logo scratched off a little "
-// ​
-// price: 10
-// ​
-// productType: "Sportswear"
-// ​
-// school: "Brebeuf"
-// ​
-// seller: "Stephen"
-// ​
-// size: "Medium"
-// ​
-// title: " Brebeuf Gym Shorts, 5 years old"
