@@ -42,7 +42,9 @@ const CartItem = (props: CartItemProperties) => {
           </div>
         </div>
         <div className="flex items-center ml-auto">
-          <p className="text-[#87C38F] text-[24px] mr-3">${props.price}</p>
+          <p className="text-[#87C38F] text-[24px] mr-3">
+            ${props.price.toFixed(2)}
+          </p>
           <FaTrash
             className="hover:text-red-600"
             onClick={removeItem}
