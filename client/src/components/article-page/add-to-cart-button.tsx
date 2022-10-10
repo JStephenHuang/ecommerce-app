@@ -11,12 +11,11 @@ const AddToCartButton = (props: AddToCartButtonProperties) => {
   const userContext = useUser();
   const username = userContext.buyer;
   const [inCart, setInCart] = useState<boolean>(false);
-
   const [ownership, setOwnership] = useState<boolean>(false);
   useEffect(() => {
     APIContext.getCart(username).then((value) => {
       const cart = value.data;
-      const userCartListingsId = cart.articles.map(
+      const userCartListingsId = cart.listings.map(
         (listings: any) => listings._id
       );
       console.log(userCartListingsId);
@@ -26,7 +25,7 @@ const AddToCartButton = (props: AddToCartButtonProperties) => {
         setInCart(false);
       }
     });
-  }, []);
+  }, [APIContext, username]);
 
   useEffect(() => {
     APIContext.getUserListings(username).then((value) => {

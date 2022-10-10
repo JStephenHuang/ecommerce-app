@@ -16,12 +16,9 @@ const CartPage = () => {
           <AiOutlineArrowLeft size={30} />
         </button>
         <div className="spacer layer2">
-          <div className="flex flex-col items-center ">
-            <p className="title">Welcome to your Cart</p>
-            <CartInfo />
-          </div>
-          {/* <Media /> */}
+          <CartInfo />
         </div>
+        {/* <Media /> */}
       </div>
     </>
   );
