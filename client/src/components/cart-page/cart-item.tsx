@@ -5,7 +5,7 @@ import { useAPIs } from "../../contexts/APIContext";
 import { useUser } from "../../contexts/UserContext";
 
 interface CartItemProperties {
-  deleteAlertFunction: () => void;
+  removeCartItemHandler: (id: string) => void;
   title: string;
   price: number;
   seller: string;
@@ -21,7 +21,7 @@ const CartItem = (props: CartItemProperties) => {
     APIContext.removeListing(username, props.id)
       .then(() => {
         console.log("Item Removed Successfully");
-        props.deleteAlertFunction();
+        props.removeCartItemHandler(props.id);
       })
       .catch((err) => console.log(err));
   };

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 
 interface CartTotalProperties {
-  deleteAlert: number;
   cartLength: number;
 }
 
@@ -13,12 +12,13 @@ const CartTotal = (props: CartTotalProperties) => {
   const userContext = useUser();
   const username = userContext.buyer;
   const [cartTotal, setCartTotal] = useState<number>(0);
+
   useEffect(() => {
     APIContext.getCart(username).then((value) => {
       setCartTotal(value.data.total);
-      console.log("lol");
     });
-  }, [props.deleteAlert]);
+  }, [props.cartLength]);
+
   const shipping = cartTotal * 0.1;
   const total = cartTotal + shipping;
   return (
