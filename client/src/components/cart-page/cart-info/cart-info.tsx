@@ -19,10 +19,13 @@ const CartInfo = () => {
     setLoading(false);
   };
 
-  const removeCartItemHandler = (id: string) => {
-    const cartItemIndex = cartItems.map((cartItem) => cartItem._id).indexOf(id);
-
-    setCartItems(cartItems.splice(cartItemIndex - 1, 1));
+  const removeCartItemHandler = async (id: string) => {
+    setLoading(true);
+    APIContext.removeCartItem(userContext.buyer, id);
+    setCartItems(
+      (await APIContext.getCartItems(userContext.buyer)).data.listings
+    );
+    setLoading(false);
   };
 
   useEffect(() => {
