@@ -2,22 +2,21 @@ import { Item } from "../../../types/cart-item";
 import CartItem from "../cart-item";
 import CartTotal from "./cart-total";
 
+interface CartItemsProperties {
+  cartItems: Item[];
+  removeCartItemHandler: (id: string) => void;
+}
+
 const CartItems = ({
   cartItems,
   removeCartItemHandler,
-}: {
-  cartItems: Item[];
-  removeCartItemHandler: (id: string) => void;
-}) => {
+}: CartItemsProperties) => {
   const frontEndCartItems = cartItems.map((value, index) => {
     return (
       <CartItem
         key={index}
+        cartItem={value}
         removeCartItemHandler={removeCartItemHandler}
-        title={value.title}
-        price={value.price}
-        seller={value.seller}
-        id={value._id}
       />
     );
   });

@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { Item } from "../../../types/cart-item";
 
-const CartTotal = ({ cartItems }: { cartItems: Item[] }) => {
+interface CartTotalProperties {
+  cartItems: Item[];
+}
+
+const CartTotal = ({ cartItems }: CartTotalProperties) => {
   let cartTotal;
 
-  if (cartItems.length == 0) {
+  if (cartItems.length === 0) {
     cartTotal = 0;
   } else {
     cartTotal = cartItems
