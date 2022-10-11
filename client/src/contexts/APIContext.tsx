@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { stringify } from "querystring";
 
 import React, { useContext } from "react";
 
