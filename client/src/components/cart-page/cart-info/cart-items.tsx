@@ -9,15 +9,15 @@ const CartItems = ({
   cartItems: Item[];
   removeCartItemHandler: (id: string) => void;
 }) => {
-  const frontEndCartItems = cartItems.map((cartItem, key) => {
+  const frontEndCartItems = cartItems.map((value, index) => {
     return (
       <CartItem
-        key={key}
+        key={index}
         removeCartItemHandler={removeCartItemHandler}
-        title={cartItem.title}
-        price={cartItem.price}
-        seller={cartItem.seller}
-        id={cartItem._id}
+        title={value.title}
+        price={value.price}
+        seller={value.seller}
+        id={value._id}
       />
     );
   });
@@ -32,7 +32,7 @@ const CartItems = ({
           frontEndCartItems
         )}
       </div>
-      <CartTotal cartLength={cartItems.length} />
+      <CartTotal cartItems={cartItems} />
     </div>
   );
 };
