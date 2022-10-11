@@ -1,8 +1,5 @@
-import { Key, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useAPIs } from "../../contexts/APIContext";
-import { useUser } from "../../contexts/UserContext";
 
 interface CartItemProperties {
   removeCartItemHandler: (id: string) => void;
@@ -13,18 +10,6 @@ interface CartItemProperties {
 }
 
 const CartItem = (props: CartItemProperties) => {
-  const APIContext = useAPIs();
-  const userContext = useUser();
-  const username = userContext.buyer;
-
-  const removeItem = () => {
-    APIContext.removeListing(username, props.id)
-      .then(() => {
-        console.log("Item Removed Successfully");
-        props.removeCartItemHandler(props.id);
-      })
-      .catch((err) => console.log(err));
-  };
   return (
     <div className="cart-items">
       <div className="flex items-center w-full">
@@ -47,7 +32,7 @@ const CartItem = (props: CartItemProperties) => {
           </p>
           <FaTrash
             className="hover:text-red-600"
-            onClick={removeItem}
+            onClick={() => props.removeCartItemHandler(props.id)}
             size={16}
           />
         </div>

@@ -1,5 +1,5 @@
-import { lazy, useEffect, useState } from "react";
-import { APIContext, useAPIs } from "../../../contexts/APIContext";
+import { useEffect, useState } from "react";
+import { useAPIs } from "../../../contexts/APIContext";
 import { useUser } from "../../../contexts/UserContext";
 import LoadingSpinner from "../../sell-page/loading-spinner";
 import CartItems from "./cart-items";
@@ -13,14 +13,19 @@ const CartInfo = () => {
 
   const getCartItemsHandler = async () => {
     setLoading(true);
-    setCartItems((await APIContext.getCart(userContext.buyer)).data.listings);
+    setCartItems(
+      (await APIContext.getCartItems(userContext.buyer)).data.listings
+    );
     setLoading(false);
   };
 
-  const removeCartItemHandler = (id: string) => {
+  const removeCartItemHandler = async (id: string) => {
+    setLoading(true);
+    await APIContext.removeCartItem(userContext.buyer, id);
     setCartItems(
-      cartItems.splice(cartItems.findIndex((value) => value._id == id) - 1, 1)
+      (await APIContext.getCartItems(userContext.buyer)).data.listings
     );
+    setLoading(false);
   };
 
   useEffect(() => {

@@ -1,6 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { stringify } from "querystring";
-
 import React, { useContext } from "react";
 
 class APIContextValue {
@@ -56,19 +54,19 @@ class APIContextValue {
     };
     await this.axios.post(`${this.IP}/listing/sell`, body);
   };
-  getCart = async (username: string) => {
+  getCartItems = async (username: string) => {
     const params = {
       username: username,
     };
     return await this.axios.get(`${this.IP}/cart/${params.username}`);
   };
-  addToCart = async (username: string, id: string) => {
+  addCartItem = async (username: string, id: string) => {
     const body = {
       username: username,
     };
     return await this.axios.post(`${this.IP}/listing/add-cart/${id}`, body);
   };
-  removeListing = async (username: string, id: string) => {
+  removeCartItem = async (username: string, id: string) => {
     const body = {
       username: username,
     };
