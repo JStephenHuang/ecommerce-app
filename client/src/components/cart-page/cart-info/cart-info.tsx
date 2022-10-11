@@ -18,9 +18,9 @@ const CartInfo = () => {
   };
 
   const removeCartItemHandler = (id: string) => {
-    setCartItems(
-      cartItems.splice(cartItems.findIndex((value) => value._id == id) - 1, 1)
-    );
+    const cartItemIndex = cartItems.map((cartItem) => cartItem._id).indexOf(id);
+
+    setCartItems(cartItems.splice(cartItemIndex - 1, 1));
   };
 
   useEffect(() => {
