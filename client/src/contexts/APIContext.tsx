@@ -1,4 +1,8 @@
 import axios, { AxiosInstance } from "axios";
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9324629c62714753d64d0693d74752197900c5d5
 import React, { useContext } from "react";
 
 class APIContextValue {

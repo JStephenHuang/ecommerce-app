@@ -19,6 +19,12 @@ const CartInfo = () => {
     setLoading(false);
   };
 
+<<<<<<< HEAD
+  const removeCartItemHandler = (id: string) => {
+    const cartItemIndex = cartItems.map((cartItem) => cartItem._id).indexOf(id);
+
+    setCartItems(cartItems.splice(cartItemIndex - 1, 1));
+=======
   const removeCartItemHandler = async (id: string) => {
     setLoading(true);
     await APIContext.removeCartItem(userContext.buyer, id);
@@ -26,6 +32,7 @@ const CartInfo = () => {
       (await APIContext.getCartItems(userContext.buyer)).data.listings
     );
     setLoading(false);
+>>>>>>> 9324629c62714753d64d0693d74752197900c5d5
   };
 
   useEffect(() => {
