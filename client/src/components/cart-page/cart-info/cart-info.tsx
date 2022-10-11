@@ -21,7 +21,7 @@ const CartInfo = () => {
 
   const removeCartItemHandler = async (id: string) => {
     setLoading(true);
-    APIContext.removeCartItem(userContext.buyer, id);
+    await APIContext.removeCartItem(userContext.buyer, id);
     setCartItems(
       (await APIContext.getCartItems(userContext.buyer)).data.listings
     );
