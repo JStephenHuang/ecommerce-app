@@ -11,7 +11,7 @@ const CartInfo = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [cartItems, setCartItems] = useState<Item[]>([]);
 
-  const getCartItemsHandler = async () => {
+  const _getCartItemsHandler = async () => {
     setLoading(true);
     setCartItems(
       (await APIContext.getCartItems(userContext.buyer)).data.listings
@@ -29,7 +29,7 @@ const CartInfo = () => {
   };
 
   useEffect(() => {
-    getCartItemsHandler();
+    _getCartItemsHandler();
   }, []);
 
   if (loading) {
