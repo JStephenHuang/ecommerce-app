@@ -1,53 +1,38 @@
-import { Key, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useAPIs } from "../../contexts/APIContext";
-import { useUser } from "../../contexts/UserContext";
+import { Item } from "../../types/cart-item";
 
 interface CartItemProperties {
-  deleteAlertFunction: () => void;
-  title: string;
-  price: number;
-  seller: string;
-  id: string;
+  cartItem: Item;
+  removeCartItemHandler: (id: string) => void;
 }
 
-const CartItem = (props: CartItemProperties) => {
-  const APIContext = useAPIs();
-  const userContext = useUser();
-  const username = userContext.buyer;
-
-  const removeItem = () => {
-    APIContext.removeListing(username, props.id)
-      .then(() => {
-        console.log("Item Removed Successfully");
-        props.deleteAlertFunction();
-      })
-      .catch((err) => console.log(err));
-  };
+const CartItem = ({ cartItem, removeCartItemHandler }: CartItemProperties) => {
   return (
     <div className="cart-items">
       <div className="flex items-center w-full">
         <div className="h-20 w-20 bg-white rounded-lg"></div>
 
         <div className="flex flex-col ml-5 w-[50%]">
-          <Link to={`/article/${props.title.replace(/ /g, "-")}/${props.id}`}>
+          <Link
+            to={`/article/${cartItem.title.replace(/ /g, "-")}/${cartItem._id}`}
+          >
             <p className="hover:text-[#912F56] font-bold truncate">
-              {props.title}
+              {cartItem.title}
             </p>
           </Link>
           <div className="flex">
             <p className="">Seller:</p>
-            <p className="text-[#912F56] ml-1"> {props.seller}</p>
+            <p className="text-[#912F56] ml-1"> {cartItem.seller}</p>
           </div>
         </div>
         <div className="flex items-center ml-auto">
           <p className="text-[#87C38F] text-[24px] mr-3">
-            ${props.price.toFixed(2)}
+            ${cartItem.price.toFixed(2)}
           </p>
           <FaTrash
             className="hover:text-red-600"
-            onClick={removeItem}
+            onClick={() => removeCartItemHandler(cartItem._id)}
             size={16}
           />
         </div>
