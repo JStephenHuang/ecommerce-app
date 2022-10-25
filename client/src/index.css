@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
 body {
-  font-family: 'Prompt', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #EAF2EF;
   scrollbar-width: thin;          
   scrollbar-color: #521945 #EAF2EF;
