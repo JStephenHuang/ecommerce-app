@@ -1,78 +1,72 @@
+interface MarqueeProperties {
+  imageSrcs: string[];
+}
+
+const ImageMarquee = ({ imageSrcs }: MarqueeProperties) => {
+  return (
+    <div className="flex w-full h-full relative pb-[150%] overflow-hidden">
+      {imageSrcs.map((value, index) => (
+        <img
+          key={index}
+          className="absolute w-full h-full object-cover animate-marquee"
+          src={value}
+          style={{ animationDelay: `${index * 8}s` }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const LoginPage = () => {
   return (
-    <div className="flex h-screen">
-      <div className="bg-[#111111] h-3/4 w-1/2 m-auto rounded-[25px] shadow-lg">
-        <div className="bg-[#ffffff] flex h-full w-1/2 rounded-[25px]">
-          <div className="m-auto w-1/2">
-            <div>
-              <p className="text-[32px] text-[#111111]">Welcome back</p>
-              <p className="text-[16px] text-[#111111]">
-                Please enter your details.
-              </p>
-            </div>
+    <div>
+      <section className="min-h-screen flex items-center justify-center">
+        {/* Login Container */}
+        <div className="bg-white flex overflow-hidden rounded-2xl shadow-lg">
+          {/* Left Side */}
+          <div className="w-1/2">
+            <section className="h-full flex items-center justify-center">
+              {/* Email & Password Input */}
+              <div className="flex flex-col gap-4 m-64">
+                <input
+                  type="email"
+                  className="p-1 rounded-lg border"
+                  placeholder="Email"
+                />
+                <input
+                  type="password"
+                  className="p-1 rounded-lg border"
+                  placeholder="Password"
+                />
 
-            <br />
-            <br />
-            <div>
-              <p className="text-[16px] text-[#111111]">Email</p>
-              <input
-                type="email"
-                className="w-full h-10 border-2 border-[#dcdcdc] rounded-lg p-2"
-              />
-            </div>
-            <br />
-            <div>
-              <p className="text-[16px] text-[#111111]">Password</p>
-              <input
-                type="password"
-                className="w-full h-10 border-2 border-[#dcdcdc] rounded-lg p-2"
-              />
-            </div>
-            <br />
-            <br />
-            <div>
-              <button className="bg-[#111111] text-[#ffffff] w-full h-10 rounded-lg">
-                Sign in
-              </button>
-            </div>
-            <br />
-            {/* https://stackoverflow.com/questions/70203473/creating-a-horizontal-rule-hr-divider-that-contains-text-with-tailwind-css START */}
-            <div className="relative flex items-center">
-              <div className="flex-grow border-t border-[#111111]"></div>
-              <span className="flex-shrink mx-2 text-[#111111]">or</span>
-              <div className="flex-grow border-t border-[#111111]"></div>
-            </div>
-            {/* END */}
-            <br />
-            <div>
-              <button className="bg-[#ffffff] text-[#111111] border-2 border-[#dcdcdc] w-full h-10 rounded-lg">
-                <div className="flex">
-                  <img
-                    className="h-6 w-6 ml-9"
-                    src="google_login_logo.png"
-                  ></img>
-                  <span className="ml-6">Sign in with Google</span>
+                <button className="border-2 border-black bg-black rounded-lg text-white py-1 hover:scale-105 duration-300">
+                  Login
+                </button>
+
+                <div className="grid grid-cols-3 items-center text-gray-400">
+                  <hr className="border-gray-400" />
+                  <p className="text-center text-sm">or</p>
+                  <hr className="border-gray-400" />
                 </div>
-              </button>
-            </div>
-            <br />
-            <div className="bg-[#ffffff] text-[#111111] border-2 border-[#dcdcdc] w-full h-10 rounded-lg">
-              <button>
-                <div className="grid grid-cols-6">
-                  <div className="col-span-1 my-auto">
-                    <img src="facebook_login_logo.png"></img>
-                  </div>
-                  <div className="col-span-5 my-auto">
-                    <span>Sign in with Facebook</span>
-                  </div>
-                </div>
-              </button>
-            </div>
-            <br />
-            <div></div>
+
+                <button className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300">
+                  Sign with Google
+                </button>
+
+                <button className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300">
+                  Sign with Google
+                </button>
+              </div>
+            </section>
+          </div>
+          {/* Right Side */}
+          <div className="w-1/2">
+            <ImageMarquee
+              imageSrcs={["/login/0.jpeg", "/login/1.jpeg", "/login/2.jpeg"]}
+            ></ImageMarquee>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
