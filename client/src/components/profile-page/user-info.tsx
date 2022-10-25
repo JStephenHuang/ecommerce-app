@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAPIs } from "../../contexts/APIContext";
-import { useUser } from "../../contexts/UserContext";
+import { useAPIs } from "../../contexts/api-context";
+import { useUser } from "../../contexts/user-context";
 import ProfilePic from "./profile-pic";
 import UserCredentials from "./user-credentials";
 import UserListings from "./user-listings";

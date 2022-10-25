@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Item } from "../../../types/cart-item";
+import { Listing } from "../../../types/listing";
 
 interface CartTotalProperties {
-  cartItems: Item[];
+  cartItems: Listing[];
 }
 
 const CartTotal = ({ cartItems }: CartTotalProperties) => {

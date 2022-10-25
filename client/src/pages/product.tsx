@@ -1,6 +1,6 @@
 import Navbar from "../components/product-page/navbar/navbar";
 import SubNavbar from "../components/product-page/sub-navbar/sub-navbar";
-import ImgSwiper from "../components/product-page/features/slider";
+import Slider from "../components/product-page/features/slider/slider";
 import Schools from "../components/product-page/features/schools";
 import Articles from "../components/product-page/features/articles";
 
@@ -14,7 +14,7 @@ const ProductPage = () => {
       <div className="flex flex-col items-center">
         <SubNavbar />
 
-        <ImgSwiper />
+        <Slider />
 
         <Schools />
 

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { IoCart } from "react-icons/io5";
 import { ReactComponent as ListingImg } from "../../../images/blob-5.svg";
 interface ArticleBubblesProperties {
   className: string;
@@ -17,7 +18,7 @@ const ListingBubbles = (props: ArticleBubblesProperties) => {
     <Link className="main-bubble" to={`/article/${title}/${props.id}`}>
       <div className={`${props.className} h-[12rem] bg-white rounded-t-lg`}>
         <div className="w-full h-full flex items-center">
-          <ListingImg className="w-full h-full rounded-t-lg" />
+          {/* Img component */}
         </div>
       </div>
       <div
@@ -26,15 +27,21 @@ const ListingBubbles = (props: ArticleBubblesProperties) => {
         <div className="w-[90%]">
           <p className="truncate">{props.title}</p>
         </div>
+        <div className="flex justify-between">
+          <div className="flex flex-col">
+            <div>
+              <p className="text-[#F7C4A5] text-[20px]">
+                ${props.price.toFixed(2)}
+              </p>
+            </div>
 
-        <div>
-          <p className="text-[#F7C4A5] text-[20px]">
-            ${props.price.toFixed(2)}
-          </p>
-        </div>
-
-        <div className="flex">
-          <p className="text-[#EF798A]">Seller: {props.seller}</p>
+            <div className="flex">
+              <p className="text-[#EF798A]">Seller: {props.seller}</p>
+            </div>
+          </div>
+          {/* <button className="mt-5 z-20">
+            <IoCart size={28} />
+          </button> */}
         </div>
       </div>
     </Link>

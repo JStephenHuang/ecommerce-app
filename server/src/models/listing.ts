@@ -27,6 +27,10 @@ const listingSchema = new Schema({
     type: schoolSchema,
     required: true,
   },
+  pictures: {
+    type: [String],
+    required: true,
+  },
   price: {
     type: Number,
     required: true,

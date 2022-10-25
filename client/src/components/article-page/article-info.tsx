@@ -1,49 +1,50 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useAPIs } from "../../contexts/APIContext";
+import { Navigate, useParams } from "react-router-dom";
+import { useAPIs } from "../../contexts/api-context";
 import ArticleImg from "./article-img";
 import InfoSection from "./info-section";
 import ArticleDescription from "./article-description";
 import AddToCartButton from "./add-to-cart-button";
 import ArticleTitle from "./article-title";
+import LoadingSpinner from "../sell-page/loading-spinner";
+import { useUser } from "../../contexts/user-context";
+import { Listing, listingDefaultValue } from "../../types/listing";
 
 const ArticleInfo = () => {
   const APIContext = useAPIs();
-  const [listing, setListing] = useState<{
-    title: string;
-    productType: string;
-    seller: string;
-    description: string;
-    size: number;
-    school: any;
-    price: number;
-    inCart: [];
-    _id: string;
-  }>({
-    title: "-",
-    productType: "-",
-    seller: "-",
-    description: "-",
-    size: 0,
-    school: "-",
-    price: 0,
-    inCart: [],
-    _id: "-",
-  });
+  const userContext = useUser();
+  const [listing, setListing] = useState<Listing>();
   const params = useParams();
   const title = params.title?.replace(/-/g, " ");
   let id = "";
   if (params.id) id = params.id;
 
+  const getListingHandler = async () => {
+    setLoading(true);
+    setListing((await APIContext.getListing(id)).data);
+    setLoading(false);
+  };
+
+  const deleteListingHandler = async (user: string, id: string) => {
+    setLoading(true);
+    await APIContext.deleteListing(user, id);
+    setListing((await APIContext.getListing(id)).data);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    APIContext.getListing(id)
-      .then((value) => {
-        setListing(value.data);
-      })
-      .catch((err) => console.log(err.message));
+    getListingHandler();
   }, []);
 
-  if (listing) {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  if (loading) {
+    return (
+      <div className="h-[60%] grid place-items-center">
+        <LoadingSpinner classname="w-16 h-16" />
+      </div>
+    );
+  } else if (listing) {
     return (
       <div className="w-[70%] my-5 p-5">
         <p className="text-[20px] font-bold">Listing Information</p>
@@ -52,7 +53,11 @@ const ArticleInfo = () => {
         <div className="flex h-[20rem] ">
           <ArticleImg />
           <div className="w-[60%] rounded-lg ml-5 p-3">
-            <ArticleTitle id={id} title={title} />
+            <ArticleTitle
+              id={id}
+              title={title}
+              deleteListingHandler={deleteListingHandler}
+            />
 
             <div className="h-full flex items-center">
               <div className="flex flex-col w-[50%] justify-between h-full p-5">

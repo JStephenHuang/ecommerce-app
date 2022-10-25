@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import DescriptionSection from "./description-section";
 import ConditionSection from "./condition-section";
+import PictureDroper from "./picture-section";
 import PriceSection from "./price-section";
 
 interface ProductDetailProperties {
@@ -40,6 +41,8 @@ const ProductDetail = (props: ProductDetailProperties) => {
       <ConditionSection />
 
       <DescriptionSection inputValue={inputDescription} />
+
+      <PictureDroper />
 
       <PriceSection inputValue={inputPrice} />
       {notFilled ? (

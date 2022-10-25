@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAPIs } from "../../../contexts/APIContext";
+import { useAPIs } from "../../../contexts/api-context";
 import SchoolBubbles from "./school-bubbles";
 
 const Schools = () => {

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useAPIs } from "../../../contexts/APIContext";
-import { useUser } from "../../../contexts/UserContext";
+import { useAPIs } from "../../../contexts/api-context";
+import { useUser } from "../../../contexts/user-context";
 import LoadingSpinner from "../../sell-page/loading-spinner";
 import CartItems from "./cart-items";
-import { Item } from "../../../types/cart-item";
+import { Listing } from "../../../types/listing";
 
 const CartInfo = () => {
   const APIContext = useAPIs();
   const userContext = useUser();
   const [loading, setLoading] = useState<boolean>(true);
-  const [cartItems, setCartItems] = useState<Item[]>([]);
+  const [cartItems, setCartItems] = useState<Listing[]>([]);
 
   const getCartItemsHandler = async () => {
     setLoading(true);

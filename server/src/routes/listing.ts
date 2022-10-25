@@ -4,20 +4,16 @@ import { User } from "../models/user";
 import { School } from "../models/school";
 
 const router = Router();
-router.get("/", (req: Request, res: Response) => {
-  Listing.find()
-    .then((listings) => {
-      return res.status(200).json(listings);
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
+router.get("/", async (req: Request, res: Response) => {
+  const listings = await Listing.find();
+  if (!listings) return res.status(400).json("ListingsNotFound");
+  return res.status(200).json(listings);
 });
 
-router.get("/:id", (req: Request, res: Response) => {
-  Listing.findOne({ _id: req.params.id })
-    .then((listing) => {
-      return res.status(200).json(listing);
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
+router.get("/:id", async (req: Request, res: Response) => {
+  const listing = await Listing.findOne({ _id: req.params.id });
+  if (!listing) return res.status(400).json("ListingNotFound");
+  return res.status(200).json(listing);
 });
 
 router.post("/sell", async (req: Request, res: Response) => {
@@ -28,16 +24,14 @@ router.post("/sell", async (req: Request, res: Response) => {
     description,
     size,
     schoolName,
+    pictures,
     price,
   } = req.body;
   const school = await School.findOne({ name: schoolName });
   const user = await User.findOne({ username: sellerName });
   if (!school) return res.status(400).json("SchoolNotFound");
   if (!user) return res.status(400).json("SellerNotFound");
-  console.log(school);
-  console.log(user);
   const seller = user.username;
-  console.log(seller);
   const newListing = new Listing({
     title,
     productType,
@@ -45,6 +39,7 @@ router.post("/sell", async (req: Request, res: Response) => {
     description,
     size,
     school,
+    pictures,
     price,
   });
   newListing
@@ -85,16 +80,24 @@ router.post("/delete/:id", async (req: Request, res: Response) => {
   if (!school) return res.status(400).json("SchoolNotFound");
   if (listing.seller !== user.username)
     return res.status(200).json("NoOwnership");
-  listing.delete();
+
   const schoolProducts = school.products;
   const userListings = user.listings;
-  schoolProducts.splice(schoolProducts.indexOf(listing.school.name), 1);
-  const listingIndex = userListings
-    .map((listing) => listing.seller)
-    .indexOf(listing.seller);
-  userListings.splice(listingIndex, 1);
+  const userListingIndex = userListings
+    .map((listing) => listing._id?.toHexString())
+    .indexOf(listingId);
+  const schoolListingIndex = schoolProducts
+    .map((listing) => listing._id?.toHexString())
+    .indexOf(listingId);
+
+  schoolProducts.splice(schoolListingIndex, 1);
+  userListings.splice(userListingIndex, 1);
+
   school.save();
   user.save();
+
+  listing.delete();
+
   res.status(200).json("ListingRemoved");
 });
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAPIs } from "../../../contexts/APIContext";
+import { useAPIs } from "../../../contexts/api-context";
 
 interface SchoolSectionProperties {
   selectValue: React.RefObject<HTMLSelectElement>;

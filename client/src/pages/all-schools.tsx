@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAPIs } from "../contexts/APIContext";
+import { useAPIs } from "../contexts/api-context";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 

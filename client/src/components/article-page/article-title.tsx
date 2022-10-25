@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import { useAPIs } from "../../contexts/APIContext";
-import { useUser } from "../../contexts/UserContext";
+import { useAPIs } from "../../contexts/api-context";
+import { useUser } from "../../contexts/user-context";
 
 interface ArticleTitleProperties {
   id: string;
   title: string | undefined;
+  deleteListingHandler: (user: string, id: string) => void;
 }
 
 const ArticleTitle = (props: ArticleTitleProperties) => {
   const APIContext = useAPIs();
   const userContext = useUser();
-  const username = userContext.buyer;
+  const username = userContext.seller;
   const [ownership, setOwnership] = useState<boolean>(false);
   useEffect(() => {
     APIContext.getUserListings(username).then((value) => {
@@ -27,13 +28,6 @@ const ArticleTitle = (props: ArticleTitleProperties) => {
       }
     });
   }, []);
-  const deleteListing = () => {
-    APIContext.deleteListing(username, props.id)
-      .then(() => {
-        console.log("Listing Successfully Deleted");
-      })
-      .catch((err) => console.log(err));
-  };
   return (
     <div className="h-[10%]">
       <div className="flex items-center justify-between">
@@ -41,7 +35,7 @@ const ArticleTitle = (props: ArticleTitleProperties) => {
         {ownership ? (
           <FaTrash
             className="hover:text-red-600"
-            onClick={deleteListing}
+            onClick={() => props.deleteListingHandler(username, props.id)}
             size={16}
           />
         ) : null}

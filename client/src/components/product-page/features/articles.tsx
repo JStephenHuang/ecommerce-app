@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAPIs } from "../../../contexts/APIContext";
+import { useAPIs } from "../../../contexts/api-context";
 import ListingBubbles from "./listing-bubbles";
 
 const Articles = () => {

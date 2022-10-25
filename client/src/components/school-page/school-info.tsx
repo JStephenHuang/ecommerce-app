@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAPIs } from "../../contexts/APIContext";
+import { useAPIs } from "../../contexts/api-context";
 import ListingBubbles from "../product-page/features/listing-bubbles";
 
 const SchoolInfo = () => {
