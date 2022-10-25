@@ -7,9 +7,7 @@ const InfoSection = (props: InfoSectionProperties) => {
   return (
     <div className="flex">
       <p className="w-[40%] font-bold">{props.name}:</p>
-      <p
-        className={props.name === "Price" ? "text-[#87C38F]" : "text-gray-500"}
-      >
+      <p className={props.name === "Price" ? "price-color" : "text-gray-500"}>
         {props.value}
       </p>
     </div>

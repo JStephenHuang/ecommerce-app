@@ -5,11 +5,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
+:root {
+  --primary-color: #000000;
+  /* --primary-color: #912F56; */
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #EAF2EF;
   scrollbar-width: thin;          
   scrollbar-color: #521945 #EAF2EF;
+}
+
+@layer components {
+  .price-color {
+    @apply text-[#87C38F]
+  }
+  .seller-color {
+    @apply 
+  }
 }
 
 @layer components {
@@ -32,16 +46,22 @@ body {
   .main-bubble {
     @apply flex flex-col rounded-lg
   text-white mx-2 mb-3 shadow-md border
-    hover:border-[#912F56] hover:shadow-xl ease-in-out duration-150
+    hover:border-black hover:shadow-xl ease-in-out duration-150
   }
-  
+  .bubble-info {
+    background-color: var(--primary-color);
+    @apply h-[6rem] rounded-b-lg p-3 flex flex-col justify-center
+  }
 }
+
 
 @layer components {
   .edit-button {
+    background-color: var(--primary-color);
     @apply p-2 text-white rounded-lg w-full
-    bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+     hover:bg-[#F7C4A5] hover:text-[#912F56] 
     ease-in-out duration-150
+
   }
 }
 
@@ -89,18 +109,23 @@ body {
 
 @layer components {
   .checkout-button {
+    background-color: var(--primary-color);
     @apply p-2 text-white rounded-lg w-full
-    bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+   hover:bg-white hover:text-black
     ease-in-out duration-150
   }
   .checkout-button-disabled {
+    background-color: var(--primary-color);
+
     @apply p-2 text-white rounded-lg w-full
-    bg-[#912F56] opacity-50
+    opacity-50
     ease-in-out duration-150
   }
   .checkout-button-in-cart {
+    background-color: var(--primary-color);
+
     @apply p-2 text-white rounded-lg w-full
-    bg-[#912F56] opacity-50
+    opacity-50
     ease-in-out duration-150
   }
   

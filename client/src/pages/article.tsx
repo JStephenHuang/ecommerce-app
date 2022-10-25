@@ -16,11 +16,9 @@ const ArticlePage = () => {
       <button className="back-arrow" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={30} />
       </button>
-      <div className="spacer layer9">
-        <div className="flex flex-col items-center">
-          <p className="title">{title}</p>
-          <ArticleInfo />
-        </div>
+      <div className="flex flex-col items-center">
+        <p className="title">{title}</p>
+        <ArticleInfo />
       </div>
     </div>
   );

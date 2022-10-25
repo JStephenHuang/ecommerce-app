@@ -21,22 +21,20 @@ const ListingBubbles = (props: ArticleBubblesProperties) => {
           {/* Img component */}
         </div>
       </div>
-      <div
-        className={`${props.className} h-[6rem] bg-[#912F56] rounded-b-lg p-3 flex flex-col justify-center`}
-      >
+      <div className={`${props.className} bubble-info`}>
         <div className="w-[90%]">
           <p className="truncate">{props.title}</p>
         </div>
         <div className="flex justify-between">
           <div className="flex flex-col">
             <div>
-              <p className="text-[#F7C4A5] text-[20px]">
+              <p className="price-color text-[20px]">
                 ${props.price.toFixed(2)}
               </p>
             </div>
 
             <div className="flex">
-              <p className="text-[#EF798A]">Seller: {props.seller}</p>
+              <p className="text-gray-300">Seller: {props.seller}</p>
             </div>
           </div>
           {/* <button className="mt-5 z-20">
