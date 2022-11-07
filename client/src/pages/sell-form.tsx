@@ -5,18 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { useAPIs } from "../contexts/api-context";
 import { useUser } from "../contexts/user-context";
 import Navbar from "../components/product-page/navbar/navbar";
-import ProductInfo from "../components/sell-page/product-info/product-info";
-import ProductDetail from "../components/sell-page/product-detail/product-detail";
-import LoadingSpinner from "../components/sell-page/loading-spinner";
+import ProductInfo from "../components/sell-form-page/product-info/product-info";
+import ProductDetail from "../components/sell-form-page/product-detail/product-detail";
+import LoadingSpinner from "../components/sell-form-page/loading-spinner";
 
-const SellPage = () => {
+const SellFormPage = () => {
   const APIContext = useAPIs();
   const userContext = useUser();
   const navigate = useNavigate();
   //* Product detail
   const priceInputRef = useRef<HTMLInputElement>(null);
   const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
-
+  const imagesInputRef = useRef<HTMLInputElement>(null);
+  const [images, setImages] = useState<Array<FileList | null | undefined>>([]);
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
   //* Product info
   const schoolSelectRef = useRef<HTMLSelectElement>(null);
   const typeSelectRef = useRef<HTMLSelectElement>(null);
@@ -36,10 +40,11 @@ const SellPage = () => {
       sizeSelectRef.current &&
       titleInputRef.current &&
       priceInputRef.current &&
+      images &&
       descriptionTextAreaRef.current
     ) {
       const title = titleInputRef.current.value;
-      const productType = typeSelectRef.current.value;
+      const clothingType = typeSelectRef.current.value;
       const seller = userContext.seller;
       const description = descriptionTextAreaRef.current.value;
       const size = sizeSelectRef.current.value;
@@ -47,7 +52,7 @@ const SellPage = () => {
       const price = Number(priceInputRef.current.value);
       if (
         title === "-" ||
-        productType == "-" ||
+        clothingType === "-" ||
         description === "-" ||
         size === "-" ||
         school === "-" ||
@@ -61,11 +66,12 @@ const SellPage = () => {
 
         APIContext.sellListing(
           title,
-          productType,
+          clothingType,
           seller,
           description,
           size,
           school,
+          images,
           price
         )
           .then(() => {
@@ -95,6 +101,9 @@ const SellPage = () => {
       count={count}
       inputDescription={descriptionTextAreaRef}
       inputPrice={priceInputRef}
+      inputImages={imagesInputRef}
+      images={images}
+      setImages={setImages}
     />,
   ];
 
@@ -110,7 +119,7 @@ const SellPage = () => {
         <div className="flex flex-col items-center">
           <p className="title">Welcome to the Sell page</p>
           {sections}
-          <div className="w-[60%] flex flex-col items-end">
+          <div className="w-[60%] flex flex-col items-end pb-10">
             <button
               className="publish-button flex items-center justify-center"
               onClick={publish}
@@ -119,18 +128,20 @@ const SellPage = () => {
                 <LoadingSpinner classname="w-8 w-8" />
               ) : (
                 <>
-                  <p className="mr-[5px]">Publish</p>
-                  <AiFillCaretRight size={20} />
+                  <p className="mr-[5px] group">Publish</p>
+                  <AiFillCaretRight
+                    className="group-hover:translate-x-1.5"
+                    size={20}
+                  />
                 </>
               )}
             </button>
           </div>
         </div>
 
-        <div className="spacer layer11"></div>
         {/* <Media /> */}
       </div>
     </>
   );
 };
-export default SellPage;
+export default SellFormPage;

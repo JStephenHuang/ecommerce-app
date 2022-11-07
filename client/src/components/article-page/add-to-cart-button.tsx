@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../contexts/api-context";
 import { useUser } from "../../contexts/user-context";
-import LoadingSpinner from "../sell-page/loading-spinner";
+import LoadingSpinner from "../sell-form-page/loading-spinner";
 
 interface AddToCartButtonProperties {
   id: string;
@@ -68,7 +68,7 @@ const AddToCartButton = (props: AddToCartButtonProperties) => {
         className="checkout-button items-center text-center mt-auto flex justify-center"
         disabled={true}
       >
-        <LoadingSpinner classname="w-8 h-8" />
+        <LoadingSpinner classname="w-6 h-6" />
       </button>
     );
   } else if (inCart) {

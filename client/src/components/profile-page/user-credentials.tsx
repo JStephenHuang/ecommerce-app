@@ -1,17 +1,10 @@
+import { Listing } from "../../types/listing";
 import InfoSection from "./info-section";
 
 interface UserCredentialsProperties {
   user: {
     username: string;
-    listings: Array<{
-      title: string;
-      productType: string;
-      seller: string;
-      size: number;
-      school: any;
-      price: number;
-      _id: string;
-    }>;
+    listings: Array<Listing>;
   };
 }
 

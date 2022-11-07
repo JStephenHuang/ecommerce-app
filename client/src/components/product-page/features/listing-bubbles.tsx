@@ -16,7 +16,7 @@ const ListingBubbles = (props: ArticleBubblesProperties) => {
   const title = props.title.replace(/ /g, "-");
   return (
     <Link className="main-bubble" to={`/article/${title}/${props.id}`}>
-      <div className={`${props.className} h-[12rem] bg-white rounded-t-lg`}>
+      <div className={`${props.className} h-[12rem] bg-white`}>
         <div className="w-full h-full flex items-center">
           {/* Img component */}
         </div>
@@ -31,10 +31,6 @@ const ListingBubbles = (props: ArticleBubblesProperties) => {
               <p className="price-color text-[20px]">
                 ${props.price.toFixed(2)}
               </p>
-            </div>
-
-            <div className="flex">
-              <p className="text-gray-300">Seller: {props.seller}</p>
             </div>
           </div>
           {/* <button className="mt-5 z-20">

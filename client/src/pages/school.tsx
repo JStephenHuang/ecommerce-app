@@ -20,7 +20,6 @@ const SchoolPage = () => {
         <p className="title">{name}</p>
         <SchoolInfo />
       </div>
-      <div className="spacer layer10"></div>
     </div>
   );
 };

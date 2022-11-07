@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../../contexts/api-context";
 import { useUser } from "../../../contexts/user-context";
-import LoadingSpinner from "../../sell-page/loading-spinner";
+import LoadingSpinner from "../../sell-form-page/loading-spinner";
 import CartItems from "./cart-items";
 import { Listing } from "../../../types/listing";
 

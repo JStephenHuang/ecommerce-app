@@ -11,9 +11,7 @@ const CartItem = ({ cartItem, removeCartItemHandler }: CartItemProperties) => {
   return (
     <div className="cart-items mb-2">
       <div className="flex items-center w-full">
-        <div className="h-20 w-20 bg-white rounded-lg">
-          {/* Img component */}
-        </div>
+        <div className="h-20 w-20 bg-white">{/* Img component */}</div>
 
         <div className="flex flex-col ml-5 w-[50%]">
           <Link

@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@500&display=swap');
 
 :root {
   --primary-color: #000000;
@@ -11,15 +12,18 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #EAF2EF;
+  /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Overpass', sans-serif;
+  /* font-family: "GT America Extended", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; */
+  background-color: #f4f4f4;
   scrollbar-width: thin;          
-  scrollbar-color: #521945 #EAF2EF;
+  scrollbar-color: #000000 #EAF2EF;
 }
 
 @layer components {
   .price-color {
-    @apply text-[#87C38F]
+    @apply text-[#58cb67]
   }
   .seller-color {
     @apply 
@@ -28,7 +32,7 @@ body {
 
 @layer components {
   .navbar {
-    @apply w-full h-[10%] fixed bg-[#EAF2EF]
+    @apply w-full h-[10%] fixed bg-[#f4f4f4]
    flex items-center justify-center border-b shadow-md
   }
   .navbar-link {
@@ -41,16 +45,16 @@ body {
 }
 @layer components {
   .sub-navbar-link {
-    @apply text-[16px] font-semibold mx-5 hover:text-[#912F56]
+    @apply text-[16px] font-semibold mx-5 text-black hover:text-black
   }
   .main-bubble {
-    @apply flex flex-col rounded-lg
-  text-white mx-2 mb-3 shadow-md border
+    @apply flex flex-col w-full
+  text-white mb-3 shadow-md border
     hover:border-black hover:shadow-xl ease-in-out duration-150
   }
   .bubble-info {
     background-color: var(--primary-color);
-    @apply h-[6rem] rounded-b-lg p-3 flex flex-col justify-center
+    @apply h-[5rem] p-3 flex flex-col justify-center
   }
 }
 
@@ -70,39 +74,47 @@ body {
     @apply flex justify-between mb-[1.5rem] 
   }
   .title {
-    @apply text-gray-600 font-bold text-[36px]
+    @apply text-gray-600 font-extrabold text-[36px]
   }
   .select-button {
     @apply flex items-center justify-between 
-    text-[16px] w-[60%] border p-2 rounded-md
-    border-[#521945]
+    text-[16px] w-[60%] border p-2
+    border-black
     bg-inherit
     /* bg-white */
   }
   .text-area {
-    @apply w-full border border-[#521945]
-    outline-none rounded-md
+    @apply w-full border border-black
+    outline-none
     resize-none p-2 bg-transparent 
   }
 
   .input {
-    @apply w-full border border-[#521945]
-    outline-none rounded-md text-[16px]
+    @apply w-full border border-black
+    outline-none text-[16px]
     resize-none p-2 bg-transparent
+  }
+
+  .file-drop {
+    @apply ease-in-out duration-200 border-[#521945] flex flex-col 
+    justify-center items-center w-32 text-center
+    h-32 border
+    cursor-pointer hover:bg-gray-100
   }
 
   .price-div {
     @apply border-[#521945] w-[20%] h-[15%] 
-    flex items-center border  rounded-md p-2 mr-auto
+    flex items-center border p-2 mr-auto
   }
   .price-input {
     @apply border-none ml-2 
-    outline-none rounded-md text-[16px]
+    outline-none text-[16px]
     resize-none bg-transparent
   }
   .publish-button {
-    @apply p-3 text-white rounded-lg text-[20px]
-    bg-[#912F56] hover:bg-[#F7C4A5] hover:text-[#912F56] 
+    background-color: var(--primary-color);
+    @apply p-3 text-white text-[20px]
+    hover:opacity-50
     ease-in-out duration-150 w-[30%] 
   }
 }
@@ -110,21 +122,20 @@ body {
 @layer components {
   .checkout-button {
     background-color: var(--primary-color);
-    @apply p-2 text-white rounded-lg w-full
-   hover:bg-white hover:text-black
+    @apply p-2 text-white w-full
+   hover:opacity-50
     ease-in-out duration-150
   }
   .checkout-button-disabled {
     background-color: var(--primary-color);
 
-    @apply p-2 text-white rounded-lg w-full
+    @apply p-2 text-white w-full
     opacity-50
     ease-in-out duration-150
   }
   .checkout-button-in-cart {
     background-color: var(--primary-color);
-
-    @apply p-2 text-white rounded-lg w-full
+    @apply p-2 text-white w-full
     opacity-50
     ease-in-out duration-150
   }
@@ -134,7 +145,7 @@ body {
 
 @layer components {
   .cart-items {
-    @apply border border-black rounded-lg p-3 flex items-center justify-between
+    @apply border border-black p-3 flex items-center justify-between
   }
 
 }
@@ -184,5 +195,8 @@ body {
   }
   .layered2 {
     @apply bg-[url('./svg/layered2.svg')]
+  }
+  .slider1 {
+    @apply bg-[url('./svg/slider1.svg')]
   }
 }

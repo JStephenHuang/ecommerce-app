@@ -5,7 +5,8 @@ import { UserProvider } from "./contexts/user-context";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
 import ProductPage from "./pages/product";
-import SellPage from "./pages/sell";
+import SellFormPage from "./pages/sell-form";
+import SellerHubPage from "./pages/seller-hub";
 import CartPage from "./pages/cart";
 import CheckoutPage from "./pages/checkout";
 import ProfilePage from "./pages/profile";
@@ -22,7 +23,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<ProductPage />} />
-          <Route path="/sell/product-info" element={<SellPage />} />
+          <Route path="/sell/product-form" element={<SellFormPage />} />
+          <Route path="/sell/hub" element={<SellerHubPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/cart/checkout" element={<CheckoutPage />} />
           <Route path="/profile" element={<ProfilePage />} />

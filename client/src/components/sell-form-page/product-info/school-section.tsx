@@ -15,7 +15,7 @@ const SchoolSection = (props: SchoolSectionProperties) => {
     APIContext.getSchools().then((value) => {
       setSchools(value.data);
     });
-  }, []);
+  }, [APIContext]);
   return (
     <div className="container">
       <p className="text-[16px] font-bold">School</p>

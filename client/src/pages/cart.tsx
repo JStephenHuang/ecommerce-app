@@ -15,9 +15,7 @@ const CartPage = () => {
         <button className="back-arrow" onClick={() => navigate(-1)}>
           <AiOutlineArrowLeft size={30} />
         </button>
-        <div className="spacer layer2">
-          <CartInfo />
-        </div>
+        <CartInfo />
         {/* <Media /> */}
       </div>
     </>

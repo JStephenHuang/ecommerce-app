@@ -1,15 +1,8 @@
+import { Listing } from "../../types/listing";
 import ListingBubbles from "../product-page/features/listing-bubbles";
 
 interface UserListingsProperties {
-  listings: Array<{
-    title: string;
-    productType: string;
-    seller: string;
-    size: number;
-    school: any;
-    price: number;
-    _id: string;
-  }>;
+  listings: Array<Listing>;
 }
 
 const UserListings = (props: UserListingsProperties) => {
@@ -20,7 +13,7 @@ const UserListings = (props: UserListingsProperties) => {
         className="w-full"
         key={key}
         title={listing.title}
-        productType={listing.productType}
+        productType={listing.clothingType}
         seller={listing.seller}
         size={listing.size}
         school={listing.school}
@@ -29,7 +22,7 @@ const UserListings = (props: UserListingsProperties) => {
       />
     );
   });
-  return <div className="w-full grid grid-cols-3">{frontEndListings}</div>;
+  return <div className="w-full grid grid-cols-2">{frontEndListings}</div>;
 };
 
 export default UserListings;

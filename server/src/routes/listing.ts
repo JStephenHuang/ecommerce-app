@@ -16,15 +16,21 @@ router.get("/:id", async (req: Request, res: Response) => {
   return res.status(200).json(listing);
 });
 
+router.get("/:type", async (req: Request, res: Response) => {
+  const listings = await Listing.find({ clothingType: req.query.type });
+  if (!listings) return res.status(400).json("ListingsNotFound");
+  return res.status(200).json(listings);
+});
+
 router.post("/sell", async (req: Request, res: Response) => {
   const {
     title,
-    productType,
+    clothingType,
     sellerName,
     description,
     size,
     schoolName,
-    pictures,
+    images,
     price,
   } = req.body;
   const school = await School.findOne({ name: schoolName });
@@ -34,12 +40,12 @@ router.post("/sell", async (req: Request, res: Response) => {
   const seller = user.username;
   const newListing = new Listing({
     title,
-    productType,
+    clothingType,
     seller,
     description,
     size,
     school,
-    pictures,
+    images,
     price,
   });
   newListing

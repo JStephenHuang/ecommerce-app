@@ -1,6 +1,6 @@
 export interface Listing {
   title: string;
-  productType: string;
+  clothingType: string;
   seller: string;
   size: number;
   school: any;
@@ -12,11 +12,12 @@ export interface Listing {
 
 export const listingDefaultValue = {
   title: "-",
-  productType: "-",
+  clothingType: "-",
   seller: "-",
   description: "-",
   size: 0,
   school: "-",
+  pictures: [],
   price: 0,
   _id: "-",
 };

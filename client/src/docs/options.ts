@@ -1,4 +1,4 @@
-export const productTypes = [
+export const clothingTypes = [
   { value: "-", label: "--Choose an option--" },
   { value: "Polo", label: "Polo" },
   { value: "Sportswear", label: "Sportswear" },
@@ -7,6 +7,7 @@ export const productTypes = [
   { value: "Shoes", label: "Shoes" },
   { value: "Hoodie", label: "Hoodie" },
   { value: "Skirt", label: "Skirt" },
+  { value: "Pants", label: "Pants" },
 ];
 
 export const sizes = [
@@ -23,4 +24,5 @@ export const conditions = [
   { value: "Used, Good", label: "Used, Good" },
   { value: "Used, New", label: "Used, New" },
   { value: "Brand New", label: "Brand New" },
+  { value: "User for 1 years", label: "User for 1 years" },
 ];

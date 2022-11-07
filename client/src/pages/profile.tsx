@@ -18,7 +18,6 @@ const ProfilePage = () => {
         <p className="title">Welcome to the Profile Page</p>
         <UserInfo />
       </div>
-      <div className="spacer layered2"></div>
     </div>
   );
 };

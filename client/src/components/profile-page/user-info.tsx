@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../contexts/api-context";
 import { useUser } from "../../contexts/user-context";
+import { Listing } from "../../types/listing";
 import ProfilePic from "./profile-pic";
 import UserCredentials from "./user-credentials";
 import UserListings from "./user-listings";
@@ -11,15 +12,7 @@ const UserInfo = () => {
   const username = userContext.seller;
   const [user, setUser] = useState<{
     username: string;
-    listings: Array<{
-      title: string;
-      productType: string;
-      seller: string;
-      size: number;
-      school: any;
-      price: number;
-      _id: string;
-    }>;
+    listings: Array<Listing>;
   }>({
     username: "-",
     listings: [],
@@ -36,7 +29,7 @@ const UserInfo = () => {
         <ProfilePic user={user} />
         <div className="w-[75%] flex flex-col">
           <UserCredentials user={user} />
-          <div className="w-[full]">
+          <div className="w-full">
             <p className="mb-5">{user.listings.length} listings:</p>
             <UserListings listings={user.listings} />
           </div>

@@ -26,6 +26,10 @@ class APIContextValue {
     return await this.axios.get(`${this.IP}/listing/${id}`);
   };
 
+  getListingsByType = async (type: string) => {
+    return await this.axios.get(`${this.IP}/listing/${type}`);
+  };
+
   getUser = async (username: string) => {
     return await this.axios.get(`${this.IP}/user/${username}`);
   };
@@ -36,20 +40,22 @@ class APIContextValue {
 
   sellListing = async (
     title: string,
-    productType: string,
+    clothingType: string,
     sellerName: string,
     description: string,
     size: string,
     schoolName: string,
+    images: Array<FileList | null | undefined>,
     price: number
   ) => {
     const body = {
       title: title,
-      productType: productType,
+      clothingType: clothingType,
       sellerName: sellerName,
       description: description,
       size: size,
       schoolName: schoolName,
+      images: images,
       price: price,
     };
     await this.axios.post(`${this.IP}/listing/sell`, body);

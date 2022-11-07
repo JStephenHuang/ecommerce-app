@@ -1,4 +1,4 @@
-import { productTypes } from "../../../docs/options";
+import { clothingTypes } from "../../../docs/options";
 
 interface TypeSectionProperties {
   selectValue: React.RefObject<HTMLSelectElement>;
@@ -12,10 +12,10 @@ const TypeSection = (props: TypeSectionProperties) => {
         <p className="text-[12px]">Polo, T-shirt, Skirt, etc</p>
       </div>
       <select className="select-button" ref={props.selectValue}>
-        {productTypes.map((type, key) => {
+        {clothingTypes.map((clothingType, key) => {
           return (
-            <option key={key} value={type.label}>
-              {type.label}
+            <option key={key} value={clothingType.label}>
+              {clothingType.label}
             </option>
           );
         })}

@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import { productTypes } from "../../../docs/options";
+import { useState } from "react";
 
 interface TitleSectionProperties {
   inputValue: React.RefObject<HTMLInputElement>;

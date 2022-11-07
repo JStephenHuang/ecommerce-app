@@ -6,7 +6,7 @@ import InfoSection from "./info-section";
 import ArticleDescription from "./article-description";
 import AddToCartButton from "./add-to-cart-button";
 import ArticleTitle from "./article-title";
-import LoadingSpinner from "../sell-page/loading-spinner";
+import LoadingSpinner from "../sell-form-page/loading-spinner";
 import { useUser } from "../../contexts/user-context";
 import { Listing, listingDefaultValue } from "../../types/listing";
 
@@ -61,7 +61,7 @@ const ArticleInfo = () => {
 
             <div className="h-full flex items-center">
               <div className="flex flex-col w-[50%] justify-between h-full p-5">
-                <InfoSection name="Type" value={listing.productType} />
+                <InfoSection name="Type" value={listing.clothingType} />
                 <InfoSection name="School" value={listing.school.name} />
                 <InfoSection name="Size" value={listing.size} />
                 <InfoSection name="Seller" value={listing.seller} />
