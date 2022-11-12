@@ -3,13 +3,13 @@ import { useAPIs } from "../../../contexts/api-context";
 import { useUser } from "../../../contexts/user-context";
 import LoadingSpinner from "../../sell-form-page/loading-spinner";
 import CartItems from "./cart-items";
-import { Listing } from "../../../types/listing";
+import { ListingType } from "../../../types/listing";
 
 const CartInfo = () => {
   const APIContext = useAPIs();
   const userContext = useUser();
   const [loading, setLoading] = useState<boolean>(true);
-  const [cartItems, setCartItems] = useState<Listing[]>([]);
+  const [cartItems, setCartItems] = useState<ListingType[]>([]);
 
   const getCartItemsHandler = async () => {
     setLoading(true);

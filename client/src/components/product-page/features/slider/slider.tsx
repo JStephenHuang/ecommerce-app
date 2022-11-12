@@ -4,7 +4,7 @@ import Carousel from "./carousel";
 
 const Slider = () => {
   return (
-    <div className="w-full h-[30rem] bg-white flex flex-col items-center">
+    <div className="w-full h-[30rem] bg-white flex flex-col items-center mb-5">
       <SubNavbar />
       <Carousel />
     </div>

@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/user-context";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Navbar from "../components/product-page/navbar/navbar";
-import SellerHubInfo from "../components/seller-hub-page/seller-hub-info";
+import ShopInfo from "../components/shop-page/shop-info";
 
-const SellerHubPage = () => {
+const ShopPage = () => {
   const navigate = useNavigate();
   const userContext = useUser();
   return (
@@ -19,7 +19,7 @@ const SellerHubPage = () => {
         </header>
         <div className="flex flex-col items-center">
           <p className="title">Welcome to your Shop</p>
-          <SellerHubInfo />
+          <ShopInfo />
         </div>
         {/* <Media /> */}
       </div>
@@ -27,4 +27,4 @@ const SellerHubPage = () => {
   );
 };
 
-export default SellerHubPage;
+export default ShopPage;

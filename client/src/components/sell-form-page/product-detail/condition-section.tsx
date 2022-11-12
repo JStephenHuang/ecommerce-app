@@ -1,6 +1,10 @@
 import { conditions } from "../../../docs/options";
 
-const ConditionSection = () => {
+interface ConditionSectionProperties {
+  selectValue: React.RefObject<HTMLSelectElement>;
+}
+
+const ConditionSection = (props: ConditionSectionProperties) => {
   return (
     <div className="flex justify-between mb-[1.5rem]">
       <div>
@@ -8,7 +12,7 @@ const ConditionSection = () => {
         <p className="text-[12px]">New, Old?</p>
       </div>
 
-      <select className="select-button">
+      <select className="select-button" ref={props.selectValue}>
         {conditions.map((condition, key) => {
           return (
             <option key={key} value={condition.label}>

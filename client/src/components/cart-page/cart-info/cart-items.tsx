@@ -1,9 +1,9 @@
-import { Listing } from "../../../types/listing";
+import { ListingType } from "../../../types/listing";
 import CartItem from "../cart-item";
 import CartTotal from "./cart-total";
 
 interface CartItemsProperties {
-  cartItems: Listing[];
+  cartItems: ListingType[];
   removeCartItemHandler: (id: string) => void;
 }
 

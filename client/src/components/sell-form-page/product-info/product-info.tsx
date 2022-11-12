@@ -9,53 +9,21 @@ interface ProductInfoProperties {
   selectSize: React.RefObject<HTMLSelectElement>;
   selectType: React.RefObject<HTMLSelectElement>;
   inputTitle: React.RefObject<HTMLInputElement>;
-  count: number;
 }
 
 const ProductInfo = (props: ProductInfoProperties) => {
-  const selectSchool = props.selectSchool;
-  const selectType = props.selectType;
-  const selectSize = props.selectSize;
-  const inputTitle = props.inputTitle;
-  const [notFilled, setNotFilled] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (
-      selectSchool.current &&
-      selectType.current &&
-      selectSize.current &&
-      inputTitle.current &&
-      props.count !== 0
-    ) {
-      const school = selectSchool.current.value;
-      const type = selectType.current.value;
-      const size = selectSize.current.value;
-      const title = inputTitle.current.value;
-      if (title === "" || school === "-" || type === "-" || size === "-") {
-        setNotFilled(true);
-      } else {
-        setNotFilled(false);
-      }
-    }
-  }, [props.count]);
-
   return (
     <div className="w-[60%] rounded-md my-5 p-5">
       <p className="text-[20px] font-bold">Product Information</p>
       <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
 
-      <SchoolSection selectValue={selectSchool} />
+      <SchoolSection selectValue={props.selectSchool} />
 
-      <TypeSection selectValue={selectType} />
+      <TypeSection selectValue={props.selectType} />
 
-      <SizeSection selectValue={selectSize} />
+      <SizeSection selectValue={props.selectSize} />
 
-      <TitleSection inputValue={inputTitle} />
-      {notFilled ? (
-        <div className="text-center">
-          <p className="text-red-600 my-5">Invalid or missing informations</p>
-        </div>
-      ) : null}
+      <TitleSection inputValue={props.inputTitle} />
     </div>
   );
 };

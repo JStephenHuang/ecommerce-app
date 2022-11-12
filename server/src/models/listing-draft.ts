@@ -27,7 +27,7 @@ const listingDraftSchema = new Schema({
     required: true,
   },
   images: {
-    type: [],
+    type: Array<FileList | null | undefined>,
     required: true,
   },
   price: {

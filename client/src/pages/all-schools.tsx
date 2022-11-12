@@ -21,7 +21,6 @@ const AllSchools = () => {
     return (
       <SchoolBubbles
         key={key}
-        classname={"w-full"}
         name={school.name}
         products={school.products.length}
         id={school._id}

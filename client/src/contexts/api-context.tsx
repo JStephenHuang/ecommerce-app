@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import React, { useContext } from "react";
+import { ListListingType } from "../types/listing";
 
 class APIContextValue {
   axios: AxiosInstance;
@@ -38,27 +39,8 @@ class APIContextValue {
     return await this.axios.get(`${this.IP}/user/listings/${username}`);
   };
 
-  sellListing = async (
-    title: string,
-    clothingType: string,
-    sellerName: string,
-    description: string,
-    size: string,
-    schoolName: string,
-    images: Array<FileList | null | undefined>,
-    price: number
-  ) => {
-    const body = {
-      title: title,
-      clothingType: clothingType,
-      sellerName: sellerName,
-      description: description,
-      size: size,
-      schoolName: schoolName,
-      images: images,
-      price: price,
-    };
-    await this.axios.post(`${this.IP}/listing/sell`, body);
+  publishListing = async (body: ListListingType) => {
+    return await this.axios.post(`${this.IP}/listing/publish`, body);
   };
   getCartItems = async (username: string) => {
     const params = {

@@ -1,9 +1,9 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/product-page/navbar/navbar";
-import UserInfo from "../components/profile-page/user-info";
+import UserInfo from "../components/users-page/user-info";
 
-const ProfilePage = () => {
+const UserPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -14,11 +14,9 @@ const ProfilePage = () => {
       <button className="back-arrow" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={30} />
       </button>
-      <div className="flex flex-col items-center">
-        <p className="title">Welcome to the Profile Page</p>
-        <UserInfo />
-      </div>
+
+      <UserInfo />
     </div>
   );
 };
-export default ProfilePage;
+export default UserPage;

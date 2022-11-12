@@ -1,42 +1,23 @@
 import { Link } from "react-router-dom";
-import { IoCart } from "react-icons/io5";
-import { ReactComponent as ListingImg } from "../../../images/blob-5.svg";
-interface ArticleBubblesProperties {
-  className: string;
-  title: string;
-  productType: string;
-  seller: string;
-  size: number;
-  school: any;
-  price: number;
-  id: string;
-}
+import { FrontEndListing } from "../../../types/listing";
 
-const ListingBubbles = (props: ArticleBubblesProperties) => {
+const ListingBubbles = (props: FrontEndListing) => {
   const title = props.title.replace(/ /g, "-");
+  console.log(props.images);
+
   return (
-    <Link className="main-bubble" to={`/article/${title}/${props.id}`}>
-      <div className={`${props.className} h-[12rem] bg-white`}>
+    <Link className="main-bubble" to={`/article/${title}/${props._id}`}>
+      <div className="h-[12rem] bg-white">
         <div className="w-full h-full flex items-center">
-          {/* Img component */}
+          {props.images ? <img src="" alt="" /> : null}
         </div>
       </div>
-      <div className={`${props.className} bubble-info`}>
-        <div className="w-[90%]">
-          <p className="truncate">{props.title}</p>
+      <div className="listing-bubble-info">
+        <div>
+          <p className="truncate ">{props.title}</p>
+          <p className="price-color ">${props.price.toFixed(2)}</p>
         </div>
-        <div className="flex justify-between">
-          <div className="flex flex-col">
-            <div>
-              <p className="price-color text-[20px]">
-                ${props.price.toFixed(2)}
-              </p>
-            </div>
-          </div>
-          {/* <button className="mt-5 z-20">
-            <IoCart size={28} />
-          </button> */}
-        </div>
+        <div className="bg-white h-10 w-10 rounded-full"></div>
       </div>
     </Link>
   );

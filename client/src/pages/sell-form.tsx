@@ -14,33 +14,33 @@ const SellFormPage = () => {
   const userContext = useUser();
   const navigate = useNavigate();
   //* Product detail
+  const conditionSelectRef = useRef<HTMLSelectElement>(null);
   const priceInputRef = useRef<HTMLInputElement>(null);
   const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const imagesInputRef = useRef<HTMLInputElement>(null);
-  const [images, setImages] = useState<Array<FileList | null | undefined>>([]);
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
+  const [images, setImages] = useState<Array<File | undefined>>([]);
+
   //* Product info
   const schoolSelectRef = useRef<HTMLSelectElement>(null);
   const typeSelectRef = useRef<HTMLSelectElement>(null);
   const sizeSelectRef = useRef<HTMLSelectElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
 
-  const [count, setCount] = useState<number>(0);
+  const [notFilled, setNotFilled] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   // const [invalidInfo, setInvalidInfo] = useState<boolean>(false);
 
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
   const publish = async () => {
-    setCount((count) => (count += 1));
     if (
       schoolSelectRef.current &&
       typeSelectRef.current &&
       sizeSelectRef.current &&
       titleInputRef.current &&
       priceInputRef.current &&
-      images &&
+      imagesInputRef.current &&
+      conditionSelectRef.current &&
       descriptionTextAreaRef.current
     ) {
       const title = titleInputRef.current.value;
@@ -48,32 +48,38 @@ const SellFormPage = () => {
       const seller = userContext.seller;
       const description = descriptionTextAreaRef.current.value;
       const size = sizeSelectRef.current.value;
+      const condition = conditionSelectRef.current.value;
       const school = schoolSelectRef.current.value;
+      const images = imagesInputRef.current.files;
       const price = Number(priceInputRef.current.value);
       if (
         title === "-" ||
         clothingType === "-" ||
         description === "-" ||
         size === "-" ||
+        condition === "-" ||
         school === "-" ||
         price === 0
       ) {
+        setNotFilled(true);
         return;
       } else {
         setLoading(true);
 
         await delay(2000);
 
-        APIContext.sellListing(
-          title,
-          clothingType,
-          seller,
-          description,
-          size,
-          school,
-          images,
-          price
-        )
+        const body = {
+          title: title,
+          clothingType: clothingType,
+          seller: seller,
+          description: description,
+          size: size,
+          condition: condition,
+          schoolName: school,
+          price: price,
+        };
+
+        APIContext.publishListing(body)
           .then(() => {
             console.log("Item Successfully Listed");
             setLoading(false);
@@ -90,7 +96,6 @@ const SellFormPage = () => {
   const sections = [
     <ProductInfo
       key={0}
-      count={count}
       selectSchool={schoolSelectRef}
       selectSize={sizeSelectRef}
       selectType={typeSelectRef}
@@ -98,7 +103,7 @@ const SellFormPage = () => {
     />,
     <ProductDetail
       key={1}
-      count={count}
+      selectCondition={conditionSelectRef}
       inputDescription={descriptionTextAreaRef}
       inputPrice={priceInputRef}
       inputImages={imagesInputRef}
@@ -117,20 +122,22 @@ const SellFormPage = () => {
           <AiOutlineArrowLeft size={30} />
         </button>
         <div className="flex flex-col items-center">
-          <p className="title">Welcome to the Sell page</p>
+          <p className="title">Welcome to the Sell Form</p>
           {sections}
-          <div className="w-[60%] flex flex-col items-end pb-10">
-            <button
-              className="publish-button flex items-center justify-center"
-              onClick={publish}
-            >
+          {notFilled ? (
+            <div className="text-center my-5">
+              <p className="text-red-600">Invalid or missing informations</p>
+            </div>
+          ) : null}
+          <div className="w-[60%] flex flex-col items-end pb-10 ">
+            <button className="publish-button group" onClick={publish}>
               {loading ? (
                 <LoadingSpinner classname="w-8 w-8" />
               ) : (
                 <>
-                  <p className="mr-[5px] group">Publish</p>
+                  <p className="mr-[5px] font-extrabold">Publish</p>
                   <AiFillCaretRight
-                    className="group-hover:translate-x-1.5"
+                    className="group-hover:translate-x-1.5 transition-all"
                     size={20}
                   />
                 </>

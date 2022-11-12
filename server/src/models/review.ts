@@ -3,10 +3,12 @@ import { userSchema } from "./user";
 
 const reviewSchema = new Schema({
   writer: {
-    type: String,
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
   },
-  id: {
-    type: String,
+  destinator: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
   },
   content: {
     type: String,

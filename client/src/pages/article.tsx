@@ -1,7 +1,8 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/product-page/navbar/navbar";
-import ArticleInfo from "../components/article-page/article-info";
+import Listing from "../components/article-page/listing";
+import { useState } from "react";
 
 const ArticlePage = () => {
   const params = useParams();
@@ -16,10 +17,8 @@ const ArticlePage = () => {
       <button className="back-arrow" onClick={() => navigate(-1)}>
         <AiOutlineArrowLeft size={30} />
       </button>
-      <div className="flex flex-col items-center">
-        <p className="title">{title}</p>
-        <ArticleInfo />
-      </div>
+
+      <Listing />
     </div>
   );
 };

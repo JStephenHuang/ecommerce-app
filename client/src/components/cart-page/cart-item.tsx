@@ -1,9 +1,9 @@
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Listing } from "../../types/listing";
+import { ListingType } from "../../types/listing";
 
 interface CartItemProperties {
-  cartItem: Listing;
+  cartItem: ListingType;
   removeCartItemHandler: (id: string) => void;
 }
 
@@ -23,7 +23,7 @@ const CartItem = ({ cartItem, removeCartItemHandler }: CartItemProperties) => {
           </Link>
           <div className="flex">
             <p className="">Seller:</p>
-            <p className="text-[#912F56] ml-1"> {cartItem.seller}</p>
+            <p className="text-[#912F56] ml-1"> {cartItem.seller.username}</p>
           </div>
         </div>
         <div className="flex items-center ml-auto">

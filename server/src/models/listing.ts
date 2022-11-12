@@ -1,5 +1,8 @@
 import mongoose, { Schema } from "mongoose";
-import { schoolSchema } from "./school";
+import { Cart, cartSchema } from "./cart";
+import { School, schoolSchema } from "./school";
+import { uploadSchema } from "./upload";
+import { User } from "./user";
 
 const listingSchema = new Schema({
   title: {
@@ -10,10 +13,7 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
-  seller: {
-    type: String,
-    required: true,
-  },
+
   description: {
     type: String,
     required: true,
@@ -22,13 +22,23 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
-  school: {
-    type: schoolSchema,
+  condition: {
+    type: String,
     required: true,
   },
-  images: {
-    type: [],
+  seller: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
     required: true,
+  },
+  school: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "School",
+    required: true,
+  },
+  inCart: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    ref: "Cart",
   },
   price: {
     type: Number,

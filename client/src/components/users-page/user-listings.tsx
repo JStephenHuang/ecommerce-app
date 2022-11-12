@@ -1,8 +1,8 @@
-import { Listing } from "../../types/listing";
+import { FrontEndListing } from "../../types/listing";
 import ListingBubbles from "../product-page/features/listing-bubbles";
 
 interface UserListingsProperties {
-  listings: Array<Listing>;
+  listings: Array<FrontEndListing>;
 }
 
 const UserListings = (props: UserListingsProperties) => {
@@ -10,15 +10,12 @@ const UserListings = (props: UserListingsProperties) => {
   const frontEndListings = listings.map((listing, key) => {
     return (
       <ListingBubbles
-        className="w-full"
         key={key}
         title={listing.title}
-        productType={listing.clothingType}
-        seller={listing.seller}
-        size={listing.size}
         school={listing.school}
         price={listing.price}
-        id={listing._id}
+        images={[]}
+        _id={listing._id}
       />
     );
   });

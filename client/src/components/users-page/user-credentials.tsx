@@ -1,10 +1,9 @@
-import { Listing } from "../../types/listing";
-import InfoSection from "./info-section";
+import { ListingType } from "../../types/listing";
 
 interface UserCredentialsProperties {
   user: {
     username: string;
-    listings: Array<Listing>;
+    listings: Array<ListingType>;
   };
 }
 
@@ -16,9 +15,7 @@ const UserCredentials = (props: UserCredentialsProperties) => {
       </div>
       <hr className="w-full bg-[#521945] h-[2px]" />
       <div className="flex flex-col">
-        <div className="flex flex-col w-[50%] justify-between h-full my-5">
-          <InfoSection name="Name" value={props.user.username} />
-        </div>
+        <div className="flex flex-col w-[50%] justify-between h-full my-5"></div>
       </div>
     </div>
   );

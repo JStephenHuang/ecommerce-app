@@ -7,7 +7,7 @@ const schoolSchema = new Schema({
     required: true,
   },
   products: {
-    type: [],
+    type: [listingSchema],
     required: true,
   },
 });

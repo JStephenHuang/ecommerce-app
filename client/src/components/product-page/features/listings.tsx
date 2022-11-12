@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAPIs } from "../../../contexts/api-context";
-import { Listing } from "../../../types/listing";
+import { FrontEndListing } from "../../../types/listing";
 import ListingBubbles from "./listing-bubbles";
 
 const Listings = () => {
   const APIContext = useAPIs();
-  const [listings, setListings] = useState<Array<Listing>>([]);
+  const [listings, setListings] = useState<Array<FrontEndListing>>([]);
   useEffect(() => {
     APIContext.getListings().then((value) => {
       setListings(value.data);
@@ -15,15 +15,12 @@ const Listings = () => {
   const frontEndArticles = listings.slice(0, 8).map((listing, key) => {
     return (
       <ListingBubbles
-        className=""
         key={key}
         title={listing.title}
-        productType={listing.clothingType}
-        seller={listing.seller}
-        size={listing.size}
         school={listing.school}
         price={listing.price}
-        id={listing._id}
+        images={listing.images}
+        _id={listing._id}
       />
     );
   });
@@ -33,7 +30,7 @@ const Listings = () => {
       <div className="flex justify-between">
         <p className="text-[24px] font-bold">Uniforms</p>
 
-        <a className="underline hover:text-[#912F56]" href="">
+        <a className="underline hover:opacity-50" href="">
           See all
         </a>
       </div>

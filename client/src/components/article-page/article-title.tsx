@@ -5,8 +5,7 @@ import { useUser } from "../../contexts/user-context";
 
 interface ArticleTitleProperties {
   id: string;
-  title: string | undefined;
-  deleteListingHandler: (user: string, id: string) => void;
+  title: string;
 }
 
 const ArticleTitle = (props: ArticleTitleProperties) => {
@@ -29,18 +28,10 @@ const ArticleTitle = (props: ArticleTitleProperties) => {
     });
   }, []);
   return (
-    <div className="h-[10%]">
+    <div className="h-[3.5rem]">
       <div className="flex items-center justify-between">
-        <p className="font-bold text-[20px] truncate">{props.title}</p>
-        {ownership ? (
-          <FaTrash
-            className="hover:text-red-600"
-            onClick={() => props.deleteListingHandler(username, props.id)}
-            size={16}
-          />
-        ) : null}
+        <p className="font-extrabold text-[24px] truncate">{props.title}</p>
       </div>
-
       <hr className="w-full bg-[#521945] h-[2px]" />
     </div>
   );

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAPIs } from "../../contexts/api-context";
 import { useUser } from "../../contexts/user-context";
-import { Listing } from "../../types/listing";
+import { FrontEndListing } from "../../types/listing";
 
-import UserListings from "../profile-page/user-listings";
+import UserListings from "../users-page/user-listings";
 
 const SellerListings = () => {
   const APIContext = useAPIs();
@@ -13,7 +13,7 @@ const SellerListings = () => {
 
   const [user, setUser] = useState<{
     username: string;
-    listings: Array<Listing>;
+    listings: Array<FrontEndListing>;
   }>({
     username: "-",
     listings: [],

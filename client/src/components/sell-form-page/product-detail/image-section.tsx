@@ -4,18 +4,12 @@ import { FaTrash } from "react-icons/fa";
 
 interface ImageDroperProperties {
   inputValue: React.RefObject<HTMLInputElement>;
-  images: Array<FileList | null | undefined>;
-  setImages: React.Dispatch<
-    React.SetStateAction<(FileList | null | undefined)[]>
-  >;
+  images: Array<File | undefined>;
+  setImages: React.Dispatch<React.SetStateAction<(File | undefined)[]>>;
 }
 
 function ImageDroper(props: ImageDroperProperties) {
-  const [images, setImages] = useState<Array<FileList | null | undefined>>([]);
-  useEffect(() => {
-    setImages(images);
-    props.setImages(images);
-  }, [images]);
+  const [images, setImages] = useState<Array<FileList | null>>([]);
 
   return (
     <div className="w-full ml-auto mb-[1.5rem]">
@@ -71,12 +65,10 @@ function ImageDroper(props: ImageDroperProperties) {
             ref={props.inputValue}
             onChange={() => {
               if (props.inputValue.current) {
-                setImages((images) => [
-                  ...images,
-                  props.inputValue.current?.files,
-                ]);
+                console.log(props.inputValue.current.files);
               }
             }}
+            multiple
           />
         </label>
       </div>
