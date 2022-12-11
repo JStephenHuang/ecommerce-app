@@ -4,7 +4,7 @@ import { useUser } from "../../contexts/user-context";
 import { UserType } from "../../types/user";
 
 import LoadingSpinner from "../sell-form-page/loading-spinner";
-import ProfilePic from "./profile-pic";
+import Profile from "./profile";
 
 const UserInfo = () => {
   const APIContext = useAPIs();
@@ -29,7 +29,7 @@ const UserInfo = () => {
         <p className="title">Welcome to the Profile Page</p>
         <div className="w-[80%] my-5 p-5">
           <div className="flex flex-col">
-            <ProfilePic user={user} />
+            <Profile user={user} />
             <div className="w-full flex flex-col" />
           </div>
         </div>

@@ -3,8 +3,6 @@ import { Listing } from "../models/listing";
 import { User } from "../models/user";
 import { School } from "../models/school";
 import mutler from "multer";
-import { Upload } from "../models/upload";
-import { connected } from "process";
 
 const storage = mutler.memoryStorage();
 const upload = mutler({ storage: storage });
@@ -17,7 +15,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 router.get("/:id", async (req: Request, res: Response) => {
-  const listing = await Listing.findOne({ _id: req.params.id })
+  const listing = await Listing.findById(req.params.id)
     .populate({ path: "school" })
     .populate({ path: "seller" });
 
@@ -30,6 +28,21 @@ router.get("/:type", async (req: Request, res: Response) => {
   if (!listings) return res.status(400).json("ListingsNotFound");
   return res.status(200).json(listings);
 });
+
+router.post("/like/:id", async (req: Request, res: Response) => {
+  const listing = await Listing.findById(req.params.id);
+  if (!listing) return res.status(400).json("ListingsNotFound");
+  // listing.likes += 1
+  listing.save();
+});
+
+router.post(
+  "/sell-form/upload",
+  upload.single("file"),
+  async (req: Request, res: Response) => {
+    res.json({ file: req.file });
+  }
+);
 
 router.post("/publish", async (req: Request, res: Response) => {
   const {
@@ -66,7 +79,7 @@ router.post("/publish", async (req: Request, res: Response) => {
   const listingProcess = await newListing
     .save()
     .then((listing) => {
-      school.products.push(listing);
+      school.listings.push(listing);
       user.listings.push(listing);
       school.save();
       user.save();
@@ -115,14 +128,14 @@ router.post("/delete/:id", async (req: Request, res: Response) => {
   if (sellerId.toHexString() !== userId.toHexString())
     return res.status(200).json("NoOwnership");
 
-  const schoolProducts = school.products;
+  const schoolListings = school.listings;
   const userListings = user.listings;
 
   const cartListings = user.cart.listings;
 
   console.log(cartListings);
 
-  const schoolListingIndex = schoolProducts
+  const schoolListingIndex = schoolListings
     .map((listing) => listing._id?.toHexString())
     .indexOf(listingId);
   const userListingIndex = userListings
@@ -135,7 +148,7 @@ router.post("/delete/:id", async (req: Request, res: Response) => {
   // Removing article
 
   cartListings.splice(cartListingIndex, 1);
-  schoolProducts.splice(schoolListingIndex, 1);
+  schoolListings.splice(schoolListingIndex, 1);
   userListings.splice(userListingIndex, 1);
 
   school.save();

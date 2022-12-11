@@ -15,7 +15,7 @@ const UserRating = (props: { rating: number }) => {
   return (
     <div className="flex items-center text-[16px]">
       {stars}
-      <p className="ml-2 hover:underline">(0)</p>
+      <p className="ml-2 hover:underline font-normal">(0)</p>
     </div>
   );
 };

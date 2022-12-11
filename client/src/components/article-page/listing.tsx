@@ -3,18 +3,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAPIs } from "../../contexts/api-context";
 import { useUser } from "../../contexts/user-context";
 import { ListingType } from "../../types/listing";
+import { useQuery } from "react-query";
 
 import LoadingSpinner from "../sell-form-page/loading-spinner";
-import ListingOptions from "./listing-options";
+import ListingOverview from "./listing-overview";
 import ListingNotFound from "./listing-not-found";
-import ArticleImg from "./article-img";
+import ListingImg from "./listing-img";
 
 const Listing = () => {
   const APIContext = useAPIs();
   const userContext = useUser();
   const navigate = useNavigate();
   const params = useParams();
-  const id = params?.id as string;
+  const id = params.id as string;
 
   const [listing, setListing] = useState<ListingType>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,10 +47,10 @@ const Listing = () => {
     return (
       <div className="flex flex-col items-center">
         <div className="w-[80%] my-10">
-          <div className="flex h-[35rem]">
-            <ArticleImg />
+          <div className="flex h-auto">
+            <ListingImg listing={listing} />
 
-            <ListingOptions listing={listing} />
+            <ListingOverview listing={listing} />
           </div>
         </div>
       </div>

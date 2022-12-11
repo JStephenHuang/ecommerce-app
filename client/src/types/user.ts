@@ -1,7 +1,9 @@
 import { ListingType } from "./listing";
 
 export interface UserType {
+  _id: string;
   username: string;
-  listing: Array<ListingType>;
+  listings: Array<ListingType>;
   rating: number;
+  sold: Array<ListingType>;
 }

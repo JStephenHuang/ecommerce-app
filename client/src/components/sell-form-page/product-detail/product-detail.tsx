@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
+import { ListingFormType } from "../../../types/listing";
 import DescriptionSection from "./description-section";
 import ConditionSection from "./condition-section";
 import ImageDroper from "./image-section";
 import PriceSection from "./price-section";
 
 interface ProductDetailProperties {
-  selectCondition: React.RefObject<HTMLSelectElement>;
-  inputDescription: React.RefObject<HTMLTextAreaElement>;
-  inputPrice: React.RefObject<HTMLInputElement>;
-  inputImages: React.RefObject<HTMLInputElement>;
-  images: Array<File | undefined>;
-  setImages: React.Dispatch<React.SetStateAction<(File | undefined)[]>>;
+  sellForm: ListingFormType;
+  handleInputChange: (event: any) => void;
 }
 
 const ProductDetail = (props: ProductDetailProperties) => {
@@ -19,16 +16,19 @@ const ProductDetail = (props: ProductDetailProperties) => {
       <p className="text-[20px] font-bold">Product Detail</p>
       <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
 
-      <ConditionSection selectValue={props.selectCondition} />
+      <ConditionSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
+      />
 
-      <DescriptionSection inputValue={props.inputDescription} />
+      <DescriptionSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
+      />
 
-      <PriceSection inputValue={props.inputPrice} />
-
-      <ImageDroper
-        inputValue={props.inputImages}
-        images={props.images}
-        setImages={props.setImages}
+      <PriceSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
       />
     </div>
   );

@@ -1,8 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { Cart, cartSchema } from "./cart";
-import { School, schoolSchema } from "./school";
-import { uploadSchema } from "./upload";
-import { User } from "./user";
 
 const listingSchema = new Schema({
   title: {
@@ -13,7 +9,6 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
-
   description: {
     type: String,
     required: true,
@@ -24,6 +19,11 @@ const listingSchema = new Schema({
   },
   condition: {
     type: String,
+    required: true,
+  },
+  likes: {
+    type: Number,
+    default: 0,
     required: true,
   },
   seller: {
@@ -47,7 +47,6 @@ const listingSchema = new Schema({
 });
 
 type listingType = typeof listingSchema;
-
 const Listing = mongoose.model("Listing", listingSchema);
 
 export { Listing, listingType, listingSchema };

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ListingType } from "../../../types/listing";
 import CartItem from "../cart-item";
 import CartTotal from "./cart-total";
@@ -21,17 +22,20 @@ const CartItems = ({
     );
   });
   return (
-    <div className="flex h-[20rem] ">
-      <div className="flex flex-col w-[60%] overflow-y-auto pr-3">
-        {frontEndCartItems.length === 0 ? (
-          <div className="w-full h-full grid place-items-center">
-            <p>Cart Empty</p>
-          </div>
-        ) : (
-          frontEndCartItems
-        )}
-      </div>
-      <CartTotal cartItems={cartItems} />
+    <div className="flex flex-col w-[60%] overflow-y-auto">
+      {frontEndCartItems.length === 0 ? (
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <p>Cart Empty</p>
+          <Link
+            to="/"
+            className="mt-2 p-3 bg-black text-white transition-all hover:opacity-70"
+          >
+            Go shopping
+          </Link>
+        </div>
+      ) : (
+        frontEndCartItems
+      )}
     </div>
   );
 };

@@ -18,8 +18,8 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
-  const products: listingType[] = [];
-  const newSchool = new School({ name, products });
+  const listings: listingType[] = [];
+  const newSchool = new School({ name, listings });
   newSchool
     .save()
     .then((school) => res.status(200).json("SchoolAdded " + school))

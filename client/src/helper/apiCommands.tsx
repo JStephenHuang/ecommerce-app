@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from "axios";
-import React, { useContext } from "react";
 import { ListingFormType } from "../types/listing";
 
-class APIContextValue {
+class APICommands {
   axios: AxiosInstance;
 
   constructor(
@@ -35,6 +34,10 @@ class APIContextValue {
     return await this.axios.get(`${this.IP}/user/${username}`);
   };
 
+  getUserById = async (id: string) => {
+    return await this.axios.get(`${this.IP}/user/${id}`);
+  };
+
   getUserListings = async (username: string) => {
     return await this.axios.get(`${this.IP}/user/listings/${username}`);
   };
@@ -42,11 +45,11 @@ class APIContextValue {
   createListing = async (body: ListingFormType) => {
     return await this.axios.post(`${this.IP}/listing/publish`, body);
   };
-  getCartItems = async (username: string) => {
+  getCart = async (username: string) => {
     const params = {
       username: username,
     };
-    return await fetch(`${this.IP}/cart/${params.username}`);
+    return await this.axios.get(`${this.IP}/cart/${params.username}`);
   };
   addCartItem = async (username: string, id: string) => {
     const body = {
@@ -66,17 +69,9 @@ class APIContextValue {
     };
     await this.axios.post(`${this.IP}/listing/delete/${id}`, body);
   };
+  likeListing = async (id: string) => {
+    // await this.axios.post();
+  };
 }
 
-const defaultValue = new APIContextValue();
-const APIContext = React.createContext<APIContextValue>(defaultValue);
-const useAPIs = () => useContext(APIContext);
-const APIProvider = (props: { children: React.ReactNode }) => {
-  return (
-    <APIContext.Provider value={defaultValue}>
-      {props.children}
-    </APIContext.Provider>
-  );
-};
-
-export { APIContext, APIProvider, useAPIs };
+export const apiCommands = new APICommands();

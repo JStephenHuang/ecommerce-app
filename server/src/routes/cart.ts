@@ -1,5 +1,4 @@
 import { Router, Request, Response } from "express";
-import { Types } from "mongoose";
 import { Listing } from "../models/listing";
 import { User } from "../models/user";
 

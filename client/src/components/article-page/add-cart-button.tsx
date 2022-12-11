@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAPIs } from "../../contexts/api-context";
+import { apiCommands } from "../../helper/apiCommands";
 import { useUser } from "../../contexts/user-context";
 import { IoCart } from "react-icons/io5";
 import LoadingSpinner from "../sell-form-page/loading-spinner";
@@ -11,7 +11,6 @@ interface ListingButtonProperties {
 }
 
 const AddCartButton = (props: ListingButtonProperties) => {
-  const APIContext = useAPIs();
   const userContext = useUser();
   const username = userContext.buyer;
   const [inCart, setInCart] = useState<boolean>(false);
@@ -19,9 +18,8 @@ const AddCartButton = (props: ListingButtonProperties) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const getRelationListing = async () => {
-    console.log(props.inCart);
     setLoading(true);
-    const user = (await APIContext.getUser(username)).data;
+    const user = (await apiCommands.getUser(username)).data;
     if (props.inCart.includes(user._id)) {
       setInCart(true);
     } else if (props.seller === user._id) {
@@ -35,11 +33,12 @@ const AddCartButton = (props: ListingButtonProperties) => {
 
   useEffect(() => {
     getRelationListing();
-  }, [APIContext]);
+  }, [apiCommands, username]);
 
   const addToCart = async () => {
     setLoading(true);
-    APIContext.addCartItem(username, props.id)
+    apiCommands
+      .addCartItem(username, props.id)
       .then(() => {
         console.log("Item Successfully Added to Cart!");
         setInCart(true);
@@ -52,20 +51,20 @@ const AddCartButton = (props: ListingButtonProperties) => {
   };
   if (loading) {
     return (
-      <button className="checkout-button" disabled={true}>
+      <button className="add-to-cart-button" disabled={true}>
         <LoadingSpinner classname="w-6 h-6" />
       </button>
     );
   } else if (inCart) {
     return (
-      <button className="checkout-button-in-cart" disabled={true}>
+      <button className="button-in-cart" disabled={true}>
         In Cart
       </button>
     );
   } else if (ownership) {
     return (
       <>
-        <button className="checkout-button-in-cart" disabled={true}>
+        <button className="button-in-cart" disabled={true}>
           Owned
         </button>
       </>

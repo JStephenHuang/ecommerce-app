@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAPIs } from "../../../contexts/api-context";
+import { ListingFormType } from "../../../types/listing";
 
 interface SchoolSectionProperties {
-  selectValue: React.RefObject<HTMLSelectElement>;
+  sellForm: ListingFormType;
+  handleInputChange: (event: any) => void;
 }
 
 const SchoolSection = (props: SchoolSectionProperties) => {
@@ -19,8 +21,19 @@ const SchoolSection = (props: SchoolSectionProperties) => {
   return (
     <div className="container">
       <p className="text-[16px] font-bold">School</p>
-      <select className="select-button" ref={props.selectValue}>
-        <option value="-">--Choose an option--</option>
+      <select
+        className={
+          props.sellForm.schoolName !== ""
+            ? `select-button`
+            : `select-button text-gray-400`
+        }
+        name="schoolName"
+        value={props.sellForm.schoolName}
+        onChange={props.handleInputChange}
+      >
+        <option value="" disabled={true}>
+          Select School
+        </option>
         {schools.map((school, key) => {
           return (
             <option key={key} value={school.name}>

@@ -1,10 +1,9 @@
+import { UserType } from "./user";
+
 export interface ListingType {
   title: string;
   clothingType: string;
-  seller: {
-    _id: string;
-    username: string;
-  };
+  seller: UserType;
   size: number;
   school: {
     _id: string;
@@ -18,7 +17,7 @@ export interface ListingType {
   _id: string;
 }
 
-export interface ListListingType {
+export interface ListingFormType {
   title: string;
   clothingType: string;
   seller: string;
@@ -28,6 +27,17 @@ export interface ListListingType {
   schoolName: string;
   price: number;
 }
+
+export const listingFormDefaultValue = {
+  title: "",
+  clothingType: "",
+  seller: "",
+  description: "",
+  size: "",
+  condition: "",
+  schoolName: "",
+  price: 0.0,
+};
 
 export interface FrontEndListing {
   title: string;
@@ -39,16 +49,3 @@ export interface FrontEndListing {
   price: number;
   _id: string;
 }
-
-export const listingDefaultValue = {
-  title: "-",
-  clothingType: "-",
-  seller: "-",
-  description: "-",
-  size: 0,
-  condition: "-",
-  school: "-",
-  images: [],
-  price: 0,
-  _id: "-",
-};

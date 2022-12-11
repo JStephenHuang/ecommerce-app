@@ -1,14 +1,30 @@
 import { Link } from "react-router-dom";
+import { UserType } from "../../types/user";
+import { MdSell } from "react-icons/md";
 
-const ListingSeller = (props: { seller: string }) => {
+import UserRating from "../users-page/user-rating";
+
+const ListingSeller = (props: { seller: UserType }) => {
   return (
-    <div className="flex items-center">
-      <div className="w-16 h-16 bg-black rounded-full" />
-      <div className="flex flex-col text-black ml-2">
-        <Link to="/" className="hover:underline">
-          {props.seller}
-        </Link>
-        <p className="opacity-50">Canada</p>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center">
+        <div className="w-16 h-16 bg-black rounded-full" />
+        <div className="flex flex-col text-black ml-2">
+          <Link
+            to={`/${props.seller.username}`}
+            className="hover:underline font-bold"
+          >
+            {props.seller.username}
+          </Link>
+          <p className="opacity-50 font-normal">Canada</p>
+        </div>
+      </div>
+      <div className="flex flex-col items-end">
+        <UserRating rating={props.seller.rating} />
+        <div className="flex items-center font-normal">
+          <MdSell className="mr-2" />
+          {props.seller.sold.length} sold
+        </div>
       </div>
     </div>
   );

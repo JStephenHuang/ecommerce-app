@@ -1,5 +1,4 @@
 export const clothingTypes = [
-  { value: "-", label: "--Choose an option--" },
   { value: "Polo", label: "Polo" },
   { value: "Sportswear", label: "Sportswear" },
   { value: "Shorts", label: "Shorts" },
@@ -11,7 +10,6 @@ export const clothingTypes = [
 ];
 
 export const sizes = [
-  { value: "-", label: "--Choose an option--" },
   { value: "XL", label: "Extra Large" },
   { value: "L", label: "Large" },
   { value: "M", label: "Medium" },
@@ -19,10 +17,14 @@ export const sizes = [
 ];
 
 export const conditions = [
-  { value: "-", label: "--Choose an option--" },
-  { value: "Old", label: "Old" },
-  { value: "Used, Good", label: "Used, Good" },
-  { value: "Used, New", label: "Used, New" },
-  { value: "Brand New", label: "Brand New" },
-  { value: "User for 1 years", label: "User for 1 years" },
+  { value: "1/10", label: "1/10" },
+  { value: "2/10", label: "2/10" },
+  { value: "3/10", label: "3/10" },
+  { value: "4/10", label: "4/10" },
+  { value: "5/10", label: "5/10" },
+  { value: "6/10", label: "6/10" },
+  { value: "7/10", label: "7/10" },
+  { value: "8/10", label: "8/10" },
+  { value: "9/10", label: "9/10" },
+  { value: "10/10", label: "10/10" },
 ];

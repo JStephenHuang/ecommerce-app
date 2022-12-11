@@ -20,12 +20,12 @@ const CartTotal = ({ cartItems }: CartTotalProperties) => {
   const total = cartTotal + shippingFee;
 
   return (
-    <div className="p-5 w-[40%] h-full ml-5 flex flex-col items-end border border-black">
-      <div className="flex w-full justify-between">
+    <div className="cart-total-card sticky top-[15%]">
+      <div className="flex w-full justify-between font-normal">
         <p className="">Item(s):</p>
         <p className="">${cartTotal.toFixed(2)}</p>
       </div>
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between font-normal">
         <p className="">Shipping:</p>
         <p className="">${shippingFee.toFixed(2)}</p>
       </div>

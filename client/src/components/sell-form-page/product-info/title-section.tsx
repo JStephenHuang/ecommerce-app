@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { ListingFormType } from "../../../types/listing";
 
 interface TitleSectionProperties {
-  inputValue: React.RefObject<HTMLInputElement>;
+  sellForm: ListingFormType;
+  handleInputChange: (event: any) => void;
 }
 
 const TitleSection = (props: TitleSectionProperties) => {
-  const [charCount, setCharCount] = useState<number>(0);
   return (
     <div className="flex justify-between mb-[1.5rem]">
       <div className="w-[30%]">
         <p className="text-[16px] font-bold">Title</p>
-        <p className="text-[12px]">
+        <p className="text-[12px] font-light">
           Title is the first thing client will read, So it's important to be
           descriptive
         </p>
@@ -21,14 +21,13 @@ const TitleSection = (props: TitleSectionProperties) => {
           type="text"
           placeholder="ex: Large Black Hoodie from Notre Dame 4-5 years old..."
           maxLength={60}
-          ref={props.inputValue}
-          onChange={() => {
-            if (props.inputValue.current) {
-              setCharCount(props.inputValue.current.value.length);
-            }
-          }}
+          name="title"
+          value={props.sellForm.title}
+          onChange={props.handleInputChange}
         />
-        <p className="text-[12px] text-gray-500 ml-auto">{charCount}/60</p>
+        <p className="text-[12px] text-gray-500 ml-auto">
+          {props.sellForm.title.length}/60
+        </p>
       </div>
     </div>
   );

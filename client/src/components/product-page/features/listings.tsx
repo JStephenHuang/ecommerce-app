@@ -28,7 +28,7 @@ const Listings = () => {
   return (
     <div id="" className="w-[80%]">
       <div className="flex justify-between">
-        <p className="text-[24px] font-bold">Uniforms</p>
+        <p className="text-[24px] font-bold mt-10">Uniforms</p>
 
         <a className="underline hover:opacity-50" href="">
           See all

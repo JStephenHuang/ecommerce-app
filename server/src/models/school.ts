@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
-import { listingSchema, listingType } from "./listing";
+import { listingSchema } from "./listing";
 
 const schoolSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  products: {
+  listings: {
     type: [listingSchema],
     required: true,
   },

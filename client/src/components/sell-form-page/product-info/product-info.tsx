@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { ListingFormType } from "../../../types/listing";
+
 import SchoolSection from "./school-section";
 import TypeSection from "./type-section";
 import SizeSection from "./size-section";
 import TitleSection from "./title-section";
 
 interface ProductInfoProperties {
-  selectSchool: React.RefObject<HTMLSelectElement>;
-  selectSize: React.RefObject<HTMLSelectElement>;
-  selectType: React.RefObject<HTMLSelectElement>;
-  inputTitle: React.RefObject<HTMLInputElement>;
+  sellForm: ListingFormType;
+  handleInputChange: (event: any) => void;
 }
 
 const ProductInfo = (props: ProductInfoProperties) => {
@@ -17,13 +16,25 @@ const ProductInfo = (props: ProductInfoProperties) => {
       <p className="text-[20px] font-bold">Product Information</p>
       <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
 
-      <SchoolSection selectValue={props.selectSchool} />
+      <SchoolSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
+      />
 
-      <TypeSection selectValue={props.selectType} />
+      <TypeSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
+      />
 
-      <SizeSection selectValue={props.selectSize} />
+      <SizeSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
+      />
 
-      <TitleSection inputValue={props.inputTitle} />
+      <TitleSection
+        sellForm={props.sellForm}
+        handleInputChange={props.handleInputChange}
+      />
     </div>
   );
 };

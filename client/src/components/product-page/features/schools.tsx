@@ -30,7 +30,7 @@ const Schools = () => {
   return (
     <div className="w-[80%]">
       <div className="flex justify-between">
-        <p className="text-[24px] font-bold">Schools</p>
+        <p className="text-[24px] font-bold mt-10">Popular Schools</p>
         <Link to={"/schools"} className="underline hover:text-[#912F56]">
           See all
         </Link>

@@ -2,11 +2,11 @@ import mongoose, { Schema, Types } from "mongoose";
 import { userSchema } from "./user";
 
 const reviewSchema = new Schema({
-  writer: {
+  reviewer: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
   },
-  destinator: {
+  reviewee: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
   },

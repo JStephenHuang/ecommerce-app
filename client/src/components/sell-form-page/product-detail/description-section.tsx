@@ -1,17 +1,17 @@
 import { useState } from "react";
+import { ListingFormType } from "../../../types/listing";
 
 interface PriceSectionProperties {
-  inputValue: React.RefObject<HTMLTextAreaElement>;
+  sellForm: ListingFormType;
+  handleInputChange: (event: any) => void;
 }
 
 const DescriptionSection = (props: PriceSectionProperties) => {
-  const [charCount, setCharCount] = useState<number>(0);
-
   return (
     <div className="flex justify-between mb-[1.5rem]">
       <div className="w-[30%]">
         <p className="text-[16px] font-bold">Description</p>
-        <p className="text-[12px]">
+        <p className="text-[12px] font-light">
           Describe your listing: the more details, the better for buyers!
         </p>
       </div>
@@ -21,14 +21,13 @@ const DescriptionSection = (props: PriceSectionProperties) => {
           className="text-area"
           rows={7}
           placeholder="Describe the state of your product... at least 30 characters"
-          ref={props.inputValue}
-          onChange={() => {
-            if (props.inputValue.current) {
-              setCharCount(props.inputValue.current.value.length);
-            }
-          }}
+          name="description"
+          value={props.sellForm.description}
+          onChange={props.handleInputChange}
         ></textarea>
-        <p className="text-[12px] text-gray-500 ml-auto">{charCount}/30</p>
+        <p className="text-[12px] text-gray-500 ml-auto">
+          {props.sellForm.description.length}/30
+        </p>
       </div>
     </div>
   );

@@ -16,9 +16,15 @@ body {
   /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
   /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
   /* font-family: 'Poppins', sans-serif; */
-  background-color: #f4f4f4;
+  background-color: #ffffff;
   scrollbar-width: thin;          
   scrollbar-color: #000000 #EAF2EF;
+}
+
+@layer components {
+  body {
+    @apply font-bold
+  }
 }
 
 @layer components {
@@ -30,14 +36,14 @@ body {
   }
 }
 
-@layer components {
+@layer navbar {
   .navbar {
-    @apply w-full h-[10%] fixed bg-[#f4f4f4]
+    @apply w-full h-[10%] fixed bg-white
    flex items-center justify-center border-b shadow-md
   }
   .navbar-link {
     @apply text-[16px] text-gray-600 hover:opacity-50
-    ease-in-out duration-150
+    ease-in-out duration-150 font-normal
   }
   .back-arrow {
     @apply absolute ml-10 text-gray-400 hover:text-red-600 ease-in-out duration-150 mt-10 z-[5]
@@ -49,13 +55,13 @@ body {
   }
   .main-bubble {
     @apply flex flex-col w-full
-  text-white mb-3 shadow-md border
-  bg-white
-    hover:border-black hover:shadow-xl ease-in-out duration-150
+  text-white border-white
+  bg-white border
+  hover:border-black ease-in-out duration-150
   }
   .listing-bubble-info {
     @apply h-[5rem] p-3 flex items-center justify-between text-[20px]
-    bg-black
+    bg-black break-words
   }
   .school-bubble-info {
     @apply h-[5rem] p-3 flex flex-col text-[20px]
@@ -70,9 +76,9 @@ body {
     @apply p-2 text-white rounded-lg w-full
     ease-in-out duration-150
   }
-  .create-listing {
+  .create-listing-button {
     background-color: var(--primary-color);
-    @apply p-2 text-white
+    @apply p-3 text-white
     hover:opacity-50 flex items-center
     ease-in-out duration-150
   }
@@ -123,32 +129,43 @@ body {
   .publish-button {
     background-color: var(--primary-color);
     @apply p-3 text-white text-[20px]
-    hover:opacity-50 
+    hover:opacity-70 
     ease-in-out duration-150 w-[30%] 
     flex items-center justify-center
   }
 }
 
 @layer components {
-  .checkout-button {
+  .add-to-cart-button {
     background-color: var(--primary-color);
     @apply p-2 text-white w-full
    hover:opacity-50 text-center
     ease-in-out duration-150
   }
+  .checkout-button {
+    background-color: var(--primary-color);
+    @apply p-2 text-white w-full
+   hover:opacity-50 text-center
+    ease-in-out duration-150 text-[20px]
+  }
   .checkout-button-disabled {
     background-color: var(--primary-color);
     @apply p-2 text-white w-full
     opacity-50 text-center
-    ease-in-out duration-150
+    ease-in-out duration-150 text-[20px]
   }
-  .checkout-button-in-cart {
+  .button-in-cart {
     background-color: var(--primary-color);
     @apply p-2 text-white w-full
     opacity-50 text-center
     ease-in-out duration-150
   }
-  .save-draft-button {
+  .buy-now-button {
+    @apply p-2 w-full text-center
+    border-2 border-black
+    ease-in-out duration-150
+  }
+  .write-review-button {
     @apply p-2 w-full text-center
     border-2 border-black
     ease-in-out duration-150
@@ -158,9 +175,11 @@ body {
 
 @layer components {
   .cart-items {
-    @apply border border-black p-3 flex items-center justify-between
+    @apply border h-[10rem] border-black p-3 flex items-center justify-between
   }
-
+  .cart-total-card {
+    @apply p-5 w-[40%] h-[20rem] ml-5 flex flex-col items-end border border-black
+  }
 }
 
 @layer components {
