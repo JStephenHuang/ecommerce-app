@@ -4,26 +4,22 @@ import { listingType } from "../models/listing";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  School.find()
-    .then((schools) => {
-      return res.status(200).json(schools);
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
+router.get("/", async (req: Request, res: Response) => {
+  const schools = await School.find();
+  if (!schools) return res.status(400).json("SchoolsNotFound");
+  return res.status(200).json(schools);
 });
 
-router.get("/:id", (req: Request, res: Response) => {
-  School.findById(req.params.id)
-    .then((school) => {
-      return res.status(200).json(school);
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
+router.get("/:id", async (req: Request, res: Response) => {
+  const school = await School.findById(req.params.id);
+  if (!school) return res.status(400).json("SchoolNotFound");
+  return res.status(200).json(school);
 });
 
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
-  const products: listingType[] = [];
-  const newSchool = new School({ name, products });
+  const listings: listingType[] = [];
+  const newSchool = new School({ name, listings });
   newSchool
     .save()
     .then((school) => res.status(200).json("SchoolAdded " + school))

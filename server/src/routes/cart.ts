@@ -1,5 +1,4 @@
 import { Router, Request, Response } from "express";
-import { Types } from "mongoose";
 import { Listing } from "../models/listing";
 import { User } from "../models/user";
 
@@ -15,22 +14,29 @@ router.get("/:username", async (req: Request, res: Response) => {
 router.post("/remove/:id", async (req: Request, res: Response) => {
   const user = await User.findOne({ username: req.body.username });
   if (!user) return res.status(400).json("UserNotFound");
+
   const listingId = req.params.id;
-  const listing = await Listing.findById(listingId);
-  if (!listing) return res.status(400).json("ArticleNotFound");
+  const removingListing = await Listing.findById(listingId);
+  if (!removingListing) return res.status(400).json("ArticleNotFound");
+
   const cart = user.cart;
   const listings = cart.listings;
 
   // Removing article
 
-  const listingIndex = listings
+  const removingItemIndex = listings
     .map((listing) => listing._id?.toHexString())
     .indexOf(listingId);
 
-  listings.splice(listingIndex, 1);
+  removingListing.inCart.splice(
+    removingListing.inCart.indexOf(Object(user._id)),
+    1
+  );
 
-  cart.total -= listing.price;
+  listings.splice(removingItemIndex, 1);
+
   user.save();
+  removingListing.save();
   return res.status(200).json(cart);
 });
 

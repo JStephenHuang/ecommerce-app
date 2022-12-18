@@ -19,7 +19,7 @@ router.post("/login", (req: Request, res: Response) => {
 router.post("/register", (req: Request, res: Response) => {
   const username = req.body.username;
   const password = req.body.password;
-  const cart = new Cart();
+  const cart = new Cart().save();
   const newUser = new User({ username, password, cart });
   newUser
     .save()

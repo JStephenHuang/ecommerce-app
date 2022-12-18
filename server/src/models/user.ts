@@ -1,27 +1,36 @@
 import mongoose, { Schema } from "mongoose";
 import { CartType, cartSchema } from "./cart";
 import { listingSchema } from "./listing";
+import { reviewSchema } from "./review";
 
 const userSchema = new Schema(
   {
     username: {
       type: String,
       required: true,
-      unique: true,
-      trim: true,
-      minlength: 3,
     },
     password: {
       type: String,
       required: true,
-      unique: true,
-      minlength: 6,
+    },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    reviews: {
+      type: [reviewSchema],
+    },
+    sold: {
+      type: [listingSchema],
     },
     cart: {
       type: cartSchema,
       required: true,
     },
     listings: {
+      type: [listingSchema],
+    },
+    listingDrafts: {
       type: [listingSchema],
     },
   },

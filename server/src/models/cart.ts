@@ -6,10 +6,6 @@ const cartSchema = new Schema({
     type: [listingSchema],
     default: [],
   },
-  total: {
-    type: Number,
-    default: 0,
-  },
 });
 
 type CartType = typeof cartSchema;

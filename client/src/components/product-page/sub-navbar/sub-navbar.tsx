@@ -2,7 +2,7 @@ import SubNavbarLinks from "./sub-navbar-link";
 
 const SubNavbar = () => {
   return (
-    <div className="flex">
+    <div className="flex mt-5">
       <SubNavbarLinks name="Polos" link="" />
       <SubNavbarLinks name="Skirts" link="" />
       <SubNavbarLinks name="Hoodies" link="" />

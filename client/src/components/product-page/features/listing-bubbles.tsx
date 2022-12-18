@@ -1,40 +1,24 @@
 import { Link } from "react-router-dom";
-import { ReactComponent as ListingImg } from "../../../images/blob-5.svg";
-interface ArticleBubblesProperties {
-  className: string;
-  title: string;
-  productType: string;
-  seller: string;
-  size: number;
-  school: any;
-  price: number;
-  id: string;
-}
+import { FrontEndListing } from "../../../types/listing";
+import { BsBookmark } from "react-icons/bs";
 
-const ListingBubbles = (props: ArticleBubblesProperties) => {
+const ListingBubbles = (props: FrontEndListing) => {
   const title = props.title.replace(/ /g, "-");
+  console.log(props.images);
+
   return (
-    <Link className="main-bubble" to={`/article/${title}/${props.id}`}>
-      <div className={`${props.className} h-[12rem] bg-white rounded-t-lg`}>
+    <Link className="main-bubble" to={`/listing/${title}/${props._id}`}>
+      <div className="h-[12rem] bg-blue-200">
         <div className="w-full h-full flex items-center">
-          <ListingImg className="w-full h-full rounded-t-lg" />
+          {props.images ? <img src="" alt="" /> : null}
         </div>
       </div>
-      <div
-        className={`${props.className} h-[6rem] bg-[#912F56] rounded-b-lg p-3 flex flex-col justify-center`}
-      >
-        <div className="w-[90%]">
+      <div className="listing-bubble-info">
+        <div className="w-full">
           <p className="truncate">{props.title}</p>
-        </div>
-
-        <div>
-          <p className="text-[#F7C4A5] text-[20px]">
-            ${props.price.toFixed(2)}
-          </p>
-        </div>
-
-        <div className="flex">
-          <p className="text-[#EF798A]">Seller: {props.seller}</p>
+          <div className="w-full flex items-center justify-between">
+            <p className="price-color ">${props.price.toFixed(2)}</p>
+          </div>
         </div>
       </div>
     </Link>

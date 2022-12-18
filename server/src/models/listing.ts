@@ -1,17 +1,11 @@
 import mongoose, { Schema } from "mongoose";
-import { schoolSchema } from "./school";
-import { userSchema, userType } from "./user";
 
 const listingSchema = new Schema({
   title: {
     type: String,
     required: true,
   },
-  productType: {
-    type: String,
-    required: true,
-  },
-  seller: {
+  clothingType: {
     type: String,
     required: true,
   },
@@ -23,9 +17,28 @@ const listingSchema = new Schema({
     type: String,
     required: true,
   },
-  school: {
-    type: schoolSchema,
+  condition: {
+    type: String,
     required: true,
+  },
+  likes: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
+  seller: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  school: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "School",
+    required: true,
+  },
+  inCart: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    ref: "Cart",
   },
   price: {
     type: Number,
@@ -34,7 +47,6 @@ const listingSchema = new Schema({
 });
 
 type listingType = typeof listingSchema;
-
 const Listing = mongoose.model("Listing", listingSchema);
 
 export { Listing, listingType, listingSchema };

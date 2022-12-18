@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useAPIs } from "../contexts/APIContext";
+import { useAPIs } from "../contexts/api-context";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import Navbar from "../components/product-page/navbar/navbar";
-import SchoolInfo from "../components/school-page/school-info";
 import SchoolBubbles from "../components/product-page/features/school-bubbles";
 
 const AllSchools = () => {
@@ -22,7 +21,6 @@ const AllSchools = () => {
     return (
       <SchoolBubbles
         key={key}
-        classname={"w-full"}
         name={school.name}
         products={school.products.length}
         id={school._id}
@@ -39,9 +37,15 @@ const AllSchools = () => {
       </button>
       <div className="flex flex-col items-center">
         <p className="title">All schools</p>
-        <div className="w-[80%] grid grid-cols-2 my-5">{frontEndSchool}</div>
+        <div className="w-[80%]">
+          <p className="text-[20px] font-bold">{schools.length} schools</p>
+          <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
+        </div>
+
+        <div className="w-[80%] grid grid-cols-2 gap-3 my-5">
+          {frontEndSchool}
+        </div>
       </div>
-      <div className="spacer layered2"></div>
     </div>
   );
 };

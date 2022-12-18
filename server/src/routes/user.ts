@@ -17,6 +17,12 @@ router.get("/:username", async (req: Request, res: Response) => {
   return res.status(200).json(user);
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+  const user = await User.findById(req.params._id);
+  if (!user) return res.status(400).json("UserNotFound");
+  return res.status(200).json(user);
+});
+
 router.get("/listings/:username", async (req: Request, res: Response) => {
   const user = await User.findOne({ username: req.params.username });
   if (!user) return res.status(400).json("UserNotFound");
