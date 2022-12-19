@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { APIProvider } from "./contexts/api-context";
 import { UserProvider } from "./contexts/user-context";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
@@ -18,6 +17,7 @@ import ShopListings from "./components/shop-page/listings/shop-listings";
 import ShopFollowers from "./components/shop-page/followers/shop-followers";
 import PageNotFound from "./pages/page-not-found";
 import ExplorerPage from "./pages/explorer";
+import { FirebaseAppProvider } from "./contexts/firebase-app-context";
 
 function App() {
   return (

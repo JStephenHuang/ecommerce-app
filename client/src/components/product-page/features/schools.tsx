@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
+import { useAPIClient } from "../../../hooks/api-client";
 import { Link } from "react-router-dom";
-import { useAPIs } from "../../../contexts/api-context";
+
 import SchoolBubbles from "./school-bubbles";
 
 const Schools = () => {
-  const APIContext = useAPIs();
+  const client = useAPIClient();
   const [schools, setSchools] = useState<
     Array<{ name: string; listings: []; _id: string }>
   >([]);
+
   useEffect(() => {
-    APIContext.getSchools().then((value) => {
+    client.get("/school").then((value) => {
+      console.log(value.data);
       setSchools(value.data);
     });
-  }, [APIContext]);
+  }, []);
 
   const frontEndSchools: JSX.Element[] = schools
     .slice(0, 4)

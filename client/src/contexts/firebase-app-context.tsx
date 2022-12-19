@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { app } from '../firebase/app';
-import { FirebaseApp } from 'firebase/app';
-import { getAuth, User } from 'firebase/auth';
+import React, { useEffect, useState } from "react";
+import { app } from "../firebase/app";
+import { FirebaseApp } from "firebase/app";
+import { getAuth, User } from "firebase/auth";
 
 const FirebaseAppContext = React.createContext<FirebaseApp>(app);
 const useFirebaseApp = () => React.useContext(FirebaseAppContext);

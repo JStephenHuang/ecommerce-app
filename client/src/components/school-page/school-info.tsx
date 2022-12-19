@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAPIs } from "../../contexts/api-context";
+import { useAPIClient } from "../../hooks/api-client";
 import { FrontEndListing, ListingType } from "../../types/listing";
 import ListingBubbles from "../product-page/features/listing-bubbles";
 
@@ -9,15 +9,15 @@ const SchoolInfo = () => {
     name: string;
     listings: Array<ListingType>;
   }>({ name: "-", listings: [] });
-  const APIContext = useAPIs();
+  const client = useAPIClient();
   const params = useParams();
   let id = "";
   if (params.id) id = params.id;
   useEffect(() => {
-    APIContext.getSchool(id).then((value) => {
+    client.get(`/school/${id}`).then((value) => {
       setSchool(value.data);
     });
-  }, [APIContext, id]);
+  }, [id]);
   console.log(school);
 
   const frontEndSchoolListings = school.listings.map((schoolListing, key) => {

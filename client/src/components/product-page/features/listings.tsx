@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAPIs } from "../../../contexts/api-context";
+import { useAPIClient } from "../../../hooks/api-client";
 import { ListingType } from "../../../types/listing";
 import ListingBubbles from "./listing-bubbles";
 
 const Listings = () => {
-  const APIContext = useAPIs();
+  const client = useAPIClient();
   const [listings, setListings] = useState<Array<ListingType>>([]);
   useEffect(() => {
-    APIContext.getListings().then((value) => {
+    client.get("/listing").then((value) => {
       setListings(value.data);
     });
   }, []);
@@ -18,7 +18,7 @@ const Listings = () => {
   });
 
   return (
-    <div id="" className="w-[80%]">
+    <div className="w-[80%]">
       <div className="flex justify-between items-center mt-10">
         <p className="text-[24px] font-bold">Top Uniforms</p>
 

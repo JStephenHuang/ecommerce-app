@@ -8,7 +8,7 @@ class APICommands {
     public readonly IP: string = process.env.REACT_APP_BACKEND_URI as string
   ) {
     this.axios = axios.create({
-      baseURL: process.env.REACT_APP_BACKEND_URI,
+      baseURL: process.env.REACT_APP_BACKEND_URL,
       withCredentials: true,
     });
   }
