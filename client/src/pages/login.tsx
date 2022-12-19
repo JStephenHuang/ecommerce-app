@@ -35,7 +35,7 @@ const LoginPage = () => {
                 <button
                   className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300"
                   onClick={() => {
-                    auth.
+                    signInWithPopup(auth, new GoogleAuthProvider());
                   }}
                 >
                   Sign with Google
