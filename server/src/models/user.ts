@@ -5,14 +5,19 @@ import { reviewSchema } from "./review";
 
 const userSchema = new Schema(
   {
+    firstname: {
+      type: String,
+      required: true,
+    },
+    lastname: {
+      type: String,
+      required: true,
+    },
     username: {
       type: String,
       required: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
+
     rating: {
       type: Number,
       default: 0,

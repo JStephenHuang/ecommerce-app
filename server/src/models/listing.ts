@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, InferSchemaType } from "mongoose";
 
 const listingSchema = new Schema({
   title: {
@@ -35,12 +35,17 @@ const listingSchema = new Schema({
   price: {
     type: Number,
   },
+  dicks: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   imageURL: {
     type: String,
   },
 });
 
-type listingType = typeof listingSchema;
-const Listing = mongoose.model("Listing", listingSchema);
+type IListing = InferSchemaType<typeof listingSchema>;
+const Listing = mongoose.model<IListing>("Listing", listingSchema);
 
-export { Listing, listingType, listingSchema };
+export { Listing, listingSchema, IListing };

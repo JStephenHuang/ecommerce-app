@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { School } from "../models/school";
-import { listingType } from "../models/listing";
+import { IListing } from "../models/listing";
 
 const router = Router();
 
@@ -18,7 +18,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
-  const listings: listingType[] = [];
+  const listings: IListing[] = [];
   const newSchool = new School({ name, listings });
   newSchool
     .save()

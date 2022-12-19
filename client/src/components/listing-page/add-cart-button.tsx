@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { apiCommands } from "../../helper/apiCommands";
-import { useUser } from "../../contexts/user-context";
-import { IoCart } from "react-icons/io5";
+import { useAPIClient } from "../../hooks/api-client";
+import { useFirebaseAuthUser } from "../../contexts/firebase-app-context";
 import LoadingSpinner from "../sell-form-page/loading-spinner";
+import { IoCart } from "react-icons/io5";
 
 interface ListingButtonProperties {
   id: string;
@@ -11,18 +11,23 @@ interface ListingButtonProperties {
 }
 
 const AddCartButton = (props: ListingButtonProperties) => {
-  const userContext = useUser();
-  const username = userContext.buyer;
+  const client = useAPIClient();
+  const user = useFirebaseAuthUser();
   const [inCart, setInCart] = useState<boolean>(false);
   const [ownership, setOwnership] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  console.log(user);
 
   const getRelationListing = async () => {
     setLoading(true);
-    const user = (await apiCommands.getUser(username)).data;
-    if (props.inCart.includes(user._id)) {
+    if (!user) {
+      setInCart(false);
+      setLoading(false);
+      return;
+    }
+    if (props.inCart.includes(user.uid)) {
       setInCart(true);
-    } else if (props.seller === user._id) {
+    } else if (props.seller === user.uid) {
       setOwnership(true);
     } else {
       setOwnership(false);
@@ -33,12 +38,12 @@ const AddCartButton = (props: ListingButtonProperties) => {
 
   useEffect(() => {
     getRelationListing();
-  }, [apiCommands, username]);
+  }, []);
 
   const addToCart = async () => {
     setLoading(true);
-    apiCommands
-      .addCartItem(username, props.id)
+    client
+      .post(`listing/add-cart/${props.id}`)
       .then(() => {
         console.log("Item Successfully Added to Cart!");
         setInCart(true);
@@ -51,7 +56,10 @@ const AddCartButton = (props: ListingButtonProperties) => {
   };
   if (loading) {
     return (
-      <button className="add-to-cart-button" disabled={true}>
+      <button
+        className="add-to-cart-button flex justify-center"
+        disabled={true}
+      >
         <LoadingSpinner classname="w-6 h-6" />
       </button>
     );

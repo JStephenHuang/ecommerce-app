@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Listing, listingType } from "../models/listing";
+import { IListing, Listing } from "../models/listing";
 import { User } from "../models/user";
 import { School } from "../models/school";
 import mutler from "multer";
@@ -198,7 +198,6 @@ router.post("/add-cart/:id", async (req: Request, res: Response) => {
   cart.listings.push(listing);
 
   listing.inCart.push(Object(user._id));
-
   listing.save();
   user.save();
 

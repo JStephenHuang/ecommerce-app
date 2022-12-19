@@ -34,7 +34,11 @@ const ListingImg = (props: ListingButtonProperties) => {
   }, [apiCommands, username]);
 
   if (loading) {
-    return <LoadingSpinner classname="w-6 h-6" />;
+    return (
+      <div className="h-[20rem] aspect-auto text-white bg-black opacity-80 hover:opacity-70 grid place-items-center">
+        <LoadingSpinner classname="w-16 h-16" />
+      </div>
+    );
   } else if (inCart) {
     return (
       <div className="h-[20rem] aspect-auto text-white bg-black opacity-80 hover:opacity-70 grid place-items-center">

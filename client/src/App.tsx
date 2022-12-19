@@ -17,6 +17,8 @@ import ShopListings from "./components/shop-page/listings/shop-listings";
 import ShopFollowers from "./components/shop-page/followers/shop-followers";
 import PageNotFound from "./pages/page-not-found";
 import ExplorerPage from "./pages/explorer";
+import OnboardingPage from "./pages/onboarding";
+
 import { FirebaseAppProvider } from "./contexts/firebase-app-context";
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
       <UserProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />}></Route>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<ProductPage />} />
           <Route path="/listing-form/:title/:id" element={<SellFormPage />} />
