@@ -1,3 +1,6 @@
+import { useFirebaseAuth } from '../contexts/firebase-app-context';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
 interface MarqueeProperties {
   imageSrcs: string[];
 }
@@ -18,6 +21,7 @@ const ImageMarquee = ({ imageSrcs }: MarqueeProperties) => {
 };
 
 const LoginPage = () => {
+  const auth = useFirebaseAuth();
   return (
     <div>
       <section className="min-h-screen flex items-center justify-center">
@@ -28,32 +32,12 @@ const LoginPage = () => {
             <section className="h-full flex items-center justify-center">
               {/* Email & Password Input */}
               <div className="flex flex-col gap-4 m-64">
-                <input
-                  type="email"
-                  className="p-1 rounded-lg border"
-                  placeholder="Email"
-                />
-                <input
-                  type="password"
-                  className="p-1 rounded-lg border"
-                  placeholder="Password"
-                />
-
-                <button className="border-2 border-black bg-black rounded-lg text-white py-1 hover:scale-105 duration-300">
-                  Login
-                </button>
-
-                <div className="grid grid-cols-3 items-center text-gray-400">
-                  <hr className="border-gray-400" />
-                  <p className="text-center text-sm">or</p>
-                  <hr className="border-gray-400" />
-                </div>
-
-                <button className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300">
-                  Sign with Google
-                </button>
-
-                <button className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300">
+                <button
+                  className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300"
+                  onClick={() => {
+                    auth.
+                  }}
+                >
                   Sign with Google
                 </button>
               </div>
@@ -62,7 +46,7 @@ const LoginPage = () => {
           {/* Right Side */}
           <div className="w-1/2">
             <ImageMarquee
-              imageSrcs={["/login/0.jpeg", "/login/1.jpeg", "/login/2.jpeg"]}
+              imageSrcs={['/login/0.jpeg', '/login/1.jpeg', '/login/2.jpeg']}
             ></ImageMarquee>
           </div>
         </div>

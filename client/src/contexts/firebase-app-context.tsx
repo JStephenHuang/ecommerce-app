@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { app } from '../firebase/app';
 import { FirebaseApp } from 'firebase/app';
-import { getAuth, User } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  User,
+} from 'firebase/auth';
 
 const FirebaseAppContext = React.createContext<FirebaseApp>(app);
 const useFirebaseApp = () => React.useContext(FirebaseAppContext);
@@ -31,6 +36,10 @@ const useFirebaseAuthToken = () => {
 
   return token;
 };
+const useFirebaseAuthSignInWithGoogle = () => {
+  const auth = useFirebaseAuth();
+  signInWithPopup(auth, new GoogleAuthProvider());
+};
 
 const FirebaseAppProvider = (props: { children: React.ReactNode }) => {
   return (
@@ -46,4 +55,5 @@ export {
   useFirebaseAuth,
   useFirebaseAuthUser,
   useFirebaseAuthToken,
+  useFirebaseAuthSignInWithGoogle,
 };
