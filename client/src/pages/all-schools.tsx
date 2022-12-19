@@ -1,28 +1,26 @@
 import { useState, useEffect } from "react";
-import { useAPIs } from "../contexts/api-context";
-import { useNavigate } from "react-router-dom";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useAPIClient } from "../hooks/api-client";
 
 import Navbar from "../components/product-page/navbar/navbar";
 import SchoolBubbles from "../components/product-page/features/school-bubbles";
 
 const AllSchools = () => {
-  const APIContext = useAPIs();
-  const navigate = useNavigate();
+  const client = useAPIClient();
   const [schools, setSchools] = useState<
-    Array<{ name: string; products: []; _id: string }>
+    Array<{ name: string; listings: []; _id: string }>
   >([]);
   useEffect(() => {
-    APIContext.getSchools().then((value) => {
+    client.get("/school").then((value) => {
       setSchools(value.data);
     });
-  }, [APIContext]);
+  }, []);
+  console.log(schools);
   const frontEndSchool = schools.map((school, key) => {
     return (
       <SchoolBubbles
         key={key}
         name={school.name}
-        products={school.products.length}
+        products={school.listings.length}
         id={school._id}
       />
     );
@@ -32,9 +30,6 @@ const AllSchools = () => {
       <header className="h-[10%] mb-5">
         <Navbar />
       </header>
-      <button className="back-arrow" onClick={() => navigate(-1)}>
-        <AiOutlineArrowLeft size={30} />
-      </button>
       <div className="flex flex-col items-center">
         <p className="title">All schools</p>
         <div className="w-[80%]">

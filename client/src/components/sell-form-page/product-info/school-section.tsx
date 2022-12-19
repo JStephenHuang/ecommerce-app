@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAPIs } from "../../../contexts/api-context";
+import { useAPIClient } from "../../../hooks/api-client";
 import { ListingFormType } from "../../../types/listing";
 
 interface SchoolSectionProperties {
@@ -8,16 +8,16 @@ interface SchoolSectionProperties {
 }
 
 const SchoolSection = (props: SchoolSectionProperties) => {
-  const APIContext = useAPIs();
+  const client = useAPIClient();
 
   const [schools, setSchools] = useState<
     Array<{ name: string; product: string }>
   >([]);
   useEffect(() => {
-    APIContext.getSchools().then((value) => {
+    client.get("/school").then((value) => {
       setSchools(value.data);
     });
-  }, [APIContext]);
+  }, []);
   return (
     <div className="container">
       <p className="text-[16px] font-bold">School</p>

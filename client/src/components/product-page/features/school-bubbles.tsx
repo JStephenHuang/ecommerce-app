@@ -10,11 +10,11 @@ const SchoolBubbles = (props: SchoolBubblesProperties) => {
   const name = props.name.replace(/ /g, "-");
 
   return (
-    <Link className="main-bubble" to={`/school/${name}/${props.id}`}>
-      <div className={`h-[12rem] bg-blue-200`} />
-      <div className="school-bubble-info">
+    <Link className="bg-white " to={`/school/${name}/${props.id}`}>
+      <div className={`h-[20rem] aspect-auto bg-black hover:opacity-70`} />
+      <div className="py-3">
         <p className="text-[20px]">{props.name}</p>
-        <p className="text-gray-300">Listings: {props.products}</p>
+        <p className="font-light">Listings: {props.products}</p>
       </div>
     </Link>
   );

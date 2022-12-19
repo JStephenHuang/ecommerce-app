@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import { useAPIs } from "../../contexts/api-context";
-import { useUser } from "../../contexts/user-context";
 import { UserType } from "../../types/user";
+import { useAPIClient } from "../../hooks/api-client";
 
 import LoadingSpinner from "../sell-form-page/loading-spinner";
 import Profile from "./profile";
 
 const UserInfo = () => {
-  const APIContext = useAPIs();
-  const userContext = useUser();
-  const username = userContext.seller;
+  const client = useAPIClient();
   const [user, setUser] = useState<UserType>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const getUserHandler = async () => {
     setLoading(true);
-    setUser((await APIContext.getUser(username)).data);
+    setUser((await client.get(`/user`)).data);
     setLoading(false);
   };
 
   useEffect(() => {
     getUserHandler();
-  }, [APIContext, username]);
+  }, []);
 
   if (user) {
     return (

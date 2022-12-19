@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { ListingFormType } from "../../../types/listing";
 import DescriptionSection from "./description-section";
 import ConditionSection from "./condition-section";
-import ImageDroper from "./image-section";
 import PriceSection from "./price-section";
 
 interface ProductDetailProperties {

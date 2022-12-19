@@ -1,8 +1,7 @@
 import Navbar from "../components/product-page/navbar/navbar";
 import Slider from "../components/product-page/features/slider/slider";
 import Schools from "../components/product-page/features/schools";
-import Articles from "../components/product-page/features/listings";
-import SeperatorLine from "../components/product-page/seperator-line/seperator-line";
+import Listings from "../components/product-page/features/listings";
 
 const ProductPage = () => {
   return (
@@ -14,9 +13,9 @@ const ProductPage = () => {
       <div className="flex flex-col items-center">
         <Slider />
 
-        <Schools />
+        <Listings />
 
-        <Articles />
+        <Schools />
       </div>
     </div>
   );

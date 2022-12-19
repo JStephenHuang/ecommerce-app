@@ -45,7 +45,8 @@ export interface FrontEndListing {
     _id: string;
     name: string;
   };
-  images: Array<File | undefined>;
+  seller: string;
+  inCart: [string];
   price: number;
   _id: string;
 }

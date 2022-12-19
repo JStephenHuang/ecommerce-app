@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { useFirebaseAuthToken } from '../contexts/firebase-app-context';
+import axios, { AxiosRequestConfig } from "axios";
+import { useFirebaseAuthToken } from "../contexts/firebase-app-context";
 
 export const useAPIClient = () => {
   const config: AxiosRequestConfig = {};

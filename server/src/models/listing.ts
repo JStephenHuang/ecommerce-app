@@ -3,46 +3,40 @@ import mongoose, { Schema } from "mongoose";
 const listingSchema = new Schema({
   title: {
     type: String,
-    required: true,
   },
   clothingType: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
   size: {
     type: String,
-    required: true,
   },
   condition: {
     type: String,
-    required: true,
   },
   likes: {
-    type: Number,
-    default: 0,
-    required: true,
+    type: [mongoose.SchemaTypes.ObjectId],
+    ref: "User",
   },
   seller: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
-    required: true,
   },
   school: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "School",
-    required: true,
   },
   inCart: {
     type: [mongoose.SchemaTypes.ObjectId],
-    ref: "Cart",
+    ref: "User",
   },
   price: {
     type: Number,
-    required: true,
+  },
+  imageURL: {
+    type: String,
   },
 });
 
