@@ -21,7 +21,7 @@ import ExplorerPage from "./pages/explorer";
 
 function App() {
   return (
-    <APIProvider>
+    <FirebaseAppProvider>
       {/* <ScrollToTop> */}
       <UserProvider>
         <Routes>
@@ -46,7 +46,7 @@ function App() {
         </Routes>
       </UserProvider>
       {/* </ScrollToTop> */}
-    </APIProvider>
+    </FirebaseAppProvider>
   );
 }
 
