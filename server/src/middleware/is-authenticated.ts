@@ -28,6 +28,7 @@ export const isAuthenticated = (
         return res.status(404).json("UserError: user not found.");
 
       req.user = user;
+      user._id;
       return next();
     })
     .catch((error) => {

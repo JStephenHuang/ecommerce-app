@@ -32,4 +32,9 @@ router.get("/listings/:username", async (req: Request, res: Response) => {
   return res.status(200).json(user.listings);
 });
 
+router.post("/create", async (req: Request, res: Response) => {
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+});
+
 export { router };

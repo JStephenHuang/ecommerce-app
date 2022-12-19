@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAPIClient } from "../../hooks/api-client";
 import { useFirebaseAuthUser } from "../../contexts/firebase-app-context";
-import LoadingSpinner from "../sell-form-page/loading-spinner";
 import { IoCart } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+
+import LoadingSpinner from "../sell-form-page/loading-spinner";
 
 interface ListingButtonProperties {
   id: string;
@@ -13,10 +15,10 @@ interface ListingButtonProperties {
 const AddCartButton = (props: ListingButtonProperties) => {
   const client = useAPIClient();
   const user = useFirebaseAuthUser();
+  const navigate = useNavigate();
   const [inCart, setInCart] = useState<boolean>(false);
   const [ownership, setOwnership] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  console.log(user);
 
   const getRelationListing = async () => {
     setLoading(true);
@@ -44,7 +46,10 @@ const AddCartButton = (props: ListingButtonProperties) => {
     setLoading(true);
     client
       .post(`listing/add-cart/${props.id}`)
-      .then(() => {
+      .then((res) => {
+        if (res.status === 404) {
+          navigate("/onboarding");
+        }
         console.log("Item Successfully Added to Cart!");
         setInCart(true);
         setLoading(false);
