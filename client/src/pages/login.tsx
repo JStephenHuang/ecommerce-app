@@ -1,5 +1,9 @@
-import { useFirebaseAuth } from '../contexts/firebase-app-context';
+import {
+  useFirebaseAuth,
+  useFirebaseAuthUser,
+} from '../contexts/firebase-app-context';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 interface MarqueeProperties {
   imageSrcs: string[];
@@ -22,6 +26,11 @@ const ImageMarquee = ({ imageSrcs }: MarqueeProperties) => {
 
 const LoginPage = () => {
   const auth = useFirebaseAuth();
+  const user = useFirebaseAuthUser();
+  const navigate = useNavigate();
+
+  if (user !== null) navigate('/');
+
   return (
     <div>
       <section className="min-h-screen flex items-center justify-center">
