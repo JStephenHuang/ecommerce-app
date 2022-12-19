@@ -26,7 +26,7 @@ const ListingOverview = (props: ListingOverviewProperties) => {
       <ListingDetails listing={props.listing} />
 
       <div className="w-full flex flex-col items-start">
-        <p className="text-[#58cb67] font-bold text-[30px] my-2">
+        <p className="text-[#58cb67] font-extrabold text-[30px] my-2">
           ${props.listing.price.toFixed(2)}
         </p>
         <div className="w-full text-[20px] font-extrabold">

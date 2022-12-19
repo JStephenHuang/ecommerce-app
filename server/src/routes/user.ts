@@ -24,7 +24,10 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.get("/listings/:username", async (req: Request, res: Response) => {
-  const user = await User.findOne({ username: req.params.username });
+  const user = await User.findOne({ username: req.params.username }).populate({
+    path: "listings",
+    populate: ["seller", "school"],
+  });
   if (!user) return res.status(400).json("UserNotFound");
   return res.status(200).json(user.listings);
 });

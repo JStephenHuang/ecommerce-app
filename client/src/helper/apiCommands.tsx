@@ -8,9 +8,16 @@ class APICommands {
     public readonly IP: string = process.env.REACT_APP_BACKEND_URI as string
   ) {
     this.axios = axios.create({
+      baseURL: process.env.REACT_APP_BACKEND_URI,
       withCredentials: true,
     });
   }
+  getCart = async (username: string) => {
+    const params = {
+      username: username,
+    };
+    return await this.axios.get(`${this.IP}/cart/${params.username}`);
+  };
   getSchools = async () => {
     return await this.axios.get(`${this.IP}/school`);
   };
@@ -39,18 +46,21 @@ class APICommands {
   };
 
   getUserListings = async (username: string) => {
-    return await this.axios.get(`${this.IP}/user/listings/${username}`);
+    return await this.axios.get(`/user/listings/${username}`);
+  };
+
+  getListingForm = async (id: string) => {
+    return await this.axios.get(`/listing/listing-form/${id}`);
   };
 
   createListing = async (body: ListingFormType) => {
     return await this.axios.post(`${this.IP}/listing/publish`, body);
   };
-  getCart = async (username: string) => {
-    const params = {
-      username: username,
-    };
-    return await this.axios.get(`${this.IP}/cart/${params.username}`);
+
+  updateListing = async (body: ListingFormType, id: string) => {
+    await this.axios.post(`/listing/update/${id}`, body);
   };
+
   addCartItem = async (username: string, id: string) => {
     const body = {
       username: username,

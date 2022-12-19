@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const uploadSchema = new Schema({
+const imageSchema = new Schema({
   fileName: {
     type: String,
   },
@@ -14,6 +14,6 @@ const uploadSchema = new Schema({
   },
 });
 
-const Upload = mongoose.model("Image", uploadSchema);
+const Image = mongoose.model("Image", imageSchema);
 
-export { Upload, uploadSchema };
+export { Image, imageSchema };

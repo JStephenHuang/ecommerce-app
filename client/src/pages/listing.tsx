@@ -1,16 +1,16 @@
 import Navbar from "../components/product-page/navbar/navbar";
-import CartInfo from "../components/cart-page/cart-info/cart-info";
+import Listing from "../components/listing-page/listing";
 
-const CartPage = () => {
+const ListingPage = () => {
   return (
     <div className="h-screen w-screen">
       <header className="h-[10%] mb-5">
         <Navbar />
       </header>
 
-      <CartInfo />
-      {/* <Media /> */}
+      <Listing />
     </div>
   );
 };
-export default CartPage;
+
+export default ListingPage;

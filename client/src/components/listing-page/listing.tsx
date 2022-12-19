@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAPIs } from "../../contexts/api-context";
-import { useUser } from "../../contexts/user-context";
 import { ListingType } from "../../types/listing";
-import { useQuery } from "react-query";
 
 import LoadingSpinner from "../sell-form-page/loading-spinner";
 import ListingOverview from "./listing-overview";
@@ -12,7 +10,6 @@ import ListingImg from "./listing-img";
 
 const Listing = () => {
   const APIContext = useAPIs();
-  const userContext = useUser();
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id as string;

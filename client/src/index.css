@@ -55,17 +55,17 @@ body {
   }
   .main-bubble {
     @apply flex flex-col w-full
-  text-white border-white
+  text-black border-white
   bg-white border
   hover:border-black ease-in-out duration-150
   }
   .listing-bubble-info {
     @apply h-[5rem] p-3 flex items-center justify-between text-[20px]
-    bg-black break-words
+    bg-white break-words
   }
   .school-bubble-info {
     @apply h-[5rem] p-3 flex flex-col text-[20px]
-    bg-black
+    bg-white
   }
 }
 

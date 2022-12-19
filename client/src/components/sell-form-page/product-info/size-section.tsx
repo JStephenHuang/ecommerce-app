@@ -3,7 +3,9 @@ import { ListingFormType } from "../../../types/listing";
 
 interface SizeSectionProperties {
   sellForm: ListingFormType;
-  handleInputChange: (event: any) => void;
+  handleInputChange: (
+    event: React.ChangeEventHandler<HTMLSelectElement>
+  ) => void;
 }
 
 const SizeSection = (props: SizeSectionProperties) => {
@@ -22,7 +24,7 @@ const SizeSection = (props: SizeSectionProperties) => {
         }
         name="size"
         value={props.sellForm.size}
-        onChange={props.handleInputChange}
+        onChange={() => props.handleInputChange}
       >
         <option value="" disabled={true}>
           Select Size

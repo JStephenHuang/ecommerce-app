@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import ActiveListings from "./active-listings";
-import ListingDrafts from "./listing-drafts";
+import ActiveListings from "./active/active-listings";
+import ListingDrafts from "./drafts/listing-drafts";
 
 const ShopListings = () => {
   return (
