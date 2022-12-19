@@ -9,6 +9,8 @@ import { router as listingRouter } from "./routes/listing";
 import { router as cartRouter } from "./routes/cart";
 import { router as schoolRouter } from "./routes/school";
 import { router as reviewRouter } from "./routes/review";
+import admin from "firebase-admin";
+import serviceAccount from "./firebase/ecommerce-app-76de8-firebase-adminsdk-yrwsd-ba0d7b7dff.json";
 
 dotenv.config();
 
@@ -22,6 +24,10 @@ const port = process.env.PORT;
 
 app.use(cors(corsConfig));
 app.use(express.json());
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+});
 
 const uri = process.env.MONGODB_URI as string;
 mongoose.connect(uri);

@@ -1,5 +1,5 @@
-import mongoose, { Schema } from "mongoose";
-import { CartType, cartSchema } from "./cart";
+import mongoose, { Schema, InferSchemaType } from "mongoose";
+import { cartSchema } from "./cart";
 import { listingSchema } from "./listing";
 import { reviewSchema } from "./review";
 
@@ -40,7 +40,7 @@ const userSchema = new Schema(
   }
 );
 
-type userType = typeof userSchema;
-const User = mongoose.model("User", userSchema);
+type IUser = InferSchemaType<typeof userSchema>;
+const User = mongoose.model<IUser>("User", userSchema);
 
-export { User, userSchema, userType };
+export { User, userSchema, IUser };
