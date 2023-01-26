@@ -1,43 +1,48 @@
 import { Router, Request, Response } from "express";
 import { Listing } from "../models/listing";
 import { User } from "../models/user";
+import { isAuthenticated } from "../middleware/is-authenticated";
+import { isOnboarded } from "../middleware/is-onboarded";
 
 const router = Router();
 
-router.get("/:username", async (req: Request, res: Response) => {
-  const user = await User.findOne({ username: req.params.username });
-  if (!user) return res.status(400).json("UserNotFound");
-  const cart = user.cart;
-  return res.status(200).json(cart);
-});
+router.get(
+  "/",
+  isAuthenticated,
+  isOnboarded,
+  async (req: Request, res: Response) => {
+    const user = await User.findById(req.uid).populate({
+      path: "cart",
+      populate: "seller",
+    });
+    if (!user) return res.status(400).json("UserNotFound");
 
-router.post("/remove/:id", async (req: Request, res: Response) => {
-  const user = await User.findOne({ username: req.body.username });
-  if (!user) return res.status(400).json("UserNotFound");
+    const cart = user.cart;
+    return res.status(200).json(cart);
+  }
+);
 
-  const listingId = req.params.id;
-  const removingListing = await Listing.findById(listingId);
-  if (!removingListing) return res.status(400).json("ArticleNotFound");
+router.post(
+  "/remove/:id",
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    const user = await User.findById(req.uid);
+    if (!user) return res.status(400).json("UserNotFound");
 
-  const cart = user.cart;
-  const listings = cart.listings;
+    const listing = await Listing.findById(req.params.id);
+    if (!listing) return res.status(400).json("ListingNotFound");
 
-  // Removing article
+    const cartItems = user.cart;
 
-  const removingItemIndex = listings
-    .map((listing) => listing._id?.toHexString())
-    .indexOf(listingId);
+    // Removing article
 
-  removingListing.inCart.splice(
-    removingListing.inCart.indexOf(Object(user._id)),
-    1
-  );
+    listing.inCart.splice(listing.inCart.indexOf(user._id), 1);
+    cartItems.splice(cartItems.indexOf(listing._id.toHexString()), 1);
 
-  listings.splice(removingItemIndex, 1);
-
-  user.save();
-  removingListing.save();
-  return res.status(200).json(cart);
-});
+    user.save();
+    listing.save();
+    return res.status(200).json(cartItems);
+  }
+);
 
 export { router };

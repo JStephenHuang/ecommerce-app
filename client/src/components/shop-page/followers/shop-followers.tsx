@@ -6,9 +6,6 @@ const ShopListings = () => {
       <div className="h-[10%] p-5">
         <p className="font-extrabold text-[30px]">Shop's followers</p>
       </div>
-      <div className="h-screen">
-        <UserFollowing />
-      </div>
     </div>
   );
 };

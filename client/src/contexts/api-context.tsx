@@ -1,13 +1,13 @@
-import axios, { AxiosInstance } from 'axios';
-import { useFirebaseAuthToken } from './firebase-app-context';
-import { ListingFormType } from '../types/listing';
+import axios, { AxiosInstance } from "axios";
+import { useFirebaseAuthToken } from "./firebase-app-context";
+import { IListingForm } from "../types/listing";
 
 class APIClient {
   private client: AxiosInstance;
 
   constructor(url: string, token: string | null) {
-    if (url === '') {
-      throw 'APIClientError: url cannot be empty.';
+    if (url === "") {
+      throw "APIClientError: url cannot be empty.";
     }
 
     this.client = axios.create(
@@ -19,7 +19,7 @@ class APIClient {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
     );
   }
 
@@ -50,7 +50,7 @@ class APIClient {
     return await this.client.get(`/user/listings/${username}`);
   };
 
-  createListing = async (body: ListingFormType) => {
+  createListing = async (body: IListingForm) => {
     return await this.client.post(`/listing/publish`, body);
   };
   getCartItems = async (username: string) => {

@@ -1,42 +1,42 @@
-import { UserType } from "./user";
+import { StorageReference } from "firebase/storage";
+import { IUser } from "./user";
 
-export interface ListingType {
+export interface IListing {
   title: string;
   clothingType: string;
-  seller: UserType;
+  seller: IUser;
   size: number;
-  school: {
-    _id: string;
-    name: string;
-  };
+  school: string;
   description: string;
   condition: string;
-  images: Array<File | undefined>;
   price: number;
-  inCart: [string];
+  inCart: string[];
+  imagePaths: string[];
   _id: string;
 }
 
-export interface ListingFormType {
-  title: string;
-  clothingType: string;
-  seller: string;
-  description: string;
-  size: string;
-  condition: string;
-  schoolName: string;
-  price: number;
+export interface IListingForm {
+  title?: string;
+  clothingType?: string;
+  description?: string;
+  size?: string;
+  condition?: string;
+  schoolName?: string;
+  price?: number;
+  status?: string;
+  imagePaths?: string[];
 }
 
-export const listingFormDefaultValue = {
+export const ListingFormDefault = {
   title: "",
   clothingType: "",
-  seller: "",
   description: "",
   size: "",
   condition: "",
   schoolName: "",
-  price: 0.0,
+  price: 0,
+  status: "",
+  imagePaths: [],
 };
 
 export interface FrontEndListing {

@@ -93,7 +93,7 @@ body {
   }
   .select-button {
     @apply flex items-center justify-between 
-    text-[16px] w-[60%] border p-2
+    text-[16px] w-full border p-2
     border-black
     bg-inherit
     /* bg-white */
@@ -111,10 +111,9 @@ body {
   }
 
   .file-drop {
-    @apply ease-in-out duration-200 border-[#521945] flex flex-col 
-    justify-center items-center w-32 text-center
-    h-32 border
-    cursor-pointer hover:bg-gray-100
+    @apply ease-in-out duration-200 border-black flex flex-col 
+    justify-center items-center text-center border
+    cursor-pointer hover:bg-gray-100 w-64 aspect-square
   }
 
   .price-div {
@@ -130,8 +129,7 @@ body {
     background-color: var(--primary-color);
     @apply p-3 text-white text-[20px]
     hover:opacity-70 
-    ease-in-out duration-150 w-[30%] 
-    flex items-center justify-center
+    ease-in-out duration-150 w-[25%] 
   }
 }
 
@@ -175,10 +173,10 @@ body {
 
 @layer components {
   .cart-items {
-    @apply border h-[10rem] border-black p-3 flex items-center justify-between
+    @apply border h-[10rem] p-3 flex items-center justify-between rounded-sm shadow-md mx-5
   }
   .cart-total-card {
-    @apply p-5 w-[40%] h-[20rem] ml-5 flex flex-col items-end border border-black
+    @apply p-5 w-[40%] h-[20rem] ml-5 flex flex-col items-end border shadow-md rounded-sm
   }
 }
 

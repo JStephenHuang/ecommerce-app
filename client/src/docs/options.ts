@@ -2,7 +2,7 @@ export const clothingTypes = [
   { value: "Polo", label: "Polo" },
   { value: "Sportswear", label: "Sportswear" },
   { value: "Shorts", label: "Shorts" },
-  { value: "Jeans", label: "Jeans" },
+  { value: "Jean", label: "Jean" },
   { value: "Shoes", label: "Shoes" },
   { value: "Hoodie", label: "Hoodie" },
   { value: "Skirt", label: "Skirt" },
@@ -10,11 +10,11 @@ export const clothingTypes = [
 ];
 
 export const sizes = [
-  { value: "XL", label: "Extra Large" },
-  { value: "L", label: "Large" },
-  { value: "M", label: "Medium" },
-  { value: "S", label: "Small" },
-  { value: "XS", label: "Extra Small" },
+  { value: "Extra Large", label: "Extra Large" },
+  { value: "Large", label: "Large" },
+  { value: "Medium", label: "Medium" },
+  { value: "Small", label: "Small" },
+  { value: "Extra Small", label: "Extra Small" },
 ];
 
 export const conditions = [
@@ -23,4 +23,9 @@ export const conditions = [
   { value: "3/5", label: "3/5" },
   { value: "4/5", label: "4/5" },
   { value: "5/5", label: "5/5" },
+];
+
+export const schools = [
+  { value: "Notre-Dame", label: "Notre-Dame" },
+  { value: "Brebeuf", label: "Brebeuf" },
 ];

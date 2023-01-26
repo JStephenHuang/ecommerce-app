@@ -2,6 +2,7 @@ import Navbar from "../components/product-page/navbar/navbar";
 import Slider from "../components/product-page/features/slider/slider";
 import Schools from "../components/product-page/features/schools";
 import Listings from "../components/product-page/features/listings";
+import SubNavbar from "../components/product-page/sub-navbar/sub-navbar";
 
 const ProductPage = () => {
   return (
@@ -11,11 +12,11 @@ const ProductPage = () => {
       </header>
 
       <div className="flex flex-col items-center">
+        <SubNavbar />
+
         <Slider />
 
         <Listings />
-
-        <Schools />
       </div>
     </div>
   );

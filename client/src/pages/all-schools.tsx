@@ -3,27 +3,30 @@ import { useAPIClient } from "../hooks/api-client";
 
 import Navbar from "../components/product-page/navbar/navbar";
 import SchoolBubbles from "../components/product-page/features/school-bubbles";
+import { ISchool } from "../types/school";
+import { useQuery } from "react-query";
 
 const AllSchools = () => {
   const client = useAPIClient();
-  const [schools, setSchools] = useState<
-    Array<{ name: string; listings: []; _id: string }>
-  >([]);
-  useEffect(() => {
-    client.get("/school").then((value) => {
-      setSchools(value.data);
-    });
-  }, []);
-  console.log(schools);
-  const frontEndSchool = schools.map((school, key) => {
-    return (
-      <SchoolBubbles
-        key={key}
-        name={school.name}
-        products={school.listings.length}
-        id={school._id}
-      />
-    );
+
+  const getAllSchoolHandler = async (): Promise<ISchool[]> => {
+    const res = await client.get("/school");
+    return res.data;
+  };
+
+  const { data, status } = useQuery<ISchool[]>(
+    "getAllSchools",
+    getAllSchoolHandler
+  );
+
+  if (status === "loading") {
+  }
+
+  if (status === "error") {
+  }
+
+  const frontEndSchool = (data || []).map((school, key) => {
+    return <SchoolBubbles key={key} name={school.name} id={school._id} />;
   });
   return (
     <div className="h-screen w-screen">
@@ -33,7 +36,7 @@ const AllSchools = () => {
       <div className="flex flex-col items-center">
         <p className="title">All schools</p>
         <div className="w-[80%]">
-          <p className="text-[20px] font-bold">{schools.length} schools</p>
+          <p className="text-[20px] font-bold">{(data || []).length} schools</p>
           <hr className="w-full bg-[#521945] h-[2px] mb-[1.5rem]" />
         </div>
 

@@ -1,10 +1,17 @@
 import mongoose, { Schema, InferSchemaType } from "mongoose";
-import { cartSchema } from "./cart";
-import { listingSchema } from "./listing";
+import { IListing, listingSchema } from "./listing";
 import { reviewSchema } from "./review";
 
 const userSchema = new Schema(
   {
+    _id: {
+      type: String,
+      required: true,
+    },
+    stripe_id: {
+      type: String,
+      require: true,
+    },
     firstname: {
       type: String,
       required: true,
@@ -16,27 +23,30 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
 
     rating: {
       type: Number,
+      required: true,
       default: 0,
     },
     reviews: {
       type: [reviewSchema],
-    },
-    sold: {
-      type: [listingSchema],
-    },
-    cart: {
-      type: cartSchema,
       required: true,
+      default: [],
     },
-    listings: {
-      type: [listingSchema],
-    },
-    listingDrafts: {
-      type: [listingSchema],
+
+    cart: {
+      type: [String],
+      required: true,
+      default: [],
+      ref: "Listing",
     },
   },
 

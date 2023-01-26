@@ -2,14 +2,15 @@ import SubNavbarLinks from "./sub-navbar-link";
 
 const SubNavbar = () => {
   return (
-    <div className="flex mt-5">
-      <SubNavbarLinks name="Polos" link="" />
-      <SubNavbarLinks name="Skirts" link="" />
-      <SubNavbarLinks name="Hoodies" link="" />
-      <SubNavbarLinks name="Sportswears" link="" />
-      <SubNavbarLinks name="Jeans" link="" />
-      <SubNavbarLinks name="Shorts" link="" />
-      <SubNavbarLinks name="Shoes" link="" />
+    <div className="flex justify-center w-full bg-white py-3 border-b-[1px]">
+      <SubNavbarLinks name="Polos" link="Polo" />
+      <SubNavbarLinks name="Skirts" link="Skirt" />
+      <SubNavbarLinks name="Hoodies" link="Hoodie" />
+      <SubNavbarLinks name="Sportswears" link="Sportswear" />
+      <SubNavbarLinks name="Jeans" link="Jean" />
+      <SubNavbarLinks name="Pants" link="Pants" />
+      <SubNavbarLinks name="Shorts" link="Shorts" />
+      <SubNavbarLinks name="Shoes" link="Shoes" />
     </div>
   );
 };

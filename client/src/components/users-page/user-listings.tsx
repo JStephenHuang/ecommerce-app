@@ -1,8 +1,8 @@
-import { FrontEndListing, ListingType } from "../../types/listing";
+import { FrontEndListing, IListing } from "../../types/listing";
 import ListingBubbles from "../product-page/features/listing-bubbles";
 
 interface UserListingsProperties {
-  listings: Array<ListingType>;
+  listings: Array<IListing>;
 }
 
 const UserListings = (props: UserListingsProperties) => {

@@ -1,62 +1,55 @@
 import {
   useFirebaseAuth,
   useFirebaseAuthUser,
-} from '../contexts/firebase-app-context';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+} from "../contexts/firebase-app-context";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAPIClient } from "../hooks/api-client";
+import LoadingSpinner from "../components/listing-form-page/loading-spinner";
 
 interface MarqueeProperties {
   imageSrcs: string[];
 }
-
-const ImageMarquee = ({ imageSrcs }: MarqueeProperties) => {
-  return (
-    <div className="flex w-full h-full relative pb-[150%] overflow-hidden">
-      {imageSrcs.map((value, index) => (
-        <img
-          key={index}
-          className="absolute w-full h-full object-cover animate-marquee"
-          src={value}
-          style={{ animationDelay: `${index * 8}s` }}
-        />
-      ))}
-    </div>
-  );
-};
 
 const LoginPage = () => {
   const auth = useFirebaseAuth();
   const user = useFirebaseAuthUser();
   const navigate = useNavigate();
 
-  if (user !== null) navigate('/');
+  useEffect(() => {
+    if (user !== null && user !== undefined) navigate("/onboarding");
+  }, [user]);
+
+  if (user === undefined) {
+    return (
+      <div className="w-screen h-screen grid place-items-center">
+        <LoadingSpinner classname="w-16 h-16" />
+      </div>
+    );
+  }
 
   return (
     <div>
-      <section className="min-h-screen flex items-center justify-center">
+      <section className="w-screen h-screen flex items-center justify-center">
         {/* Login Container */}
-        <div className="bg-white flex overflow-hidden rounded-2xl shadow-lg">
+        <div className="w-full h-full bg-white flex overflow-hidden">
           {/* Left Side */}
-          <div className="w-1/2">
-            <section className="h-full flex items-center justify-center">
-              {/* Email & Password Input */}
-              <div className="flex flex-col gap-4 m-64">
-                <button
-                  className="border-2 border-black p-1 rounded-lg hover:scale-105 duration-300"
-                  onClick={() => {
-                    signInWithPopup(auth, new GoogleAuthProvider());
-                  }}
-                >
-                  Sign with Google
-                </button>
-              </div>
-            </section>
-          </div>
+          <div className="w-1/2 bg-black"></div>
+
           {/* Right Side */}
           <div className="w-1/2">
-            <ImageMarquee
-              imageSrcs={['/login/0.jpeg', '/login/1.jpeg', '/login/2.jpeg']}
-            ></ImageMarquee>
+            {/* Email & Password Input */}
+            <div className="w-full h-full grid place-items-center">
+              <button
+                className="bg-black text-white px-[14px] py-[10px] rounded-sm hover:opacity-70"
+                onClick={() => {
+                  signInWithPopup(auth, new GoogleAuthProvider());
+                }}
+              >
+                Sign in with <span className="text-red-500">Google</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>

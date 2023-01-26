@@ -7,9 +7,6 @@ const ShopListings = () => {
     <div className="w-[80%] h-full flex flex-col">
       <div className="h-[10%] p-5 flex items-center justify-between">
         <p className="font-extrabold text-[30px]">Shop's listings</p>
-        <Link to="/sell/product-form" className="create-listing-button">
-          Start a listing
-        </Link>
       </div>
       <ActiveListings />
       <ListingDrafts />

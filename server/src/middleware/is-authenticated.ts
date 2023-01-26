@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import admin from "firebase-admin";
 import { getAuth } from "firebase-admin/auth";
-import { User } from "../models/user";
 
 export const isAuthenticated = (
   req: Request,
@@ -16,22 +15,17 @@ export const isAuthenticated = (
 
   if (authScheme !== "Bearer")
     return res
-      .status(400)
-      .json("AuthSchemeError: unsupported authentication scheme.");
+      .status(401)
+      .json("AuthError: unsupported authentication scheme.");
 
   getAuth(admin.app())
     .verifyIdToken(authParams)
     .then(async (value) => {
-      const user = await User.findById(value.uid);
+      req.uid = value.uid;
 
-      if (user === null)
-        return res.status(404).json("UserError: user not found.");
-
-      req.user = user;
-      user._id;
       return next();
     })
     .catch((error) => {
-      return res.status(400).json(`VerifyTokenError: ${error}`);
+      return res.status(401).json(`AuthError: ${error}.`);
     });
 };

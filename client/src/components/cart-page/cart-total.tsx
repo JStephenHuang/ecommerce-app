@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
-import { ListingType } from "../../../types/listing";
+import { Link, useNavigate } from "react-router-dom";
+import { IListing } from "../../types/listing";
+import { useAPIClient } from "../../hooks/api-client";
 
 interface CartTotalProperties {
-  cartItems: ListingType[];
+  cartItems: IListing[];
 }
 
 const CartTotal = ({ cartItems }: CartTotalProperties) => {
+  const client = useAPIClient();
   let cartTotal;
 
   if (cartItems.length === 0) {
@@ -16,16 +18,21 @@ const CartTotal = ({ cartItems }: CartTotalProperties) => {
       .reduce((prevValue, currValue) => prevValue + currValue);
   }
 
+  const proccedToStripePayment = async () => {
+    const res = await client.post("/checkout");
+    window.location = res.data.url;
+  };
+
   const shippingFee = cartTotal * 0.1;
   const total = cartTotal + shippingFee;
 
   return (
-    <div className="cart-total-card sticky top-[15%]">
-      <div className="flex w-full justify-between font-normal">
+    <div className="cart-total-card sticky top-[15%] rounded-sm">
+      <div className="flex w-full justify-between font-light">
         <p className="">Item(s):</p>
         <p className="">${cartTotal.toFixed(2)}</p>
       </div>
-      <div className="flex w-full justify-between font-normal">
+      <div className="flex w-full justify-between font-light">
         <p className="">Shipping:</p>
         <p className="">${shippingFee.toFixed(2)}</p>
       </div>
@@ -39,9 +46,9 @@ const CartTotal = ({ cartItems }: CartTotalProperties) => {
           Checkout
         </button>
       ) : (
-        <Link className="w-full" to="checkout">
-          <p className="checkout-button text-center">Checkout</p>
-        </Link>
+        <button onClick={proccedToStripePayment} className="checkout-button">
+          Checkout
+        </button>
       )}
     </div>
   );

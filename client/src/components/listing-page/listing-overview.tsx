@@ -1,4 +1,4 @@
-import { ListingType } from "../../types/listing";
+import { IListing } from "../../types/listing";
 import AddCartButton from "./add-cart-button";
 import BuyNowButton from "./buy-now-button";
 import ListingSeller from "./listing-seller";
@@ -7,7 +7,7 @@ import ListingDetails from "./listing-details";
 import ListingDescription from "./listing-description";
 
 interface ListingOverviewProperties {
-  listing: ListingType;
+  listing: IListing;
 }
 
 const ListingOverview = (props: ListingOverviewProperties) => {

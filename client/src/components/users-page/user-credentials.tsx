@@ -1,9 +1,9 @@
-import { ListingType } from "../../types/listing";
+import { IListing } from "../../types/listing";
 
 interface UserCredentialsProperties {
   user: {
     username: string;
-    listings: Array<ListingType>;
+    listings: Array<IListing>;
   };
 }
 

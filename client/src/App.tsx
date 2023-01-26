@@ -3,7 +3,6 @@ import { UserProvider } from "./contexts/user-context";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
 import ProductPage from "./pages/product";
-import SellFormPage from "./pages/sell-form";
 import ShopPage from "./pages/shop";
 import CartPage from "./pages/cart";
 import CheckoutPage from "./pages/checkout";
@@ -20,6 +19,8 @@ import ExplorerPage from "./pages/explorer";
 import OnboardingPage from "./pages/onboarding";
 
 import { FirebaseAppProvider } from "./contexts/firebase-app-context";
+import CreateListingPage from "./pages/create-listing";
+import EditListingPage from "./pages/edit-listing";
 
 function App() {
   return (
@@ -31,18 +32,19 @@ function App() {
           <Route path="/onboarding" element={<OnboardingPage />}></Route>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<ProductPage />} />
-          <Route path="/listing-form/:title/:id" element={<SellFormPage />} />
           <Route path="/shop" element={<ShopPage />}>
             <Route path="dashboard" element={<ShopDashboard />} />
             <Route path="sales" element={<ShopSales />} />
             <Route path="followers" element={<ShopFollowers />} />
             <Route path="listings" element={<ShopListings />} />
+            <Route path="listings/:id/edit" element={<EditListingPage />} />
+            <Route path="new" element={<CreateListingPage />} />
           </Route>
           <Route path="/explorer" element={<ExplorerPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/cart/checkout" element={<CheckoutPage />} />
           <Route path="/:username" element={<UserPage />} />
-          <Route path="/listing/:title/:id" element={<ListingPage />}></Route>
+          <Route path="/listing/:id" element={<ListingPage />}></Route>
           <Route path="/schools" element={<AllSchools />}></Route>
           <Route path="/school/:name/:id" element={<SchoolPage />}></Route>
           <Route path="*" element={<PageNotFound />} />

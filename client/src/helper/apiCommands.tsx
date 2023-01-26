@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { ListingFormType } from "../types/listing";
+import { IListingForm } from "../types/listing";
 
 class APICommands {
   axios: AxiosInstance;
@@ -53,11 +53,11 @@ class APICommands {
     return await this.axios.get(`/listing/listing-form/${id}`);
   };
 
-  createListing = async (body: ListingFormType) => {
+  createListing = async (body: IListingForm) => {
     return await this.axios.post(`${this.IP}/listing/publish`, body);
   };
 
-  updateListing = async (body: ListingFormType, id: string) => {
+  updateListing = async (body: IListingForm, id: string) => {
     await this.axios.post(`/listing/update/${id}`, body);
   };
 

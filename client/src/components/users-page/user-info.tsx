@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { UserType } from "../../types/user";
+import { IUser } from "../../types/user";
 import { useAPIClient } from "../../hooks/api-client";
 
-import LoadingSpinner from "../sell-form-page/loading-spinner";
+import LoadingSpinner from "../listing-form-page/loading-spinner";
 import Profile from "./profile";
 
 const UserInfo = () => {
   const client = useAPIClient();
-  const [user, setUser] = useState<UserType>();
+  const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const getUserHandler = async () => {

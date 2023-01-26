@@ -1,10 +1,9 @@
 const ShopDashboard = () => {
   return (
-    <div className="w-[80%] h-full">
+    <div className="w-[80%]">
       <div className="h-[10%] p-5">
         <p className="font-extrabold text-[30px]">Shop's dashboard</p>
       </div>
-      <div className="h-screen"></div>
     </div>
   );
 };

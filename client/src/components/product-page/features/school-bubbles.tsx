@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 interface SchoolBubblesProperties {
   id: string;
   name: string;
-  products: number;
 }
 
 const SchoolBubbles = (props: SchoolBubblesProperties) => {
@@ -14,7 +13,7 @@ const SchoolBubbles = (props: SchoolBubblesProperties) => {
       <div className={`h-[20rem] aspect-auto bg-black hover:opacity-70`} />
       <div className="py-3">
         <p className="text-[20px]">{props.name}</p>
-        <p className="font-light">Listings: {props.products}</p>
+        <p className="font-light">Listings: 0</p>
       </div>
     </Link>
   );

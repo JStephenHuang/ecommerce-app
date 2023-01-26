@@ -12,14 +12,14 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.get("/:id", async (req: Request, res: Response) => {
   const school = await School.findById(req.params.id);
+
   if (!school) return res.status(400).json("SchoolNotFound");
   return res.status(200).json(school);
 });
 
 router.post("/add", (req: Request, res: Response) => {
   const name = req.body.name;
-  const listings: IListing[] = [];
-  const newSchool = new School({ name, listings });
+  const newSchool = new School({ name });
   newSchool
     .save()
     .then((school) => res.status(200).json("SchoolAdded " + school))

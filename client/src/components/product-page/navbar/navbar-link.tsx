@@ -7,7 +7,7 @@ interface NavbarLinkProperties {
 
 const NavbarLink = (props: NavbarLinkProperties) => {
   return (
-    <Link className="navbar-link" to={props.link}>
+    <Link className="navbar-link mr-4" to={props.link}>
       {props.name}
     </Link>
   );

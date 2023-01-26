@@ -5,12 +5,11 @@ const UserRating = (props: { rating: number }) => {
   const stars: JSX.Element[] = [];
 
   for (let i = 0; i < props.rating; i++) {
-    stars.push(<AiFillStar />);
+    stars.push(<AiFillStar key={i} />);
   }
   for (let i = 0; i < 5 - props.rating; i++) {
-    stars.push(<AiOutlineStar />);
+    stars.push(<AiOutlineStar key={i} />);
   }
-  console.log(stars);
 
   return (
     <div className="flex items-center text-[16px]">

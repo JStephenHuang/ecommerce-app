@@ -6,10 +6,6 @@ const schoolSchema = new Schema({
     type: String,
     required: true,
   },
-  listings: {
-    type: [listingSchema],
-    required: true,
-  },
 });
 
 type schoolType = typeof schoolSchema;

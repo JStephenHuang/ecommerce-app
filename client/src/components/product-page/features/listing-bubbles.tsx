@@ -2,32 +2,30 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../../contexts/user-context";
 import { apiCommands } from "../../../helper/apiCommands";
-import { ListingType } from "../../../types/listing";
+import { IListing } from "../../../types/listing";
 
 import ListingImg from "./listing-img";
 
 interface ListingBubblesProperties {
-  listing: ListingType;
+  listing: IListing;
 }
 
 const ListingBubbles = ({ listing }: ListingBubblesProperties) => {
-  const title = listing.title.replace(/ /g, "-");
-
   return (
     <div className="bg-white">
-      <Link to={`/listing/${title}/${listing._id}`}>
+      <Link to={`/listing/${listing._id}`}>
         <ListingImg listing={listing} />
       </Link>
 
       <div className="w-full py-3">
-        <Link to={`/listing/${title}/${listing._id}`}>
-          <p className="text-[20px] font-normal tracking-tight truncate">
+        <Link to={`/listing/${listing._id}`}>
+          <p className="text-[20px] font-bold tracking-tight truncate">
             {listing.title}
           </p>
         </Link>
 
         <p className="font-thin">
-          {listing.seller.username} • {listing.school.name}
+          {listing.seller.username} • {listing.school}
         </p>
 
         <p className="font-extrabold text-[24px]">

@@ -1,59 +1,33 @@
-import { useEffect, useState } from "react";
-import { apiCommands } from "../../../helper/apiCommands";
-import { useUser } from "../../../contexts/user-context";
-import { ListingType } from "../../../types/listing";
+import { IListing } from "../../../types/listing";
+import { useFirebaseAuthUser } from "../../../contexts/firebase-app-context";
+import LoadingSpinner from "../../listing-form-page/loading-spinner";
+import { useDownloadUrls } from "../../../hooks/use-download-urls";
 
-import LoadingSpinner from "../../sell-form-page/loading-spinner";
 interface ListingButtonProperties {
-  listing: ListingType;
+  listing: IListing;
 }
 
-const ListingImg = (props: ListingButtonProperties) => {
-  const userContext = useUser();
-  const username = userContext.buyer;
-  const [inCart, setInCart] = useState<boolean>(false);
-  const [ownership, setOwnership] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+const ListingImg = ({ listing }: ListingButtonProperties) => {
+  const user = useFirebaseAuthUser();
+  const imageUrls = useDownloadUrls(listing.imagePaths);
 
-  const getRelationListing = async () => {
-    setLoading(true);
-    const user = (await apiCommands.getUser(username)).data;
-    if (props.listing.inCart.includes(user._id)) {
-      setInCart(true);
-    } else if (props.listing.seller._id === user._id) {
-      setOwnership(true);
-    } else {
-      setOwnership(false);
-      setInCart(false);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getRelationListing();
-  }, [apiCommands, username]);
-
-  if (loading) {
+  if (user === undefined) {
     return (
-      <div className="h-[20rem] aspect-auto text-white bg-black opacity-80 hover:opacity-70 grid place-items-center">
+      <div className="h-[10rem] aspect-auto text-white bg-black opacity-80 hover:opacity-70 grid place-items-center">
         <LoadingSpinner classname="w-16 h-16" />
       </div>
     );
-  } else if (inCart) {
-    return (
-      <div className="h-[20rem] aspect-auto text-white bg-black opacity-80 hover:opacity-70 grid place-items-center">
-        <p className="text-[24px]">In Cart</p>
-      </div>
-    );
-  } else if (ownership) {
-    return (
-      <div className="h-[20rem] aspect-auto text-white bg-black opacity-80 hover:opacity-70 grid place-items-center">
-        <p className="text-[24px]">Owned</p>
-      </div>
-    );
-  } else {
-    return <div className="h-[20rem] aspect-auto bg-black hover:opacity-70" />;
   }
+
+  return (
+    <div className="h-[15rem] aspect-auto text-white bg-black border shadow-md">
+      <img
+        className="object-fill h-full w-full hover:opacity-60"
+        src={imageUrls[0]}
+        alt=""
+      />
+    </div>
+  );
 };
 
 export default ListingImg;

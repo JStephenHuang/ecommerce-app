@@ -17,31 +17,31 @@ const listingSchema = new Schema({
     type: String,
   },
   likes: {
-    type: [mongoose.SchemaTypes.ObjectId],
+    type: [String],
     ref: "User",
+    default: [],
   },
   seller: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: String,
     ref: "User",
   },
   school: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "School",
+    type: String,
   },
   inCart: {
-    type: [mongoose.SchemaTypes.ObjectId],
+    type: [String],
     ref: "User",
+    default: [],
   },
   price: {
     type: Number,
   },
-  dicks: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  imageURL: {
+  status: {
     type: String,
+    required: true,
+  },
+  imagePaths: {
+    type: [String],
   },
 });
 

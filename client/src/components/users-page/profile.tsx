@@ -1,8 +1,8 @@
-import { UserType } from "../../types/user";
+import { IUser } from "../../types/user";
 import UserRating from "./user-rating";
 
 interface ProfilePicProperties {
-  user: UserType;
+  user: IUser;
 }
 
 const Profile = (props: ProfilePicProperties) => {

@@ -3,33 +3,43 @@ import { Listing } from "../models/listing";
 import { isAuthenticated } from "../middleware/is-authenticated";
 import { User } from "../models/user";
 import { School } from "../models/school";
-import mutler from "multer";
+import { isOnboarded } from "../middleware/is-onboarded";
+import { getStorage } from "firebase-admin/storage";
+import admin from "firebase-admin";
 
-const storage = mutler.memoryStorage();
+// const storage = mutler.memoryStorage();
 // const upload = mutler({ storage: storage });
 
 const router = Router();
 router.get("/", async (req: Request, res: Response) => {
-  const listings = await Listing.find()
-    .populate({ path: "school" })
-    .populate({ path: "seller" });
+  const listings = await Listing.find({ status: "active" }).populate({
+    path: "seller",
+  });
   if (!listings) return res.status(400).json("ListingsNotFound");
+  return res.status(200).json(listings);
+});
+
+router.get("/explore", async (req: Request, res: Response) => {
+  const filters = req.query;
+  console.log(filters);
+  for (const key in filters) {
+    filters[key] = { $in: filters[key] };
+  }
+
+  const listings = await Listing.find({
+    $and: [{ status: "active" }, filters],
+  }).populate({ path: "seller" });
+  if (!listings) return res.status(400).json("ListingsNotFound");
+
   return res.status(200).json(listings);
 });
 
 router.get("/:id", async (req: Request, res: Response) => {
-  const listing = await Listing.findById(req.params.id)
-    .populate({ path: "school" })
-    .populate({ path: "seller" });
-
+  const listing = await Listing.findById(req.params.id).populate({
+    path: "seller",
+  });
   if (!listing) return res.status(400).json("ListingNotFound");
   return res.status(200).json(listing);
-});
-
-router.get("/:type", async (req: Request, res: Response) => {
-  const listings = await Listing.find({ clothingType: req.query.type });
-  if (!listings) return res.status(400).json("ListingsNotFound");
-  return res.status(200).json(listings);
 });
 
 router.post(
@@ -69,95 +79,130 @@ router.post(
 //   }
 // );
 
-router.get("/listing-form/:id", async (req: Request, res: Response) => {
+router.post(
+  "/:listingId",
+  isAuthenticated,
+  isOnboarded,
+  async (req: Request, res: Response) => {
+    const user = await User.findById(req.uid);
+    if (!user) return res.status(400).json("UserNotFound");
+
+    const listing = await Listing.findById(req.params.listingId);
+    if (!listing) return res.status(400).json("ListingNotFound");
+
+    const cart = user.cart;
+    cart.push(listing._id.toHexString());
+
+    listing.inCart.push(user._id);
+    listing.save();
+    user.save();
+
+    return res.status(200).json(cart);
+  }
+);
+
+router.get("/form/:id", async (req: Request, res: Response) => {
   const listing = await Listing.findById(req.params.id);
   if (!listing) return res.status(400).json("ListingsNotFound");
 
-  const school = await School.findById(listing.school);
-  if (!school) return res.status(400).json("SchoolNotFound");
-
-  const seller = await User.findById(listing.seller);
-  if (!seller) return res.status(400).json("SellerNotFound");
+  if (listing.school !== "") {
+    const school = await School.findOne({ name: listing.school });
+    if (!school) return res.status(400).json("SchoolNotFound");
+  }
 
   const listingForm = {
     title: listing.title,
     clothingType: listing.clothingType,
-    seller: seller.username,
     description: listing.description,
     size: listing.size,
     condition: listing.condition,
-    schoolName: school.name,
+    schoolName: listing.school,
     price: listing.price,
+    status: listing.status,
+    imagePaths: listing.imagePaths,
   };
-
-  console.log(listingForm);
 
   return res.status(200).json(listingForm);
 });
 
+router.post("/", isAuthenticated, async (req: Request, res: Response) => {
+  const {
+    title,
+    clothingType,
+    description,
+    size,
+    condition,
+    schoolName,
+    price,
+    imagePaths,
+  } = req.body;
+
+  const user = await User.findById(req.uid);
+  if (!user) return res.status(200).json("SellerNotFound");
+
+  const school = await School.findOne({ name: schoolName });
+  if (!school) return res.status(400).json("SchoolNotFound");
+
+  if (title === "") return res.status(400).json("MissingTitle");
+
+  if (clothingType === "") return res.status(400).json("MissingType");
+
+  if (size === "") return res.status(400).json("MissingSize");
+
+  if (condition === "") return res.status(400).json("MissingCondition");
+
+  if (description === "") return res.status(400).json("MissingDescription");
+
+  if (price === "") return res.status(400).json("InvalidPrice");
+
+  if (imagePaths.length === 0) return res.status(400).json("MinOneImage");
+
+  // creating listing
+
+  const listingForm = {
+    title: title,
+    clothingType: clothingType,
+    description: description,
+    size: size,
+    condition: condition,
+    seller: user._id,
+    school: schoolName,
+    price: price,
+    status: "active",
+    imagePaths: imagePaths,
+  };
+
+  const listing = await Listing.create(listingForm);
+
+  return res.status(200).json(listing._id);
+});
+
 router.put(
-  "/update/:id",
+  "/:listingId",
   isAuthenticated,
   async (req: Request, res: Response) => {
-    const listing = await Listing.findById(req.params.id);
-    if (!listing) return res.status(400).json("ListingNotFoun");
+    const listing = await Listing.findById(req.params.listingId);
+    if (!listing) return res.status(400).json("ListingNotFound");
 
     const {
       title,
       clothingType,
-      seller,
       description,
       size,
       condition,
       schoolName,
       price,
+      imagePaths,
     } = req.body;
 
-    const user = await User.findOne({ username: seller });
+    const user = await User.findById(req.uid);
     if (!user) return res.status(400).json("SellerNotFound");
 
     const school = await School.findOne({ name: schoolName });
-    if (!school) return res.status(400).json("SchoolNotFound");
-
-    const newListingForm = {
-      title: title,
-      clothingType: clothingType,
-      description: description,
-      size: size,
-      condition: condition,
-      seller: user._id,
-      school: school._id,
-      price: price,
-    };
-
-    listing.update(newListingForm);
-    listing.save();
-  }
-);
-
-router.post(
-  "/publish",
-  isAuthenticated,
-  async (req: Request, res: Response) => {
-    const {
-      title,
-      clothingType,
-      seller,
-      description,
-      size,
-      condition,
-      schoolName,
-      price,
-    } = req.body;
-
-    const user = await User.findOne({ username: seller });
-    if (!user) return res.status(400).json("SellerNotFound");
-
-    const school = await School.findOne({ name: schoolName });
-    if (!school) return res.status(400).json("SchoolNotFound");
+    if (!school) return res.status(412).json("SchoolNotFound");
 
     if (title === "") {
-      return res.status(400).json("MissingTitle");
+      return res.status(412).json("MissingTitle");
     }
     if (clothingType === "") {
       return res.status(400).json("MissingType");
@@ -171,73 +216,44 @@ router.post(
     if (description === "") {
       return res.status(400).json("MissingDescription");
     }
-    if (price === 0) {
+    if (price === "") {
       return res.status(400).json("InvalidPrice");
     }
 
-    // creating listing
-
-    const listingForm = {
+    const newListingForm = {
       title: title,
       clothingType: clothingType,
       description: description,
       size: size,
       condition: condition,
       seller: user._id,
-      school: school._id,
+      school: schoolName,
       price: price,
+      status: "active",
+      imagePaths: imagePaths,
     };
 
-    const newListing = new Listing(listingForm);
-    const listingProcess = await newListing
-      .save()
-      .then((listing) => {
-        school.listings.push(listing);
-        user.listings.push(listing);
-        school.save();
-        user.save();
-        return res.status(200).json("ListingInStore");
-      })
-      .catch((err) => {
-        return res.status(400).send("Error: " + err);
-      });
+    for (const imagePath of listing.imagePaths) {
+      if (!imagePaths.includes(imagePath)) {
+        getStorage(admin.app()).bucket().file(imagePath).delete();
+      }
+    }
+
+    const newListing = await listing.update(newListingForm);
+
+    return res.status(200).json(newListing);
   }
 );
 
-router.post(
-  "/add-cart/:id",
+router.delete(
+  "/:listingId",
   isAuthenticated,
   async (req: Request, res: Response) => {
-    const user = req.user;
+    const user = await User.findById(req.uid);
     if (!user) return res.status(400).json("UserNotFound");
 
-    const listing = await Listing.findById(req.params.id);
-    if (!listing) return res.status(400).json("ArticeNotFound");
-
-    const cart = user.cart;
-    cart.listings.push(listing);
-
-    listing.inCart.push(Object(user.id));
-    listing.save();
-    user.save();
-
-    return res.status(200).json(cart);
-  }
-);
-
-router.post(
-  "/delete/:id",
-  isAuthenticated,
-  async (req: Request, res: Response) => {
-    const user = await User.findById({ username: req.body.username });
-    if (!user) return res.status(400).json("UserNotFound");
-
-    const listingId = req.params.id;
-    const listing = await Listing.findById(listingId);
+    const listing = await Listing.findById(req.params.listingId);
     if (!listing) return res.status(400).json("ListingNotFound");
-
-    const school = await School.findOne({ _id: listing.school });
-    if (!school) return res.status(400).json("SchoolNotFound");
 
     const seller = await User.findById(listing.seller);
     if (!seller) return res.status(400).json("SellerNotFound");
@@ -245,38 +261,35 @@ router.post(
     const userId = user._id;
     const sellerId = seller._id;
 
-    if (sellerId.toHexString() !== userId.toHexString())
-      return res.status(200).json("NoOwnership");
-
-    const schoolListings = school.listings;
-    const userListings = user.listings;
-
-    const cartListings = user.cart.listings;
-
-    console.log(cartListings);
-
-    const schoolListingIndex = schoolListings
-      .map((listing) => listing._id?.toHexString())
-      .indexOf(listingId);
-    const userListingIndex = userListings
-      .map((listing) => listing._id?.toHexString())
-      .indexOf(listingId);
-    const cartListingIndex = cartListings
-      .map((listing) => listing._id?.toHexString())
-      .indexOf(listingId);
+    if (sellerId !== userId) return res.status(200).json("NoOwnership");
 
     // Removing article
 
-    cartListings.splice(cartListingIndex, 1);
-    schoolListings.splice(schoolListingIndex, 1);
-    userListings.splice(userListingIndex, 1);
+    for (const userId of listing.inCart) {
+      const user = await User.findById(userId);
+      if (!user) return res.status(400).json("UserNotFound");
+      user.cart.splice(user.cart.indexOf(listing._id.toHexString()), 1);
+    }
 
-    school.save();
+    for (const imagePath of listing.imagePaths) {
+      getStorage(admin.app())
+        .bucket()
+        .file(imagePath)
+        .delete()
+        .catch((err) => {
+          if (
+            err.errors.message ===
+            `No such object: ecommerce-app-76de8.appspot.com/${imagePath}`
+          ) {
+            return res.status(404).json(err);
+          }
+        });
+    }
+
     user.save();
-
     listing.delete();
 
-    res.status(200).json("ListingRemoved");
+    return res.status(200).json("ListingRemoved");
   }
 );
 
