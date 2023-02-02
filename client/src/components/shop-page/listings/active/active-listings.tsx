@@ -4,7 +4,7 @@ import { useAPIClient } from "../../../../hooks/api-client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import LoadingSpinner from "../../../listing-form-page/loading-spinner";
+import LoadingSpinner from "../../../status/loading-spinner";
 import ListingBubblesActive from "./listing-bubbles-active";
 import { useFirebaseAuthUser } from "../../../../contexts/firebase-app-context";
 
@@ -58,22 +58,6 @@ const ActiveListings = () => {
     getActiveListings();
   }, [user]);
 
-  // const { isLoading, isError, refetch } = useQuery<IListing[]>({
-  //   queryKey: "getActiveListings",
-  //   queryFn: async () => {
-  //     return (await client.get("/user/listings")).data;
-  //   },
-  //   onSuccess: (listings) => setListings(listings),
-  //   onError: (err) => {
-  //     throw new Error("RequestError: failed to fetch active listings.");
-  //   },
-  // });
-
-  const deleteListingHandler = async (id: string) => {
-    await client.delete(`/listing/${id}`);
-    getActiveListings();
-  };
-
   if (loading) return <LoadingState />;
   // if (isError) return <ErrorState />;
 
@@ -91,7 +75,7 @@ const ActiveListings = () => {
             <ListingBubblesActive
               key={key}
               listing={listing}
-              deleteListingHandler={deleteListingHandler}
+              getActiveListings={getActiveListings}
             />
           ))}
         </div>

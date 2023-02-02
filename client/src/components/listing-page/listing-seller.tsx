@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { IUser } from "../../types/user";
 import { MdSell } from "react-icons/md";
 
-import UserRating from "../users-page/user-rating";
+import UserRating from "../users-page/profile-rating";
 
 const ListingSeller = (props: { seller: IUser }) => {
   return (
@@ -11,7 +11,7 @@ const ListingSeller = (props: { seller: IUser }) => {
         <div className="w-16 h-16 bg-black rounded-full" />
         <div className="flex flex-col text-black ml-2">
           <Link
-            to={`/${props.seller.username}`}
+            to={`/@${props.seller.username}`}
             className="hover:underline font-bold"
           >
             {props.seller.username}

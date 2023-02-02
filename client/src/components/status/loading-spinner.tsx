@@ -7,7 +7,7 @@ const LoadingSpinner = (props: LoadingSpinnerProperties) => {
     <div role="status">
       <svg
         aria-hidden="true"
-        className={`mr-2 ${props.classname} text-black animate-spin fill-white`}
+        className={`${props.classname} text-black animate-spin fill-white`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

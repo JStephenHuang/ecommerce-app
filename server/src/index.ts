@@ -7,7 +7,7 @@ import { router as listingRouter } from "./routes/listing";
 import { router as cartRouter } from "./routes/cart";
 import { router as schoolRouter } from "./routes/school";
 import { router as draftRouter } from "./routes/draft";
-import { router as paymentRouter } from "./payments/payments";
+import { router as paymentRouter } from "./stripe/stripe";
 import admin from "firebase-admin";
 import serviceAccount from "./firebase/ecommerce-app-76de8-firebase-adminsdk-yrwsd-ba0d7b7dff.json";
 
@@ -42,7 +42,7 @@ app.use("/listing", listingRouter);
 app.use("/cart", cartRouter);
 app.use("/school", schoolRouter);
 app.use("/draft", draftRouter);
-app.use("/checkout", paymentRouter);
+app.use("/stripe", paymentRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

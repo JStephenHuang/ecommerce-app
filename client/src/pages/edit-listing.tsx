@@ -9,7 +9,7 @@ import { useQuery } from "react-query";
 import { IListingForm } from "../types/listing";
 
 import ListingForm from "../components/listing-form-page/listing-form";
-import LoadingSpinner from "../components/listing-form-page/loading-spinner";
+import LoadingSpinner from "../components/status/loading-spinner";
 import { ref, uploadBytes } from "firebase/storage";
 
 const EditListingPage = () => {
@@ -67,6 +67,10 @@ const EditListingPage = () => {
   ) => {
     const imagePaths = listingForm.imagePaths || [];
 
+    for (const imageFile of imageFiles) {
+      imagePaths.push(imageFile.name);
+    }
+
     await client.put(`/listing/${listingId}`, {
       ...listingForm,
       imagePaths: imagePaths,
@@ -75,13 +79,16 @@ const EditListingPage = () => {
     for (const imageFile of imageFiles) {
       const imageFileRef = ref(storage, imageFile.name);
       await uploadBytes(imageFileRef, imageFile);
-      imagePaths.push(imageFileRef.fullPath);
     }
     navigate("/shop/listings");
   };
 
   const updateDraft = async (listingForm: IListingForm, imageFiles: File[]) => {
     const imagePaths = listingForm.imagePaths || [];
+
+    for (const imageFile of imageFiles) {
+      imagePaths.push(imageFile.name);
+    }
 
     await client.put(`/draft/${listingId}`, {
       ...listingForm,
@@ -92,7 +99,6 @@ const EditListingPage = () => {
       for (const imageFile of imageFiles) {
         const imageFileRef = ref(storage, imageFile.name);
         await uploadBytes(imageFileRef, imageFile);
-        imagePaths.push(imageFileRef.fullPath);
       }
     }
     navigate("/shop/listings");

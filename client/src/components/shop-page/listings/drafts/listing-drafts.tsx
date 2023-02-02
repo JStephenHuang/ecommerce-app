@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useFirebaseAuthUser } from "../../../../contexts/firebase-app-context";
 import { useAPIClient } from "../../../../hooks/api-client";
 import { IListing } from "../../../../types/listing";
-import LoadingSpinner from "../../../listing-form-page/loading-spinner";
+import LoadingSpinner from "../../../status/loading-spinner";
 import ListingBubblesDraft from "../drafts/listing-bubble-draft";
 
 const LoadingState = () => {

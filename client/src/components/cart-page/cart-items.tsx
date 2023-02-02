@@ -1,20 +1,40 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IListing } from "../../types/listing";
 import { TbTrash } from "react-icons/tb";
 import { useDownloadUrls } from "../../hooks/use-download-urls";
+import { useAPIClient } from "../../hooks/api-client";
+import { timeout } from "../../hooks/timeout";
+
+import LoadingSpinner from "../status/loading-spinner";
 
 interface CartItemsProperties {
   cartItems: IListing[];
-  removeCartItemHandler: (id: string) => void;
+  getCartHandler: () => void;
 }
 
 interface CartItemProperties {
   cartItem: IListing;
-  removeCartItemHandler: (id: string) => void;
+  getCartHandler: () => void;
 }
+const CartItem = ({ cartItem, getCartHandler }: CartItemProperties) => {
+  const client = useAPIClient();
 
-const CartItem = ({ cartItem, removeCartItemHandler }: CartItemProperties) => {
+  const [removeLoading, setRemoveLoading] = useState<boolean>(false);
+
   const imageUrls = useDownloadUrls(cartItem.imagePaths);
+
+  const removeCartItemHandler = async (id: string) => {
+    setRemoveLoading(true);
+    await client.post(`/cart/${id}`);
+
+    await timeout(500);
+
+    getCartHandler();
+
+    setRemoveLoading(false);
+  };
+
   return (
     <div className="cart-items mb-5">
       <div className="flex items-center w-full h-full">
@@ -22,7 +42,7 @@ const CartItem = ({ cartItem, removeCartItemHandler }: CartItemProperties) => {
           <img className="w-full h-full" src={imageUrls[0]} alt="" />
         </div>
 
-        <div className="flex flex-col ml-5 w-[50%] ">
+        <div className="flex flex-col ml-5 w-[50%] mr-auto">
           <Link to={`/listing/${cartItem._id}`}>
             <p className="hover:opacity-50 font-extrabold truncate text-[16px]">
               {cartItem.title}
@@ -36,28 +56,24 @@ const CartItem = ({ cartItem, removeCartItemHandler }: CartItemProperties) => {
             ${cartItem.price.toFixed(2)}
           </p>
         </div>
-
-        <TbTrash
-          className="hover:text-red-600 ml-auto"
-          onClick={() => removeCartItemHandler(cartItem._id)}
-          size={24}
-        />
+        {removeLoading ? (
+          <LoadingSpinner classname="w-6 h-6 " />
+        ) : (
+          <TbTrash
+            className="hover:text-red-600 ml-auto"
+            onClick={() => removeCartItemHandler(cartItem._id)}
+            size={24}
+          />
+        )}
       </div>
     </div>
   );
 };
 
-const CartItems = ({
-  cartItems,
-  removeCartItemHandler,
-}: CartItemsProperties) => {
+const CartItems = ({ cartItems, getCartHandler }: CartItemsProperties) => {
   const frontEndCartItems = cartItems.map((value, index) => {
     return (
-      <CartItem
-        key={index}
-        cartItem={value}
-        removeCartItemHandler={removeCartItemHandler}
-      />
+      <CartItem key={index} cartItem={value} getCartHandler={getCartHandler} />
     );
   });
   return (

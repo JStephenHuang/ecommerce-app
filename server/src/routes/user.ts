@@ -38,15 +38,33 @@ router.get(
   }
 );
 
-router.get("/", isAuthenticated, async (req: Request, res: Response) => {
-  const user = await User.findById(req.uid);
-  if (!user) return res.status(400).json("UserNotFound");
-  return res.status(200).json({ message: "UserExist", user: user });
-});
+router.get(
+  "/current",
+  isAuthenticated,
+  isOnboarded,
+  async (req: Request, res: Response) => {
+    const user = await User.findById(req.uid);
+    if (!user) return res.status(400).json("UserNotFound");
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2022-11-15",
-});
+    return res.status(200).json(user);
+  }
+);
+
+router.get(
+  "/:username",
+  isAuthenticated,
+  isOnboarded,
+  async (req: Request, res: Response) => {
+    const user = await User.findOne({ username: req.params.username });
+    if (!user) return res.status(400).json("UserNotFound");
+
+    return res.status(200).json(user);
+  }
+);
+
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+//   apiVersion: "2022-11-15",
+// });
 
 router.post("/", isAuthenticated, async (req: Request, res: Response) => {
   const firstname = req.body.firstname;
@@ -54,28 +72,21 @@ router.post("/", isAuthenticated, async (req: Request, res: Response) => {
   const username = req.body.username;
   const email = req.body.email;
 
-  const account = await stripe.accounts.create({
-    type: "express",
-    email: email,
-    capabilities: {
-      card_payments: { requested: true },
-      transfers: { requested: true },
-    },
-    business_type: "individual",
-  });
+  const user = await User.findOne({ username });
+  if (user) return res.status(400).send("UserError: username taken.");
 
   const userForm = {
     _id: req.uid,
-    stripe_id: account.id,
     firstname: firstname,
     lastname: lastname,
     username: username,
     email: email,
   };
 
-  await User.create(userForm);
-
-  res.redirect("http://localhost:3000/");
+  const createdUser = await User.create(userForm).catch((err) =>
+    console.log(err.message)
+  );
+  return res.status(200).json(createdUser);
 });
 
 export { router };

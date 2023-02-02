@@ -1,7 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { app } from "../firebase/app";
 import { Auth, getAuth, User } from "firebase/auth";
 import { FirebaseStorage, getStorage } from "firebase/storage";
+import { useAPIClient } from "../hooks/api-client";
+import { IUser } from "../types/user";
+import { useQuery } from "react-query";
+import { AxiosError } from "axios";
 
 const FirebaseAppContext = React.createContext<{
   auth: Auth;

@@ -10,7 +10,7 @@ const userSchema = new Schema(
     },
     stripe_id: {
       type: String,
-      require: true,
+      default: "",
     },
     firstname: {
       type: String,
@@ -24,6 +24,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    bio: {
+      type: String,
+      default: "",
     },
     email: {
       type: String,

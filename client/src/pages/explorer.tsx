@@ -8,7 +8,7 @@ import Navbar from "../components/product-page/navbar/navbar";
 import ExplorerSidebar from "../components/explorer-page/explorer-sidebar";
 import ExplorerListings from "../components/explorer-page/explorer-listings";
 
-import LoadingSpinner from "../components/listing-form-page/loading-spinner";
+import LoadingSpinner from "../components/status/loading-spinner";
 
 export interface Filters extends Record<string, any> {
   size: string[];

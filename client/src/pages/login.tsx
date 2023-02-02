@@ -5,8 +5,9 @@ import {
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAPIClient } from "../hooks/api-client";
-import LoadingSpinner from "../components/listing-form-page/loading-spinner";
+import { motion } from "framer-motion";
+
+import LoadingStatus from "../components/status/loading";
 
 interface MarqueeProperties {
   imageSrcs: string[];
@@ -22,38 +23,41 @@ const LoginPage = () => {
   }, [user]);
 
   if (user === undefined) {
-    return (
-      <div className="w-screen h-screen grid place-items-center">
-        <LoadingSpinner classname="w-16 h-16" />
-      </div>
-    );
+    return <LoadingStatus />;
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.3 } }}
+      transition={{ delay: 0.2 }}
+    >
       <section className="w-screen h-screen flex items-center justify-center">
-        {/* Login Container */}
         <div className="w-full h-full bg-white flex overflow-hidden">
-          {/* Left Side */}
-          <div className="w-1/2 bg-black"></div>
-
-          {/* Right Side */}
           <div className="w-1/2">
-            {/* Email & Password Input */}
-            <div className="w-full h-full grid place-items-center">
+            <div className="w-full h-full inline-block px-10 pt-[5rem] tracking-tighter">
+              <p className="text-[5rem] font-extrabold">
+                Start by signing in to explore our features.
+              </p>
+              <p className="font-thin text-[24px] mb-5 w-[80%]">
+                You can only sign in with Google at the moment, we will be
+                integrating branded logins in the future.
+              </p>
               <button
-                className="bg-black text-white px-[14px] py-[10px] rounded-sm hover:opacity-70"
+                className="w- bg-black text-white px-[14px] py-[10px] rounded-sm hover:opacity-70"
                 onClick={() => {
                   signInWithPopup(auth, new GoogleAuthProvider());
                 }}
               >
-                Sign in with <span className="text-red-500">Google</span>
+                Sign in with Google
               </button>
             </div>
           </div>
+          <div className="w-1/2 bg-black"></div>
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

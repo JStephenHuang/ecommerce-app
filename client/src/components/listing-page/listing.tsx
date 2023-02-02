@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAPIClient } from "../../hooks/api-client";
 import { IListing } from "../../types/listing";
 
-import LoadingSpinner from "../listing-form-page/loading-spinner";
+import LoadingSpinner from "../status/loading-spinner";
 import ListingOverview from "./listing-overview";
 import ListingNotFound from "./listing-not-found";
 import ListingImg from "./listing-img";

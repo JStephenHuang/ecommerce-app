@@ -70,7 +70,6 @@ const CreateListingPage = () => {
     for (const imageFile of imageFiles) {
       const imageFileRef = ref(storage, imageFile.name);
       await uploadBytes(imageFileRef, imageFile);
-      imagePaths.push(imageFileRef.fullPath);
     }
 
     navigate("/shop/listings");
@@ -93,7 +92,6 @@ const CreateListingPage = () => {
         for (const imageFile of imageFiles) {
           const imageFileRef = ref(storage, imageFile.name);
           await uploadBytes(imageFileRef, imageFile);
-          imagePaths.push(imageFileRef.fullPath);
         }
       }
     }

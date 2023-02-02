@@ -23,13 +23,13 @@ router.get(
 );
 
 router.post(
-  "/remove/:id",
+  "/:listingId",
   isAuthenticated,
   async (req: Request, res: Response) => {
     const user = await User.findById(req.uid);
     if (!user) return res.status(400).json("UserNotFound");
 
-    const listing = await Listing.findById(req.params.id);
+    const listing = await Listing.findById(req.params.listingId);
     if (!listing) return res.status(400).json("ListingNotFound");
 
     const cartItems = user.cart;

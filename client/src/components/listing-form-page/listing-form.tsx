@@ -3,7 +3,7 @@ import { IListingForm } from "../../types/listing";
 import { schools, clothingTypes, sizes, conditions } from "../../docs/options";
 import { IoClose } from "react-icons/io5";
 import { useDownloadUrls } from "../../hooks/use-download-urls";
-import LoadingSpinner from "./loading-spinner";
+import LoadingSpinner from "../status/loading-spinner";
 
 interface ListingFormProperties {
   listingForm: IListingForm;
@@ -87,11 +87,15 @@ const ImageDroper = ({
             >
               <IoClose
                 onClick={() => deleteImagePath(imagePath)}
-                className="hover:text-red-600 absolute scale-0 m-3 text-white group-hover:scale-100"
+                className="hover:text-red-600 absolute scale-0 m-3 text-white group-hover:scale-100 z-[20]"
                 size={32}
               />
 
-              <img className="w-full h-full " src={imageUrls[index]} alt="" />
+              <img
+                className="w-full h-full group-hover:opacity-60"
+                src={imageUrls[index]}
+                alt=""
+              />
             </div>
           );
         })}
@@ -103,12 +107,12 @@ const ImageDroper = ({
             >
               <IoClose
                 onClick={() => deleteImageFile(image)}
-                className="hover:text-red-600 absolute scale-0 m-3 text-white group-hover:scale-100"
+                className="hover:text-red-600 absolute scale-0 m-3 text-white group-hover:scale-100 z-[20]"
                 size={32}
               />
 
               <img
-                className="w-full h-full group-hover:opacity-60"
+                className="w-full h-full group-hover:opacity-60 "
                 src={URL.createObjectURL(image)}
                 alt=""
               />
@@ -118,8 +122,7 @@ const ImageDroper = ({
         <label htmlFor="dropzone-file" className="file-drop">
           <div className="flex flex-col justify-center items-center text-gray-400">
             <p className="mb-2 text-[12px] font-light">
-              <span className="font-bold">Click to upload</span> or drag and
-              drop
+              <span className="font-bold">Click to upload</span>
             </p>
           </div>
           <input

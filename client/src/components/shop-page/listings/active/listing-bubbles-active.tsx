@@ -6,18 +6,18 @@ import ListingImgActive from "./listing-img-active";
 
 interface ListingBubblesProperties {
   listing: IListing;
-  deleteListingHandler: (id: string) => void;
+  getActiveListings: () => void;
 }
 
 const ListingBubblesActive = ({
   listing,
-  deleteListingHandler,
+  getActiveListings,
 }: ListingBubblesProperties) => {
   return (
     <div className="bg-white">
       <ListingImgActive
         listing={listing}
-        deleteListingHandler={deleteListingHandler}
+        getActiveListings={getActiveListings}
       />
       <div className="w-full py-3">
         <Link

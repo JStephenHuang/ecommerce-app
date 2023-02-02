@@ -11,7 +11,13 @@ export const useDownloadUrls = (imagePaths: string[]) => {
     setImageUrls(
       await Promise.all(
         imagePaths.map(
-          async (imagePath) => await getDownloadURL(ref(storage, imagePath))
+          async (imagePath) =>
+            await getDownloadURL(ref(storage, imagePath)).catch((err) => {
+              if (err === "storage/object-not-found") {
+                return "";
+              }
+              return "";
+            })
         )
       )
     );

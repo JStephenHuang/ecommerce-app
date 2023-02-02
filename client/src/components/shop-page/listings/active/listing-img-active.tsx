@@ -4,19 +4,45 @@ import { IListing } from "../../../../types/listing";
 
 import { TbEye, TbEdit, TbTrash } from "react-icons/tb";
 import { useDownloadUrls } from "../../../../hooks/use-download-urls";
+import { useAPIClient } from "../../../../hooks/api-client";
+
+import { timeout } from "../../../../hooks/timeout";
+import LoadingSpinner from "../../../status/loading-spinner";
 
 interface ListingButtonProperties {
   listing: IListing;
-  deleteListingHandler: (id: string) => void;
+  getActiveListings: () => void;
 }
 
 const ListingImgActive = ({
   listing,
-  deleteListingHandler,
+  getActiveListings,
 }: ListingButtonProperties) => {
+  const client = useAPIClient();
   const imageUrls = useDownloadUrls(listing.imagePaths);
 
   const [onHover, setOnHover] = useState<boolean>(false);
+  const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
+
+  const deleteListingHandler = async (id: string) => {
+    setDeleteLoading(true);
+
+    await client.delete(`/listing/${id}`);
+
+    await timeout(500);
+
+    getActiveListings();
+
+    setDeleteLoading(false);
+  };
+  if (deleteLoading) {
+    return (
+      <div className="h-[20rem] aspect-auto bg-black group grid place-items-center">
+        <LoadingSpinner classname="w-8 h-8" />
+      </div>
+    );
+  }
+
   return (
     <div
       onMouseEnter={() => setOnHover(true)}

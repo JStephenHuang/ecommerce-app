@@ -43,21 +43,21 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.post(
-  "/like/:id",
+  "/like/:listingId",
   isAuthenticated,
   async (req: Request, res: Response) => {
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findById(req.uid);
     if (!user) return res.status(400).json("UserNotFound");
 
     const listing = await Listing.findById(req.params.id);
     if (!listing) return res.status(400).json("ListingsNotFound");
-    listing.likes.push(Object(user._id));
+    listing.likes.push(user.username);
     listing.save();
   }
 );
 
 router.post(
-  "/unlike/:id",
+  "/unlike/:listingId",
   isAuthenticated,
   async (req: Request, res: Response) => {
     const user = await User.findOne({ username: req.body.username });
@@ -65,6 +65,9 @@ router.post(
 
     const listing = await Listing.findById(req.params.id);
     if (!listing) return res.status(400).json("ListingsNotFound");
+
+    if (!listing.likes.includes(user.username))
+      return res.status(400).json("ListingNotLiked");
 
     listing.likes.splice(listing.likes.indexOf(Object(user._id)), 1);
     listing.save();
@@ -202,7 +205,7 @@ router.put(
     if (!school) return res.status(412).json("SchoolNotFound");
 
     if (title === "") {
-      return res.status(412).json("MissingTitle");
+      return res.status(400).json("MissingTitle");
     }
     if (clothingType === "") {
       return res.status(400).json("MissingType");
@@ -235,7 +238,7 @@ router.put(
 
     for (const imagePath of listing.imagePaths) {
       if (!imagePaths.includes(imagePath)) {
-        getStorage(admin.app()).bucket().file(imagePath).delete();
+        await getStorage(admin.app()).bucket().file(imagePath).delete();
       }
     }
 
@@ -272,17 +275,13 @@ router.delete(
     }
 
     for (const imagePath of listing.imagePaths) {
+      console.log("helo");
       getStorage(admin.app())
         .bucket()
         .file(imagePath)
         .delete()
         .catch((err) => {
-          if (
-            err.errors.message ===
-            `No such object: ecommerce-app-76de8.appspot.com/${imagePath}`
-          ) {
-            return res.status(404).json(err);
-          }
+          console.log(err);
         });
     }
 

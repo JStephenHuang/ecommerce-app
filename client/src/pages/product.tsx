@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import Navbar from "../components/product-page/navbar/navbar";
 import Slider from "../components/product-page/features/slider/slider";
 import Schools from "../components/product-page/features/schools";
@@ -6,7 +8,13 @@ import SubNavbar from "../components/product-page/sub-navbar/sub-navbar";
 
 const ProductPage = () => {
   return (
-    <div className="h-screen w-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.3 } }}
+      transition={{ delay: 0.2 }}
+      className="h-screen w-screen"
+    >
       <header className="h-[10%]">
         <Navbar />
       </header>
@@ -18,7 +26,7 @@ const ProductPage = () => {
 
         <Listings />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

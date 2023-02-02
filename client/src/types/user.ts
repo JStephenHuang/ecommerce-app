@@ -2,6 +2,7 @@ import { IListing } from "./listing";
 
 export interface IUser {
   _id: string;
+  stripe_id: string;
   firstname: string;
   lastname: string;
   username: string;
@@ -9,19 +10,4 @@ export interface IUser {
   reviews: Array<string>;
   cart: Array<IListing>;
   sold: Array<IListing>;
-  listings: Array<IListing>;
-  listingDrafts: Array<IListing>;
 }
-
-export const userAlt = {
-  _id: "",
-  firstname: "",
-  lastname: "",
-  username: "",
-  rating: 0,
-  reviews: [],
-  cart: [],
-  sold: [],
-  listings: [],
-  listingDrafts: [],
-};

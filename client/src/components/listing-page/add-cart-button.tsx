@@ -3,7 +3,7 @@ import { useFirebaseAuthUser } from "../../contexts/firebase-app-context";
 import { IoCart } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-import LoadingSpinner from "../listing-form-page/loading-spinner";
+import LoadingSpinner from "../status/loading-spinner";
 import { useState } from "react";
 
 interface ListingButtonProperties {
@@ -41,8 +41,8 @@ const AddCartButton = (props: ListingButtonProperties) => {
     );
   }
 
-  const addToCart = () => {
-    client
+  const addToCart = async () => {
+    await client
       .post(`listing/${props.id}`)
       .then(() => {
         setInCart(true);

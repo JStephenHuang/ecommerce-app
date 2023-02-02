@@ -45,9 +45,6 @@ body {
     @apply text-[16px] text-gray-600 hover:opacity-50
     ease-in-out duration-150 font-normal
   }
-  .back-arrow {
-    @apply absolute ml-10 text-gray-400 hover:text-red-600 ease-in-out duration-150 mt-10 z-[5]
-  }
 }
 @layer components {
   .sub-navbar-link {
@@ -66,6 +63,17 @@ body {
   .school-bubble-info {
     @apply h-[5rem] p-3 flex flex-col text-[20px]
     bg-white
+  }
+}
+
+/* * Onboarding page * */
+
+@layer components {
+  .create-account-button {
+    @apply bg-black p-3 text-white 
+    w-full text-center 
+    hover:opacity-50 transition-all rounded-sm 
+    font-extrabold
   }
 }
 
@@ -143,7 +151,7 @@ body {
   .checkout-button {
     background-color: var(--primary-color);
     @apply p-2 text-white w-full
-   hover:opacity-50 text-center
+   hover:opacity-50 text-center rounded-sm
     ease-in-out duration-150 text-[20px]
   }
   .checkout-button-disabled {
@@ -160,7 +168,7 @@ body {
   }
   .buy-now-button {
     @apply p-2 w-full text-center
-    border-2 border-black
+    border-2 border-black rounded-sm
     ease-in-out duration-150
   }
   .write-review-button {
@@ -171,12 +179,16 @@ body {
 }
 
 
+/* * Cart * */
+
 @layer components {
   .cart-items {
-    @apply border h-[10rem] p-3 flex items-center justify-between rounded-sm shadow-md mx-5
+    @apply h-[10rem] 
+    p-3 mx-5 border rounded-sm 
+    flex items-center justify-between 
   }
   .cart-total-card {
-    @apply p-5 w-[40%] h-[20rem] ml-5 flex flex-col items-end border shadow-md rounded-sm
+    @apply w-[40%] h-[20rem] p-5 ml-5 border rounded-sm flex flex-col items-end
   }
 }
 

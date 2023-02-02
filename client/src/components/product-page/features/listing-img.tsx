@@ -1,6 +1,6 @@
 import { IListing } from "../../../types/listing";
 import { useFirebaseAuthUser } from "../../../contexts/firebase-app-context";
-import LoadingSpinner from "../../listing-form-page/loading-spinner";
+import LoadingSpinner from "../../status/loading-spinner";
 import { useDownloadUrls } from "../../../hooks/use-download-urls";
 
 interface ListingButtonProperties {
@@ -20,7 +20,7 @@ const ListingImg = ({ listing }: ListingButtonProperties) => {
   }
 
   return (
-    <div className="h-[15rem] aspect-auto text-white bg-black border shadow-md">
+    <div className="h-[15rem] aspect-auto text-white bg-black border">
       <img
         className="object-fill h-full w-full hover:opacity-60"
         src={imageUrls[0]}

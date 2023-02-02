@@ -1,4 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
 import { IListing } from "../../types/listing";
 import { useAPIClient } from "../../hooks/api-client";
 
@@ -18,8 +17,8 @@ const CartTotal = ({ cartItems }: CartTotalProperties) => {
       .reduce((prevValue, currValue) => prevValue + currValue);
   }
 
-  const proccedToStripePayment = async () => {
-    const res = await client.post("/checkout");
+  const proceedToStripePayment = async () => {
+    const res = await client.post("/stripe/checkout");
     window.location = res.data.url;
   };
 
@@ -46,7 +45,7 @@ const CartTotal = ({ cartItems }: CartTotalProperties) => {
           Checkout
         </button>
       ) : (
-        <button onClick={proccedToStripePayment} className="checkout-button">
+        <button onClick={proceedToStripePayment} className="checkout-button">
           Checkout
         </button>
       )}

@@ -1,10 +1,10 @@
 import { RefObject, useEffect, useRef, useState } from "react";
-import { useAPIClient } from "../hooks/api-client";
-import {
-  useFirebaseAuth,
-  useFirebaseAuthUser,
-} from "../contexts/firebase-app-context";
+import { useAPIClient } from "../../hooks/api-client";
+import { useFirebaseAuthUser } from "../../contexts/firebase-app-context";
 import { useNavigate } from "react-router-dom";
+import { IUser } from "../../types/user";
+import { motion } from "framer-motion";
+import LoadingStatus from "../../components/status/loading";
 
 interface FirstLastNameProperties {
   firstnameRef: RefObject<HTMLInputElement>;
@@ -37,22 +37,6 @@ const FirstLastName = ({
   );
 };
 
-const Checkbox = () => {
-  return (
-    <div className="flex items-start w-full my-5">
-      <input
-        id="stephendick"
-        className="w-5 aspect-square mt-1 appearance-none border border-black checked:bg-blue-500"
-        type="checkbox"
-      />
-      <label htmlFor="stephendick" className="text-[12px] ml-2">
-        By check this box you agree to suck stephen's dick for the next 14 days,
-        dont be late :)
-      </label>
-    </div>
-  );
-};
-
 const OnboardingPage = () => {
   const user = useFirebaseAuthUser();
   const client = useAPIClient();
@@ -62,9 +46,27 @@ const OnboardingPage = () => {
   const lastnameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
 
+  const [currentUser, setCurrentUser] = useState<IUser | null | undefined>();
+  const [error, setError] = useState<string>("");
+
   useEffect(() => {
     if (user === null) navigate("/login");
-  }, [user]);
+    if (user !== undefined) {
+      getCurrentUser();
+    }
+  }, [user, currentUser]);
+
+  const getCurrentUser = async () => {
+    const res = await client.get("/user/current").catch((err) => {
+      if (err.response.status === 404) {
+        setCurrentUser(null);
+      }
+    });
+    if (res) {
+      setCurrentUser(res.data);
+      navigate("/");
+    }
+  };
 
   const createAccount = async () => {
     if (
@@ -80,17 +82,30 @@ const OnboardingPage = () => {
         email: user.email,
       };
 
-      await client.post("/user", userBody).catch((err) => {
-        return console.log(err);
+      const res = await client.post("/user", userBody).catch((err) => {
+        if (err.response.status === 400) {
+          setError("Username Taken");
+        }
       });
 
-      navigate("/");
+      if (res) {
+        if (res.status === 200) setCurrentUser(res.data);
+      }
     }
   };
 
+  if (currentUser === undefined) {
+    return <LoadingStatus />;
+  }
+
   return (
-    <div className="h-screen w-screen flex">
-      <div className="w-[50%] h-full bg-black"></div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.3 } }}
+      transition={{ delay: 0.2 }}
+      className="h-screen w-screen flex"
+    >
       <div className="w-[50%] h-full flex flex-col items-center">
         <div className="w-[60%] mt-10">
           <p className="text-center font-thin">
@@ -108,10 +123,22 @@ const OnboardingPage = () => {
               lastnameRef={lastnameRef}
             />
             <div className="my-5">
-              <p className="opacity-70 text-[12px] tracking-wider">Username</p>
+              {error === "Username Taken" ? (
+                <p className="opacity-70 text-[12px] tracking-wider text-red-600">
+                  Username already taken
+                </p>
+              ) : (
+                <p className="opacity-70 text-[12px] tracking-wider">
+                  Username
+                </p>
+              )}
               <input
                 id="username"
-                className="w-full font-normal border p-2.5 border-black"
+                className={
+                  error === "Username Taken"
+                    ? "w-full font-normal border p-2.5 border-red-600"
+                    : "w-full font-normal border p-2.5 border-black"
+                }
                 type="text"
                 ref={usernameRef}
               />
@@ -120,14 +147,15 @@ const OnboardingPage = () => {
             <button
               type="submit"
               onClick={createAccount}
-              className="font-extrabold bg-black p-3 text-white w-full text-center hover:opacity-50 transition-all rounded-sm"
+              className="create-account-button"
             >
               Submit
             </button>
           </div>
         </div>
       </div>
-    </div>
+      <div className="w-[50%] h-full bg-black"></div>
+    </motion.div>
   );
 };
 

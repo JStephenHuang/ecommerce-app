@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useUser } from "../../../contexts/user-context";
-import { apiCommands } from "../../../helper/apiCommands";
 import { IListing } from "../../../types/listing";
 
 import ListingImg from "./listing-img";

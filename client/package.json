@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "debug": "^4.3.4",
     "firebase": "^9.10.0",
+    "framer-motion": "^8.5.3",
     "fs": "^0.0.1-security",
     "postcss": "^8.4.16",
     "react": "^18.2.0",
